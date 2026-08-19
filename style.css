@@ -1,176 +1,183 @@
-/* =========================================================
-   MUSICPULSE — COMPLETE PREMIUM UI
-   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
+    --bg: #070708;
+    --bg2: #0d0d10;
+
     --red: #ff3030;
-    --red-light: #ff5555;
-    --bg: #080808;
-    --panel: rgba(18, 18, 21, .88);
-    --panel-soft: rgba(255,255,255,.045);
+    --red2: #ff5555;
+
+    --white: #ffffff;
+    --text: #e9e9ed;
+    --muted: #8b8b94;
+
     --border: rgba(255,255,255,.09);
-    --text: #ffffff;
-    --muted: #888;
+    --glass: rgba(16,16,19,.78);
+
+    --ease: cubic-bezier(.16,1,.3,1);
 }
 
-/* =========================================================
-   RESET
-   ========================================================= */
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 
 html {
     scroll-behavior: smooth;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
 
-    overflow-x: hidden;
+body {
+    min-height: 100vh;
 
     background:
         radial-gradient(
-            circle at 50% -20%,
-            rgba(255,40,40,.10),
-            transparent 40%
+            circle at 50% -10%,
+            rgba(255,35,35,.12),
+            transparent 35%
         ),
         var(--bg);
 
     color: var(--text);
 
     font-family:
+        Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
 
-    animation: pageIn .6s ease both;
+    overflow-x: hidden;
 }
 
-button,
-input,
-a {
-    font-family: inherit;
+
+body.modal-open {
+    overflow: hidden;
 }
 
-/* =========================================================
+
+/* =========================
    BACKGROUND
-   ========================================================= */
+========================= */
 
-body::before {
-    content: "";
-
-    position: fixed;
-
-    width: 650px;
-    height: 650px;
-
-    left: -300px;
-    top: 35%;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,30,30,.08),
-            transparent 70%
-        );
-
-    filter: blur(20px);
-
-    pointer-events: none;
-
-    z-index: -2;
-
-    animation:
-        backgroundFloat 12s ease-in-out infinite alternate;
-}
-
-body::after {
-    content: "";
-
+.background-glow {
     position: fixed;
 
     width: 500px;
     height: 500px;
 
-    right: -250px;
-    bottom: 5%;
-
     border-radius: 50%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,30,30,.06),
-            transparent 70%
-        );
+    filter: blur(120px);
 
-    filter: blur(20px);
+    opacity: .14;
 
     pointer-events: none;
 
     z-index: -2;
+}
+
+
+.glow-one {
+    top: -220px;
+    left: -180px;
+
+    background: #ff2020;
 
     animation:
-        backgroundFloat2 15s ease-in-out infinite alternate;
+        glowMove 12s ease-in-out infinite alternate;
 }
 
-@keyframes backgroundFloat {
-    from {
-        transform: translate3d(0,0,0) scale(1);
-    }
 
-    to {
-        transform: translate3d(90px,-50px,0) scale(1.12);
-    }
+.glow-two {
+    right: -220px;
+    bottom: -250px;
+
+    background: #8d0000;
+
+    animation:
+        glowMove 15s ease-in-out infinite alternate-reverse;
 }
 
-@keyframes backgroundFloat2 {
+
+@keyframes glowMove {
+
     from {
         transform: translate3d(0,0,0);
     }
 
     to {
-        transform: translate3d(-70px,40px,0);
+        transform: translate3d(
+            80px,
+            50px,
+            0
+        );
     }
+
 }
 
-/* =========================================================
-   HEADER
-   ========================================================= */
 
-header {
-    position: relative;
+.noise {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .025;
+
+    z-index: 999;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+
+    position: sticky;
+
+    top: 0;
 
     z-index: 100;
 
-    height: 74px;
+    height: 72px;
+
+    padding:
+        0 34px;
 
     display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    padding: 0 34px;
+    align-items: center;
+
+    justify-content: space-between;
 
     border-bottom:
         1px solid rgba(255,255,255,.07);
 
     background:
-        rgba(7,7,9,.72);
+        rgba(7,7,8,.72);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
 
     animation:
-        headerIn .65s cubic-bezier(.16,1,.3,1) both;
+        headerIn .65s var(--ease) both;
 }
 
+
 @keyframes headerIn {
+
     from {
         opacity: 0;
         transform: translateY(-20px);
@@ -180,251 +187,232 @@ header {
         opacity: 1;
         transform: translateY(0);
     }
+
 }
 
-/* =========================================================
-   LOGO
-   ========================================================= */
 
 .logo {
-    font-size: 21px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 20px;
+
     font-weight: 800;
 
-    letter-spacing: -0.8px;
-
-    cursor: default;
+    letter-spacing: -.8px;
 
     transition:
-        transform .25s ease,
+        transform .25s var(--ease),
         filter .25s ease;
 }
+
 
 .logo span {
     color: var(--red);
 }
 
+
 .logo:hover {
-    transform: translateX(2px);
+
+    transform:
+        translateY(-1px)
+        scale(1.02);
 
     filter:
         drop-shadow(
             0 0 14px
-            rgba(255,40,40,.35)
+            rgba(255,40,40,.4)
         );
 }
 
-/* =========================================================
-   HEADER RIGHT
-   ========================================================= */
 
-.header-right {
+.header-actions {
+
     display: flex;
 
     align-items: center;
-    justify-content: flex-end;
 
-    gap: 9px;
+    gap: 10px;
 }
 
+
 .version {
-    color: #777;
+
+    color: #686870;
 
     font-size: 11px;
 
-    margin-right: 5px;
+    font-weight: 600;
+
+    margin-right: 4px;
 }
 
-/* =========================================================
-   BUTTON BASE
-   ========================================================= */
 
-button {
-    position: relative;
+.login-button {
 
-    border: 0;
-
-    cursor: pointer;
-
-    -webkit-tap-highlight-color: transparent;
-
-    transition:
-        transform .2s cubic-bezier(.16,1,.3,1),
-        background .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease,
-        color .2s ease;
-}
-
-button:hover {
-    transform: translateY(-1px);
-}
-
-button:active {
-    transform: scale(.94);
-}
-
-/* =========================================================
-   BUTTON SHINE
-   ========================================================= */
-
-button::after {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: -120%;
-
-    width: 70%;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.17),
-            transparent
-        );
-
-    transform: skewX(-20deg);
-
-    transition:
-        left .5s ease;
-
-    pointer-events: none;
-}
-
-button:hover::after {
-    left: 140%;
-}
-
-/* =========================================================
-   LOGIN / LOGOUT
-   ========================================================= */
-
-.auth-button {
-    min-width: 76px;
+    height: 36px;
 
     padding:
-        9px
-        14px;
+        0 16px;
+
+    border:
+        1px solid rgba(255,255,255,.1);
 
     border-radius: 10px;
 
+    background:
+        rgba(255,255,255,.055);
+
     color: white;
 
-    background:
-        rgba(255,255,255,.07);
+    font-size: 12px;
 
-    border:
-        1px solid rgba(255,255,255,.10);
+    font-weight: 700;
 
-    font-size: 13px;
-    font-weight: 650;
+    cursor: pointer;
 
-    overflow: hidden;
+    transition:
+        transform .2s var(--ease),
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
-.auth-button:hover {
+
+.login-button:hover {
+
+    transform:
+        translateY(-2px);
+
     background:
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.09);
 
     border-color:
-        rgba(255,255,255,.17);
+        rgba(255,255,255,.18);
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.2);
+        0 10px 25px
+        rgba(0,0,0,.25);
 }
 
-/* =========================================================
-   PROFILE BUTTON
-   ========================================================= */
 
-#profileButton {
+/* =========================
+   PROFILE BUTTON
+========================= */
+
+.profile-button {
+
     width: 30px;
     height: 30px;
 
-    min-width: 30px;
-    min-height: 30px;
-
-    padding: 0;
-
-    display: flex;
+    display: none;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 50%;
+    border:
+        1px solid rgba(255,255,255,.15);
 
-    color: white;
+    border-radius: 50%;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.13),
-            rgba(255,255,255,.055)
+            #242429,
+            #111114
         );
 
-    border:
-        1px solid rgba(255,255,255,.15);
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s var(--ease),
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.profile-button.visible {
+    display: flex;
+
+    animation:
+        profileAppear .35s var(--ease) both;
+}
+
+
+@keyframes profileAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(.5)
+            rotate(-20deg);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            rotate(0);
+    }
+
+}
+
+
+.profile-button:hover {
+
+    transform:
+        scale(1.12);
+
+    border-color:
+        rgba(255,255,255,.3);
 
     box-shadow:
-        0 5px 20px rgba(0,0,0,.25);
-
-    overflow: hidden;
+        0 0 0 5px
+        rgba(255,255,255,.04),
+        0 10px 30px
+        rgba(0,0,0,.35);
 }
 
-#profileButton span {
-    font-size: 15px;
 
-    line-height: 1;
-
-    pointer-events: none;
-}
-
-#profileButton:hover {
-    transform: scale(1.12);
-
-    background:
-        rgba(255,255,255,.16);
-
-    box-shadow:
-        0 0 0 4px rgba(255,255,255,.035),
-        0 8px 25px rgba(0,0,0,.3);
-}
-
-/* =========================================================
+/* =========================
    PROFILE MENU
-   ========================================================= */
+========================= */
 
-#profileMenu {
+.profile-menu {
+
     position: absolute;
 
     top: 62px;
+
     right: 28px;
 
-    width: 250px;
+    width: 260px;
 
-    padding: 15px;
-
-    border-radius: 16px;
-
-    background:
-        rgba(17,17,20,.94);
+    padding: 10px;
 
     border:
-        1px solid rgba(255,255,255,.10);
+        1px solid rgba(255,255,255,.1);
+
+    border-radius: 17px;
+
+    background:
+        rgba(17,17,20,.92);
+
+    backdrop-filter:
+        blur(25px);
+
+    -webkit-backdrop-filter:
+        blur(25px);
 
     box-shadow:
-        0 25px 80px rgba(0,0,0,.5),
-        0 0 0 1px rgba(255,255,255,.025);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    transform:
-        translateY(-10px)
-        scale(.94);
+        0 25px 80px
+        rgba(0,0,0,.55);
 
     opacity: 0;
 
@@ -432,16 +420,22 @@ button:hover::after {
 
     pointer-events: none;
 
+    transform:
+        translateY(-12px)
+        scale(.94);
+
     transform-origin:
         top right;
 
     transition:
         opacity .22s ease,
-        transform .28s cubic-bezier(.16,1,.3,1),
+        transform .35s var(--ease),
         visibility .22s ease;
 }
 
-#profileMenu.profile-menu-open {
+
+.profile-menu.open {
+
     opacity: 1;
 
     visibility: visible;
@@ -453,40 +447,25 @@ button:hover::after {
         scale(1);
 }
 
-.profile-menu-title {
-    color: white;
 
-    font-size: 15px;
-    font-weight: 750;
+.profile-header {
 
-    margin-bottom: 12px;
-}
-
-.profile-preview {
     display: flex;
 
     align-items: center;
 
-    gap: 11px;
+    gap: 12px;
 
-    padding: 11px;
-
-    margin-bottom: 9px;
-
-    border-radius: 12px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid rgba(255,255,255,.055);
+    padding: 10px;
 }
 
-.profile-big-avatar {
-    width: 42px;
-    height: 42px;
 
-    min-width: 42px;
+.profile-avatar-large {
+
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
 
     display: flex;
 
@@ -498,34 +477,34 @@ button:hover::after {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.14),
-            rgba(255,255,255,.05)
+            #29292e,
+            #121215
         );
 
     border:
         1px solid rgba(255,255,255,.12);
 
-    font-size: 19px;
+    font-size: 20px;
 }
 
-.profile-preview strong {
-    display: block;
+
+.profile-user-info {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.profile-user-info strong {
 
     color: white;
 
-    font-size: 13px;
-}
-
-.profile-preview small {
-    display: block;
-
-    color: #777;
-
-    font-size: 11px;
-
-    margin-top: 3px;
-
-    max-width: 150px;
+    font-size: 14px;
 
     overflow: hidden;
 
@@ -534,81 +513,138 @@ button:hover::after {
     white-space: nowrap;
 }
 
-.profile-menu-item {
-    width: 100%;
 
-    padding: 10px 11px;
+.profile-user-info span {
 
-    margin-top: 3px;
+    color: #77777f;
 
-    border-radius: 9px;
-
-    background: transparent;
-
-    color: #aaa;
-
-    text-align: left;
-
-    font-size: 13px;
+    font-size: 11px;
 
     overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
 }
 
-.profile-menu-item:hover {
-    color: white;
+
+.profile-divider {
+
+    height: 1px;
+
+    margin:
+        5px 4px 7px;
 
     background:
-        rgba(255,255,255,.075);
-
-    transform:
-        translateX(2px);
+        rgba(255,255,255,.07);
 }
 
-.logout-item {
-    color: #ff7373;
-}
 
-.logout-item:hover {
-    color: #ff9a9a;
+.profile-menu button {
 
-    background:
-        rgba(255,45,45,.09);
-}
+    width: 100%;
 
-/* =========================================================
-   MAIN
-   ========================================================= */
-
-main {
-    min-height:
-        calc(100vh - 130px);
+    height: 40px;
 
     display: flex;
 
     align-items: center;
-    justify-content: center;
 
-    padding: 70px 20px;
+    gap: 10px;
+
+    padding:
+        0 11px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #c6c6cc;
+
+    font-size: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background .18s ease,
+        color .18s ease,
+        transform .18s var(--ease);
 }
 
-.container {
-    width: 100%;
-    max-width: 900px;
+
+.profile-menu button:hover {
+
+    background:
+        rgba(255,255,255,.07);
+
+    color: white;
+
+    transform:
+        translateX(3px);
+}
+
+
+.profile-menu button.danger {
+
+    color:
+        #ff7474;
+}
+
+
+.profile-menu button.danger:hover {
+
+    background:
+        rgba(255,40,40,.09);
+
+    color:
+        #ff9999;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    min-height:
+        calc(100vh - 72px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     text-align: center;
 
-    animation:
-        contentIn .75s .08s
-        cubic-bezier(.16,1,.3,1)
-        both;
+    padding:
+        90px 24px 100px;
 }
 
-@keyframes contentIn {
+
+.hero-content {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    animation:
+        heroIn .8s .08s var(--ease) both;
+}
+
+
+@keyframes heroIn {
+
     from {
         opacity: 0;
         transform:
             translateY(25px)
-            scale(.98);
+            scale(.97);
     }
 
     to {
@@ -617,209 +653,195 @@ main {
             translateY(0)
             scale(1);
     }
+
 }
 
-/* =========================================================
-   BADGE
-   ========================================================= */
 
-.badge {
+.status-badge {
+
     display: inline-flex;
 
     align-items: center;
 
-    padding:
-        7px
-        12px;
+    gap: 8px;
 
-    margin-bottom: 22px;
+    padding:
+        8px 13px;
+
+    margin-bottom: 25px;
+
+    border:
+        1px solid rgba(255,255,255,.09);
 
     border-radius: 999px;
 
     background:
-        rgba(255,255,255,.045);
+        rgba(255,255,255,.035);
 
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    color: #999;
+    color:
+        #a4a4ac;
 
     font-size: 11px;
 
-    letter-spacing: .4px;
+    font-weight: 700;
 
-    animation:
-        fadeUp .55s .15s both;
+    text-transform: uppercase;
+
+    letter-spacing: .08em;
 }
 
-/* =========================================================
-   TITLE
-   ========================================================= */
 
-h1 {
-    margin:
-        0;
+.status-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #43ff8a;
+
+    box-shadow:
+        0 0 14px
+        rgba(67,255,138,.7);
+
+    animation:
+        statusPulse 2s ease-in-out infinite;
+}
+
+
+@keyframes statusPulse {
+
+    0%,100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: .45;
+        transform: scale(.75);
+    }
+
+}
+
+
+.hero h1 {
 
     font-size:
         clamp(
             70px,
-            11vw,
-            130px
+            13vw,
+            150px
         );
 
-    line-height: .9;
+    line-height: .85;
 
     letter-spacing:
-        -7px;
+        -9px;
 
-    font-weight:
-        900;
+    font-weight: 900;
 
-    color:
-        white;
+    color: white;
 
-    animation:
-        titleIn .8s .12s
-        cubic-bezier(.16,1,.3,1)
-        both;
+    margin-bottom: 32px;
+
+    text-shadow:
+        0 25px 80px
+        rgba(0,0,0,.5);
 }
 
-h1 span {
+
+.hero h1 span {
+
     color: var(--red);
 
     text-shadow:
-        0 0 35px
-        rgba(255,40,40,.18);
+        0 0 45px
+        rgba(255,35,35,.18);
 }
 
-@keyframes titleIn {
-    from {
-        opacity: 0;
-        transform:
-            translateY(20px)
-            scale(.96);
-        filter: blur(5px);
-    }
 
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-        filter: blur(0);
-    }
-}
+.hero-subtitle {
 
-/* =========================================================
-   SUBTITLE
-   ========================================================= */
-
-.subtitle {
-    max-width: 620px;
+    max-width: 610px;
 
     margin:
-        27px
-        auto
-        42px;
+        0 auto 45px;
 
     color:
-        #888;
+        #8c8c94;
 
-    font-size:
-        16px;
+    font-size: 17px;
 
-    line-height:
-        1.65;
-
-    animation:
-        fadeUp .6s .28s both;
+    line-height: 1.7;
 }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform:
-            translateY(10px);
-    }
 
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-    }
-}
+/* =========================
+   DOWNLOAD CARDS
+========================= */
 
-/* =========================================================
-   DOWNLOADS
-   ========================================================= */
+.hero-buttons {
 
-.downloads {
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(2, minmax(260px, 1fr));
 
     gap: 14px;
 
-    max-width: 650px;
+    max-width: 700px;
 
     margin:
         0 auto;
-
-    animation:
-        downloadsIn .65s .38s both;
 }
 
-@keyframes downloadsIn {
-    from {
-        opacity: 0;
-        transform:
-            translateY(18px);
-    }
 
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-    }
-}
+.download-card {
 
-.download {
     position: relative;
 
-    display: block;
+    min-height: 88px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
 
     padding:
-        24px;
-
-    text-decoration: none;
+        18px;
 
     text-align: left;
 
-    border-radius: 18px;
+    text-decoration: none;
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    border-radius: 16px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.075),
+            rgba(255,255,255,.065),
             rgba(255,255,255,.025)
         );
-
-    border:
-        1px solid rgba(255,255,255,.09);
 
     color: white;
 
     overflow: hidden;
 
     transition:
-        transform .3s cubic-bezier(.16,1,.3,1),
-        border-color .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
+        transform .35s var(--ease),
+        border-color .25s ease,
+        box-shadow .35s ease,
+        background .25s ease;
 }
 
-.download::before {
+
+.download-card::before {
+
     content: "";
 
     position: absolute;
@@ -828,8 +850,8 @@ h1 span {
 
     background:
         radial-gradient(
-            circle at 0% 0%,
-            rgba(255,40,40,.13),
+            circle at 0% 50%,
+            rgba(255,40,40,.15),
             transparent 45%
         );
 
@@ -839,124 +861,335 @@ h1 span {
         opacity .3s ease;
 }
 
-.download:hover {
+
+.download-card:hover {
+
     transform:
-        translateY(-7px);
+        translateY(-6px);
 
     border-color:
-        rgba(255,60,60,.25);
-
-    background:
-        rgba(255,255,255,.065);
-
-    box-shadow:
-        0 20px 55px rgba(0,0,0,.3),
-        0 0 35px rgba(255,40,40,.06);
-}
-
-.download:hover::before {
-    opacity: 1;
-}
-
-.download-icon {
-    position: relative;
-
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 18px;
-
-    border-radius: 12px;
+        rgba(255,60,60,.35);
 
     background:
         rgba(255,255,255,.07);
 
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    font-size: 19px;
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.35),
+        0 0 35px
+        rgba(255,30,30,.06);
 }
 
-.download-title {
+
+.download-card:hover::before {
+    opacity: 1;
+}
+
+
+.download-icon {
+
     position: relative;
 
-    font-size: 15px;
+    z-index: 1;
 
-    font-weight: 700;
+    width: 48px;
+    height: 48px;
 
-    margin-bottom: 6px;
-}
-
-.download-info {
-    position: relative;
-
-    color: #777;
-
-    font-size: 11px;
-}
-
-/* =========================================================
-   RELEASE
-   ========================================================= */
-
-.release {
-    margin-top: 24px;
-
-    color: #666;
-
-    font-size: 11px;
-
-    animation:
-        fadeUp .6s .5s both;
-}
-
-.release a {
-    color: #888;
-
-    text-decoration: none;
-
-    transition:
-        color .2s ease;
-}
-
-.release a:hover {
-    color: white;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-footer {
-    height: 56px;
+    flex-shrink: 0;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    color: #555;
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    color: white;
+
+    font-size: 22px;
+}
+
+
+.download-icon.windows {
+    font-size: 19px;
+}
+
+
+.download-card strong {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: block;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+
+.download-card span {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: block;
+
+    color: #77777f;
+
+    font-size: 10px;
+}
+
+
+.download-arrow {
+
+    position: relative;
+
+    z-index: 1;
+
+    margin-left: auto;
+
+    color: #777;
+
+    font-size: 19px;
+
+    transition:
+        transform .3s var(--ease),
+        color .2s ease;
+}
+
+
+.download-card:hover
+.download-arrow {
+
+    color: white;
+
+    transform:
+        translateX(4px);
+}
+
+
+.release-info {
+
+    margin-top: 24px;
+
+    color: #55555c;
 
     font-size: 11px;
+}
+
+
+.release-info span {
+    margin: 0 5px;
+}
+
+
+.release-info a {
+
+    color: #888890;
+
+    text-decoration: none;
+}
+
+
+.release-info a:hover {
+    color: white;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    padding:
+        100px 25px 130px;
+}
+
+
+.section-heading {
+
+    margin-bottom: 40px;
+}
+
+
+.section-heading > span {
+
+    color: var(--red);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .15em;
+}
+
+
+.section-heading h2 {
+
+    margin-top: 10px;
+
+    color: white;
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            50px
+        );
+
+    letter-spacing: -2px;
+}
+
+
+.section-heading p {
+
+    margin-top: 10px;
+
+    color: #777780;
+
+    font-size: 14px;
+}
+
+
+.feature-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+
+.feature-card {
+
+    padding: 25px;
+
+    min-height: 190px;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:
+        transform .3s var(--ease),
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .3s ease;
+}
+
+
+.feature-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    background:
+        rgba(255,255,255,.045);
+
+    border-color:
+        rgba(255,255,255,.14);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.25);
+}
+
+
+.feature-icon {
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,40,40,.09);
+
+    border:
+        1px solid
+        rgba(255,40,40,.12);
+}
+
+
+.feature-card h3 {
+
+    color: white;
+
+    font-size: 15px;
+
+    margin-bottom: 9px;
+}
+
+
+.feature-card p {
+
+    color: #73737c;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        25px 35px;
 
     border-top:
-        1px solid rgba(255,255,255,.05);
+        1px solid rgba(255,255,255,.06);
+
+    color: #55555c;
+
+    font-size: 10px;
 }
 
-footer span {
-    color: #777;
+
+footer span:last-child {
+    color: #44444b;
 }
 
-/* =========================================================
+
+/* =========================
    AUTH OVERLAY
-   ========================================================= */
+========================= */
 
 .auth-overlay {
+
     position: fixed;
 
     inset: 0;
@@ -986,13 +1219,14 @@ footer span {
     pointer-events: none;
 
     transition:
-        opacity .3s ease,
-        visibility .3s ease,
-        backdrop-filter .35s ease,
-        -webkit-backdrop-filter .35s ease;
+        opacity .28s ease,
+        visibility .28s ease,
+        backdrop-filter .35s ease;
 }
 
+
 .auth-overlay.active {
+
     opacity: 1;
 
     visibility: visible;
@@ -1000,157 +1234,204 @@ footer span {
     pointer-events: auto;
 
     backdrop-filter:
-        blur(14px);
+        blur(18px);
 
     -webkit-backdrop-filter:
-        blur(14px);
+        blur(18px);
 }
 
-/* =========================================================
-   AUTH BOX
-   ========================================================= */
 
-.auth-box {
+.auth-modal {
+
     position: relative;
 
-    width: min(
-        390px,
-        100%
-    );
+    width: 100%;
 
-    padding:
-        32px;
+    max-width: 390px;
 
-    border-radius: 22px;
+    padding: 34px;
+
+    border:
+        1px solid rgba(255,255,255,.11);
+
+    border-radius: 23px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(25,25,29,.97),
-            rgba(12,12,15,.97)
+            rgba(27,27,31,.96),
+            rgba(12,12,14,.96)
         );
 
-    border:
-        1px solid rgba(255,255,255,.10);
-
     box-shadow:
-        0 35px 100px rgba(0,0,0,.65),
-        0 0 50px rgba(255,30,30,.06);
+        0 40px 120px
+        rgba(0,0,0,.65);
 
     transform:
-        translateY(35px)
-        scale(.90);
+        translateY(30px)
+        scale(.9);
 
     opacity: 0;
 
-    filter:
-        blur(6px);
+    filter: blur(5px);
 
     transition:
-        transform .4s cubic-bezier(.16,1,.3,1),
+        transform .42s var(--ease),
         opacity .3s ease,
-        filter .4s ease;
+        filter .42s ease;
 }
 
-.auth-overlay.active .auth-box {
+
+.auth-overlay.active
+.auth-modal {
+
     transform:
         translateY(0)
         scale(1);
 
     opacity: 1;
 
-    filter:
-        blur(0);
+    filter: blur(0);
 }
 
-/* =========================================================
-   AUTH TITLE
-   ========================================================= */
 
-.auth-box h2 {
-    margin:
-        0 0 7px;
+.auth-overlay.closing
+.auth-modal {
 
-    color: white;
+    transform:
+        translateY(20px)
+        scale(.94);
 
-    font-size: 25px;
+    opacity: 0;
 
-    letter-spacing: -.6px;
+    filter: blur(5px);
 }
 
-.auth-box > p {
-    margin:
-        0 0 22px;
 
-    color: #777;
+.auth-icon {
 
-    font-size: 13px;
-}
-
-/* =========================================================
-   CLOSE
-   ========================================================= */
-
-.close-auth {
-    position: absolute;
-
-    top: 13px;
-    right: 14px;
-
-    width: 34px;
-    height: 34px;
+    width: 45px;
+    height: 45px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
+    margin-bottom: 20px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,40,40,.1);
+
+    color: var(--red);
+
+    font-size: 21px;
+}
+
+
+.auth-modal h2 {
+
+    color: white;
+
+    font-size: 27px;
+
+    letter-spacing: -.8px;
+}
+
+
+.auth-modal > p {
+
+    margin-top: 7px;
+
+    margin-bottom: 25px;
+
+    color: #777780;
+
+    font-size: 12px;
+}
+
+
+.close-button {
+
+    position: absolute;
+
+    top: 16px;
+    right: 17px;
+
+    width: 32px;
+    height: 32px;
+
+    border: 0;
+
     border-radius: 9px;
 
-    background: transparent;
+    background:
+        transparent;
 
     color: #777;
 
     font-size: 23px;
 
-    overflow: hidden;
+    cursor: pointer;
+
+    transition:
+        transform .25s var(--ease),
+        background .2s ease,
+        color .2s ease;
 }
 
-.close-auth:hover {
-    color: white;
+
+.close-button:hover {
+
+    transform:
+        rotate(90deg);
 
     background:
         rgba(255,255,255,.07);
 
-    transform:
-        rotate(90deg);
+    color: white;
 }
 
-/* =========================================================
-   INPUTS
-   ========================================================= */
 
-.auth-box input {
+.auth-modal label {
+
+    display: block;
+
+    margin:
+        14px 0 7px;
+
+    color: #9999a1;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.auth-modal input {
+
     width: 100%;
 
-    height: 46px;
-
-    margin-top: 10px;
+    height: 45px;
 
     padding:
-        0 14px;
+        0 13px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
 
     border-radius: 11px;
 
     outline: none;
 
+    background:
+        rgba(255,255,255,.035);
+
     color: white;
 
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid rgba(255,255,255,.08);
+    font-size: 12px;
 
     transition:
         border-color .2s ease,
@@ -1159,40 +1440,33 @@ footer span {
         transform .2s ease;
 }
 
-.auth-box input::placeholder {
-    color: #666;
-}
 
-.auth-box input:hover {
-    border-color:
-        rgba(255,255,255,.15);
-}
-
-.auth-box input:focus {
-    transform:
-        translateY(-1px);
+.auth-modal input:focus {
 
     border-color:
-        rgba(255,48,48,.65);
+        rgba(255,40,40,.55);
 
     background:
-        rgba(255,255,255,.06);
+        rgba(255,255,255,.055);
 
     box-shadow:
         0 0 0 3px
-        rgba(255,48,48,.09);
+        rgba(255,40,40,.08);
+
+    transform:
+        translateY(-1px);
 }
 
-/* =========================================================
-   AUTH SUBMIT
-   ========================================================= */
 
-.auth-submit {
+.submit-button {
+
     width: 100%;
 
     height: 46px;
 
-    margin-top: 14px;
+    margin-top: 18px;
+
+    border: 0;
 
     border-radius: 11px;
 
@@ -1200,39 +1474,44 @@ footer span {
         linear-gradient(
             135deg,
             #ff3030,
-            #d91616
+            #d71919
         );
 
     color: white;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    font-weight: 750;
+    font-weight: 800;
+
+    cursor: pointer;
 
     box-shadow:
         0 10px 30px
         rgba(255,30,30,.16);
 
-    overflow: hidden;
+    transition:
+        transform .25s var(--ease),
+        box-shadow .25s ease,
+        filter .2s ease;
 }
 
-.auth-submit:hover {
-    filter:
-        brightness(1.08);
+
+.submit-button:hover {
 
     transform:
         translateY(-2px);
 
+    filter:
+        brightness(1.08);
+
     box-shadow:
-        0 14px 38px
+        0 15px 35px
         rgba(255,30,30,.25);
 }
 
-/* =========================================================
-   SEPARATOR
-   ========================================================= */
 
-.separator {
+.auth-separator {
+
     display: flex;
 
     align-items: center;
@@ -1240,16 +1519,17 @@ footer span {
     gap: 10px;
 
     margin:
-        20px 0;
+        22px 0;
 
-    color: #555;
+    color: #55555d;
 
-    font-size: 10px;
+    font-size: 9px;
+
+    font-weight: 700;
 }
 
-.separator::before,
-.separator::after {
-    content: "";
+
+.auth-separator span {
 
     flex: 1;
 
@@ -1259,214 +1539,187 @@ footer span {
         rgba(255,255,255,.07);
 }
 
-/* =========================================================
-   DISCORD
-   ========================================================= */
 
 .discord-button {
+
     width: 100%;
 
-    height: 44px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border:
+        1px solid rgba(255,255,255,.09);
 
     border-radius: 11px;
 
     background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid rgba(255,255,255,.08);
+        rgba(255,255,255,.035);
 
     color: #ddd;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    overflow: hidden;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s var(--ease),
+        background .2s ease,
+        border-color .2s ease;
 }
 
-.discord-button:hover {
-    background:
-        rgba(255,255,255,.08);
 
-    border-color:
-        rgba(255,255,255,.17);
+.discord-button:hover {
 
     transform:
         translateY(-2px);
 
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.25);
+    background:
+        rgba(255,255,255,.07);
+
+    border-color:
+        rgba(255,255,255,.18);
 }
 
-.discord-icon {
-    margin-right: 7px;
-
-    color: #aaa;
-}
-
-/* =========================================================
-   AUTH SWITCH
-   ========================================================= */
 
 .auth-switch {
-    margin-top: 18px;
+
+    margin-top: 21px;
 
     text-align: center;
 
-    color: #666;
+    color: #66666f;
 
-    font-size: 12px;
+    font-size: 11px;
 }
 
-.auth-switch button {
-    padding: 0;
 
-    margin-left: 4px;
+.auth-switch button {
+
+    margin-left: 5px;
+
+    border: 0;
 
     background: transparent;
 
     color: var(--red);
 
-    font-size: 12px;
+    font-weight: 700;
 
-    overflow: visible;
+    cursor: pointer;
 }
 
-.auth-switch button::after {
-    display: none;
-}
-
-.auth-switch button:hover {
-    color: #ff6868;
-
-    transform: none;
-}
-
-/* =========================================================
-   MESSAGE
-   ========================================================= */
 
 .auth-message {
-    min-height: 20px;
+
+    min-height: 18px;
 
     margin-top: 13px;
 
-    color: #ff5555;
+    color: #ff6666;
 
     text-align: center;
 
-    font-size: 12px;
-
-    line-height: 1.4;
+    font-size: 11px;
 }
 
-/* =========================================================
-   CARD ANIMATION
-   ========================================================= */
 
-.card,
-.stats,
-.badge {
-    transition:
-        transform .25s cubic-bezier(.16,1,.3,1),
-        box-shadow .25s ease;
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-.card:hover,
-.stats:hover {
-    transform:
-        translateY(-4px);
-}
+@media (max-width: 750px) {
 
-/* =========================================================
-   SCROLLBAR
-   ========================================================= */
-
-::-webkit-scrollbar {
-    width: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background:
-        rgba(255,255,255,.13);
-
-    border-radius: 20px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background:
-        rgba(255,255,255,.23);
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    header {
-        height: 66px;
-
-        padding:
-            0 18px;
+    .site-header {
+        padding: 0 18px;
     }
 
     .version {
         display: none;
     }
 
-    main {
+    .hero {
+        min-height:
+            calc(100vh - 72px);
+
         padding:
-            55px 18px;
+            70px 18px 80px;
     }
 
-    h1 {
+    .hero h1 {
         font-size:
             clamp(
-                58px,
-                17vw,
-                90px
+                65px,
+                22vw,
+                105px
             );
 
         letter-spacing:
-            -5px;
+            -6px;
     }
 
-    .subtitle {
+    .hero-subtitle {
         font-size: 14px;
     }
 
-    .downloads {
-        grid-template-columns:
-            1fr;
-
-        max-width: 360px;
+    .hero-buttons {
+        grid-template-columns: 1fr;
+        max-width: 390px;
     }
 
-    #profileMenu {
-        right: 15px;
-
-        width: 235px;
+    .feature-grid {
+        grid-template-columns: 1fr;
     }
 
-    .auth-box {
+    .features {
         padding:
-            27px 22px;
+            70px 18px 90px;
     }
+
+    footer {
+        padding:
+            22px 18px;
+    }
+
+    .profile-menu {
+        right: 14px;
+    }
+
 }
 
-/* =========================================================
+
+@media (max-width: 420px) {
+
+    .login-button {
+        padding:
+            0 12px;
+    }
+
+    .auth-modal {
+        padding:
+            28px 22px;
+    }
+
+}
+
+
+/* =========================
    REDUCED MOTION
-   ========================================================= */
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     *,
     *::before,
     *::after {
+
         animation-duration:
             .01ms !important;
 
@@ -1475,19 +1728,9 @@ footer span {
 
         transition-duration:
             .01ms !important;
-    }
-}
 
-/* =========================================================
-   PAGE ENTER
-   ========================================================= */
-
-@keyframes pageIn {
-    from {
-        opacity: 0;
+        scroll-behavior:
+            auto !important;
     }
 
-    to {
-        opacity: 1;
-    }
 }
