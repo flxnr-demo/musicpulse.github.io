@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MusicPulse</title>
+    <meta name="description" content="MusicPulse — powerful desktop music software for Mac and Windows.">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: #050505;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 10%,
+                    rgba(255, 0, 0, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 10% 90%,
+                    rgba(255, 0, 0, 0.08),
+                    transparent 30%
+                );
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        header {
+            width: 100%;
+            padding: 25px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #ff2020;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .version {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .auth-button {
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            color: white;
+
+            padding: 9px 16px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .auth-button:hover {
+            border-color: #ff2020;
+            background: rgba(255,32,32,0.12);
+        }
+
+        main {
+            min-height: calc(100vh - 90px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 70px 20px 100px;
+
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1050px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            background: rgba(255,255,255,0.04);
+
+            border-radius: 999px;
+
+            color: #aaa;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(60px, 10vw, 115px);
+
+            line-height: 0.95;
+
+            letter-spacing: -7px;
+
+            font-weight: 900;
+
+            margin-bottom: 30px;
+        }
+
+        h1 span {
+            color: #ff2020;
+        }
+
+        .subtitle {
+            max-width: 680px;
+
+            margin: 0 auto 50px;
+
+            color: #999;
+
+            font-size: 18px;
+
+            line-height: 1.65;
+        }
+
+        .downloads {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 320px));
+
+            justify-content: center;
+
+            gap: 20px;
+
+            margin-bottom: 45px;
+        }
+
+        .download {
+            min-height: 165px;
+
+            padding: 30px 25px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.09),
+                    rgba(255,255,255,0.025)
+                );
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 24px;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .download:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(255,32,32,0.7);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,32,32,0.16),
+                    rgba(255,255,255,0.04)
+                );
+
+            box-shadow:
+                0 15px 50px rgba(255,0,0,0.12);
+        }
+
+        .download:active {
+            transform: translateY(-2px);
+        }
+
+        .download-icon {
+            font-size: 38px;
+
+            line-height: 1;
+
+            margin-bottom: 15px;
+        }
+
+        .download-title {
+            font-size: 20px;
+
+            font-weight: 750;
+
+            margin-bottom: 7px;
+        }
+
+        .download-info {
+            color: #888;
+
+            font-size: 13px;
+        }
+
+        .release {
+            color: #666;
+
+            font-size: 13px;
+        }
+
+        .release a {
+            color: #aaa;
+
+            text-decoration: none;
+
+            transition: color 0.2s ease;
+        }
+
+        .release a:hover {
+            color: #ff2020;
+        }
+
+        footer {
+            position: relative;
+
+            text-align: center;
+
+            padding:
+                30px
+                20px
+                45px;
+
+            color: #555;
+
+            font-size: 13px;
+        }
+
+        footer span {
+            color: #ff2020;
+        }
+
+
+        /* ========================= */
+        /* AUTH WINDOW                */
+        /* ========================= */
+
+        .auth-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.78);
+
+            backdrop-filter: blur(10px);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 100;
+
+            padding: 20px;
+        }
+
+        .auth-overlay.active {
+            display: flex;
+        }
+
+        .auth-box {
+            width: 100%;
+
+            max-width: 410px;
+
+            background: #0d0d0d;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            border-radius: 22px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(0,0,0,0.6);
+
+            position: relative;
+        }
+
+        .auth-box h2 {
+            font-size: 28px;
+
+            margin-bottom: 8px;
+        }
+
+        .auth-box p {
+            color: #777;
+
+            font-size: 14px;
+
+            margin-bottom: 22px;
+        }
+
+        .auth-box input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            margin-bottom: 12px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid
+                #222;
+
+            background: #050505;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        .auth-box input:focus {
+            border-color: #ff2020;
+        }
+
+        .auth-submit {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background: #ff2020;
+
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: 0.2s;
+        }
+
+        .auth-submit:hover {
+            background: #e51515;
+        }
+
+
+        /* DISCORD BUTTON */
+
+        .discord-button {
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 12px;
+
+            border: 1px solid
+                rgba(88,101,242,0.5);
+
+            border-radius: 10px;
+
+            background:
+                rgba(88,101,242,0.12);
+
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                border-color 0.2s,
+                transform 0.2s;
+
+            font-size: 14px;
+        }
+
+        .discord-button:hover {
+            background:
+                rgba(88,101,242,0.25);
+
+            border-color:
+                rgba(88,101,242,0.9);
+
+            transform: translateY(-1px);
+        }
+
+        .discord-icon {
+            margin-right: 7px;
+        }
+
+
+        /* SEPARATOR */
+
+        .separator {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 18px 0;
+
+            color: #555;
+
+            font-size: 12px;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #222;
+        }
+
+
+        .auth-switch {
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        .auth-switch button {
+            border: 0;
+
+            background: none;
+
+            color: #ff2020;
+
+            cursor: pointer;
+        }
+
+        .close-auth {
+            position: absolute;
+
+            top: 15px;
+            right: 18px;
+
+            border: 0;
+
+            background: none;
+
+            color: #777;
+
+            font-size: 24px;
+
+            cursor: pointer;
+        }
+
+        .close-auth:hover {
+            color: white;
+        }
+
+        .auth-message {
+            min-height: 20px;
+
+            margin-top: 12px;
+
+            text-align: center;
+
+            color: #ff5555;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+        }
+
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 20px;
+            }
+
+            .header-right {
+                gap: 8px;
+            }
+
+            .version {
+                display: none;
+            }
+
+            .downloads {
+                grid-template-columns: 1fr;
+
+                max-width: 340px;
+
+                margin-left: auto;
+
+                margin-right: auto;
+            }
+
+            h1 {
+                font-size:
+                    clamp(
+                        55px,
+                        18vw,
+                        90px
+                    );
+
+                letter-spacing: -5px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Music<span>Pulse</span>
+    </div>
+
+    <div class="header-right">
+
+        <div class="version">
+            v1.0.0
+        </div>
+
+        <button
+            class="auth-button"
+            id="authButton"
+            onclick="openAuth()"
+        >
+            Login
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="container">
+
+        <div class="badge">
+            Desktop music software
+        </div>
+
+
+        <h1>
+            Music<span>Pulse</span>
+        </h1>
+
+
+        <p class="subtitle">
+            Create, manage and experience your music with MusicPulse.
+            Download the latest desktop version for your computer.
+        </p>
+
+
+        <div class="downloads">
+
+
+            <!-- MAC -->
+
+            <a
+                class="download"
+                href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-1.0.0-arm64.dmg"
+            >
+
+                <div class="download-icon">
+                    
+                </div>
+
+                <div class="download-title">
+                    Download for Mac
+                </div>
+
+                <div class="download-info">
+                    Apple Silicon · ARM64 · DMG
+                </div>
+
+            </a>
+
+
+            <!-- WINDOWS -->
+
+            <a
+                class="download"
+                href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-Setup-1.0.0-x64.exe"
+            >
+
+                <div class="download-icon">
+                    ▣
+                </div>
+
+                <div class="download-title">
+                    Download for Windows
+                </div>
+
+                <div class="download-info">
+                    Windows · x64 · EXE
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+        <div class="release">
+
+            MusicPulse 1.0.0 ·
+
+            <a
+                href="https://github.com/flxnr-demo/musicpulse.github.io/releases/tag/v1.0.0"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View release
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 Music<span>Pulse</span>
+
+</footer>
+
+
+<!-- ========================= -->
+<!-- LOGIN / REGISTER WINDOW    -->
+<!-- ========================= -->
+
+<div
+    class="auth-overlay"
+    id="authOverlay"
+>
+
+    <div class="auth-box">
+
+
+        <button
+            class="close-auth"
+            onclick="closeAuth()"
+        >
+            ×
+        </button>
+
+
+        <h2 id="authTitle">
+            Login
+        </h2>
+
+
+        <p id="authDescription">
+            Sign in to your MusicPulse account.
+        </p>
+
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            autocomplete="email"
+        >
+
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
+
+
+        <button
+            class="auth-submit"
+            onclick="submitAuth()"
+        >
+            Login
+        </button>
+
+
+        <div class="separator">
+            OR
+        </div>
+
+
+        <button
+            class="discord-button"
+            onclick="signInWithDiscord()"
+        >
+            <span class="discord-icon">◈</span>
+            Continue with Discord
+        </button>
+
+
+        <div class="auth-switch">
+
+            <span id="switchText">
+                Don't have an account?
+            </span>
+
+            <button
+                onclick="switchAuth()"
+                id="switchButton"
+            >
+                Register
+            </button>
+
+        </div>
+
+
+        <div
+            class="auth-message"
+            id="authMessage"
+        ></div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ========================= */
+    /* SUPABASE                   */
+    /* ========================= */
+
+    const SUPABASE_URL =
+        "https://doearrsajrfzlqsbrryt.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_DwxG0zK_VZRvC8S-dcw7xQ_C1fXujae";
+
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ========================= */
+    /* VARIABLES                  */
+    /* ========================= */
+
+    let registerMode = false;
+
+
+    /* ========================= */
+    /* OPEN AUTH                  */
+    /* ========================= */
+
+    function openAuth() {
+
+        document
+            .getElementById("authOverlay")
+            .classList.add("active");
+
+        document
+            .getElementById("authMessage")
+            .textContent = "";
+
+    }
+
+
+    /* ========================= */
+    /* CLOSE AUTH                 */
+    /* ========================= */
+
+    function closeAuth() {
+
+        document
+            .getElementById("authOverlay")
+            .classList.remove("active");
+
+    }
+
+
+    /* ========================= */
+    /* SWITCH LOGIN / REGISTER    */
+    /* ========================= */
+
+    function switchAuth() {
+
+        registerMode = !registerMode;
+
+
+        const title =
+            document.getElementById("authTitle");
+
+
+        const description =
+            document.getElementById("authDescription");
+
+
+        const submit =
+            document.querySelector(".auth-submit");
+
+
+        const switchText =
+            document.getElementById("switchText");
+
+
+        const switchButton =
+            document.getElementById("switchButton");
+
+
+        if (registerMode) {
+
+            title.textContent =
+                "Register";
+
+
+            description.textContent =
+                "Create your MusicPulse account.";
+
+
+            submit.textContent =
+                "Register";
+
+
+            switchText.textContent =
+                "Already have an account?";
+
+
+            switchButton.textContent =
+                "Login";
+
+        } else {
+
+            title.textContent =
+                "Login";
+
+
+            description.textContent =
+                "Sign in to your MusicPulse account.";
+
+
+            submit.textContent =
+                "Login";
+
+
+            switchText.textContent =
+                "Don't have an account?";
+
+
+            switchButton.textContent =
+                "Register";
+        }
+
+
+        document
+            .getElementById("authMessage")
+            .textContent = "";
+
+    }
+
+
+    /* ========================= */
+    /* EMAIL LOGIN / REGISTER     */
+    /* ========================= */
+
+    async function submitAuth() {
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        const message =
+            document
+                .getElementById("authMessage");
+
+
+        message.style.color =
+            "#ff5555";
+
+
+        if (!email || !password) {
+
+            message.textContent =
+                "Enter your email and password.";
+
+            return;
+        }
+
+
+        if (password.length < 6) {
+
+            message.textContent =
+                "Password must contain at least 6 characters.";
+
+            return;
+        }
+
+
+        message.textContent =
+            "Please wait...";
+
+
+        try {
+
+            if (registerMode) {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.auth.signUp({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+                if (error)
+                    throw error;
+
+
+                message.style.color =
+                    "#55ff88";
+
+
+                if (data.session) {
+
+                    message.textContent =
+                        "Account created successfully!";
+
+
+                    updateAuthButton();
+
+
+                    setTimeout(
+                        closeAuth,
+                        1000
+                    );
+
+                } else {
+
+                    message.textContent =
+                        "Account created! Check your email to confirm your account.";
+
+                }
+
+            } else {
+
+                const {
+                    error
+                } =
+                    await supabaseClient.auth.signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+                if (error)
+                    throw error;
+
+
+                message.style.color =
+                    "#55ff88";
+
+
+                message.textContent =
+                    "Logged in successfully!";
+
+
+                updateAuthButton();
+
+
+                setTimeout(
+                    closeAuth,
+                    700
+                );
+
+            }
+
+        } catch (error) {
+
+            message.style.color =
+                "#ff5555";
+
+
+            message.textContent =
+                error.message;
+
+        }
+
+    }
+
+
+    /* ========================= */
+    /* DISCORD LOGIN              */
+    /* ========================= */
+
+    async function signInWithDiscord() {
+
+        const message =
+            document
+                .getElementById("authMessage");
+
+
+        message.style.color =
+            "#aaaaaa";
+
+
+        message.textContent =
+            "Connecting to Discord...";
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient.auth.signInWithOAuth({
+
+                    provider: "discord",
+
+                    options: {
+
+                        redirectTo:
+                            "https://flxnr-demo.github.io/musicpulse.github.io/"
+
+                    }
+
+                });
+
+
+            if (error)
+                throw error;
+
+
+        } catch (error) {
+
+            message.style.color =
+                "#ff5555";
+
+
+            message.textContent =
+                error.message;
+
+        }
+
+    }
+
+
+    /* ========================= */
+    /* LOGOUT                     */
+    /* ========================= */
+
+    async function logout() {
+
+        const {
+            error
+        } =
+            await supabaseClient.auth.signOut();
+
+
+        if (error) {
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+        }
+
+
+        updateAuthButton();
+
+    }
+
+
+    /* ========================= */
+    /* UPDATE HEADER BUTTON       */
+    /* ========================= */
+
+    async function updateAuthButton() {
+
+        const button =
+            document.getElementById("authButton");
+
+
+        const {
+            data
+        } =
+            await supabaseClient.auth.getUser();
+
+
+        if (data.user) {
+
+            button.textContent =
+                "Logout";
+
+
+            button.onclick =
+                logout;
+
+        } else {
+
+            button.textContent =
+                "Login";
+
+
+            button.onclick =
+                openAuth;
+
+        }
+
+    }
+
+
+    /* ========================= */
+    /* AUTH STATE                 */
+    /* ========================= */
+
+    supabaseClient.auth.onAuthStateChange(
+
+        function () {
+
+            updateAuthButton();
+
+        }
+
+    );
+
+
+    /* ========================= */
+    /* INITIAL CHECK              */
+    /* ========================= */
+
+    updateAuthButton();
+
+
+    /* ========================= */
+    /* CLOSE WHEN CLICKING OUTSIDE */
+    /* ========================= */
+
+    document
+        .getElementById("authOverlay")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeAuth();
+
+                }
+
+            }
+        );
+
+
+    /* ========================= */
+    /* ESC CLOSE                  */
+    /* ========================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeAuth();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+</html>
