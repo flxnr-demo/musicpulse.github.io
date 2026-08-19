@@ -1,598 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MusicPulse</title>
-    <meta name="description" content="MusicPulse — powerful desktop music software for Mac and Windows.">
+<meta charset="UTF-8">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>MusicPulse</title>
 
-        html {
-            scroll-behavior: smooth;
-        }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        body {
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-
-            background: #050505;
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-
-            background:
-                radial-gradient(
-                    circle at 50% 10%,
-                    rgba(255, 0, 0, 0.18),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 10% 90%,
-                    rgba(255, 0, 0, 0.08),
-                    transparent 30%
-                );
-
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        header {
-            width: 100%;
-            padding: 25px 7%;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .logo span {
-            color: #ff2020;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .version {
-            color: #888;
-            font-size: 14px;
-        }
-
-        .auth-button {
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.05);
-            color: white;
-
-            padding: 9px 16px;
-
-            border-radius: 10px;
-
-            cursor: pointer;
-            font-size: 14px;
-
-            transition: 0.2s;
-        }
-
-        .auth-button:hover {
-            border-color: #ff2020;
-            background: rgba(255,32,32,0.12);
-        }
-
-        main {
-            min-height: calc(100vh - 90px);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 70px 20px 100px;
-
-            position: relative;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1050px;
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-block;
-
-            padding: 8px 16px;
-
-            border: 1px solid rgba(255,255,255,0.12);
-
-            background: rgba(255,255,255,0.04);
-
-            border-radius: 999px;
-
-            color: #aaa;
-
-            font-size: 13px;
-
-            margin-bottom: 25px;
-        }
-
-        h1 {
-            font-size: clamp(60px, 10vw, 115px);
-
-            line-height: 0.95;
-
-            letter-spacing: -7px;
-
-            font-weight: 900;
-
-            margin-bottom: 30px;
-        }
-
-        h1 span {
-            color: #ff2020;
-        }
-
-        .subtitle {
-            max-width: 680px;
-
-            margin: 0 auto 50px;
-
-            color: #999;
-
-            font-size: 18px;
-
-            line-height: 1.65;
-        }
-
-        .downloads {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, minmax(0, 320px));
-
-            justify-content: center;
-
-            gap: 20px;
-
-            margin-bottom: 45px;
-        }
-
-        .download {
-            min-height: 165px;
-
-            padding: 30px 25px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
-            text-decoration: none;
-
-            color: #ffffff;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.09),
-                    rgba(255,255,255,0.025)
-                );
-
-            border: 1px solid rgba(255,255,255,0.12);
-
-            border-radius: 24px;
-
-            transition:
-                transform 0.2s ease,
-                border-color 0.2s ease,
-                background 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .download:hover {
-            transform: translateY(-6px);
-
-            border-color: rgba(255,32,32,0.7);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,32,32,0.16),
-                    rgba(255,255,255,0.04)
-                );
-
-            box-shadow:
-                0 15px 50px rgba(255,0,0,0.12);
-        }
-
-        .download:active {
-            transform: translateY(-2px);
-        }
-
-        .download-icon {
-            font-size: 38px;
-
-            line-height: 1;
-
-            margin-bottom: 15px;
-        }
-
-        .download-title {
-            font-size: 20px;
-
-            font-weight: 750;
-
-            margin-bottom: 7px;
-        }
-
-        .download-info {
-            color: #888;
-
-            font-size: 13px;
-        }
-
-        .release {
-            color: #666;
-
-            font-size: 13px;
-        }
-
-        .release a {
-            color: #aaa;
-
-            text-decoration: none;
-
-            transition: color 0.2s ease;
-        }
-
-        .release a:hover {
-            color: #ff2020;
-        }
-
-        footer {
-            position: relative;
-
-            text-align: center;
-
-            padding:
-                30px
-                20px
-                45px;
-
-            color: #555;
-
-            font-size: 13px;
-        }
-
-        footer span {
-            color: #ff2020;
-        }
-
-
-        /* ========================= */
-        /* AUTH WINDOW                */
-        /* ========================= */
-
-        .auth-overlay {
-            position: fixed;
-
-            inset: 0;
-
-            background: rgba(0,0,0,0.78);
-
-            backdrop-filter: blur(10px);
-
-            display: none;
-
-            align-items: center;
-            justify-content: center;
-
-            z-index: 100;
-
-            padding: 20px;
-        }
-
-        .auth-overlay.active {
-            display: flex;
-        }
-
-        .auth-box {
-            width: 100%;
-
-            max-width: 410px;
-
-            background: #0d0d0d;
-
-            border:
-                1px solid
-                rgba(255,255,255,0.12);
-
-            border-radius: 22px;
-
-            padding: 30px;
-
-            box-shadow:
-                0 25px 80px
-                rgba(0,0,0,0.6);
-
-            position: relative;
-        }
-
-        .auth-box h2 {
-            font-size: 28px;
-
-            margin-bottom: 8px;
-        }
-
-        .auth-box p {
-            color: #777;
-
-            font-size: 14px;
-
-            margin-bottom: 22px;
-        }
-
-        .auth-box input {
-            width: 100%;
-
-            padding: 13px 14px;
-
-            margin-bottom: 12px;
-
-            border-radius: 10px;
-
-            border:
-                1px solid
-                #222;
-
-            background: #050505;
-
-            color: white;
-
-            outline: none;
-
-            font-size: 14px;
-        }
-
-        .auth-box input:focus {
-            border-color: #ff2020;
-        }
-
-        .auth-submit {
-            width: 100%;
-
-            padding: 13px;
-
-            border: 0;
-
-            border-radius: 10px;
-
-            background: #ff2020;
-
-            color: white;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            margin-top: 5px;
-
-            transition: 0.2s;
-        }
-
-        .auth-submit:hover {
-            background: #e51515;
-        }
-
-
-        /* DISCORD BUTTON */
-
-        .discord-button {
-            width: 100%;
-
-            padding: 13px;
-
-            margin-top: 12px;
-
-            border: 1px solid
-                rgba(88,101,242,0.5);
-
-            border-radius: 10px;
-
-            background:
-                rgba(88,101,242,0.12);
-
-            color: white;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition:
-                background 0.2s,
-                border-color 0.2s,
-                transform 0.2s;
-
-            font-size: 14px;
-        }
-
-        .discord-button:hover {
-            background:
-                rgba(88,101,242,0.25);
-
-            border-color:
-                rgba(88,101,242,0.9);
-
-            transform: translateY(-1px);
-        }
-
-        .discord-icon {
-            margin-right: 7px;
-        }
-
-
-        /* SEPARATOR */
-
-        .separator {
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            margin: 18px 0;
-
-            color: #555;
-
-            font-size: 12px;
-        }
-
-        .separator::before,
-        .separator::after {
-            content: "";
-
-            height: 1px;
-
-            flex: 1;
-
-            background: #222;
-        }
-
-
-        .auth-switch {
-            text-align: center;
-
-            margin-top: 18px;
-
-            color: #777;
-
-            font-size: 13px;
-        }
-
-        .auth-switch button {
-            border: 0;
-
-            background: none;
-
-            color: #ff2020;
-
-            cursor: pointer;
-        }
-
-        .close-auth {
-            position: absolute;
-
-            top: 15px;
-            right: 18px;
-
-            border: 0;
-
-            background: none;
-
-            color: #777;
-
-            font-size: 24px;
-
-            cursor: pointer;
-        }
-
-        .close-auth:hover {
-            color: white;
-        }
-
-        .auth-message {
-            min-height: 20px;
-
-            margin-top: 12px;
-
-            text-align: center;
-
-            color: #ff5555;
-
-            font-size: 13px;
-
-            line-height: 1.4;
-        }
-
-
-        @media (max-width: 700px) {
-
-            header {
-                padding: 20px;
-            }
-
-            .header-right {
-                gap: 8px;
-            }
-
-            .version {
-                display: none;
-            }
-
-            .downloads {
-                grid-template-columns: 1fr;
-
-                max-width: 340px;
-
-                margin-left: auto;
-
-                margin-right: auto;
-            }
-
-            h1 {
-                font-size:
-                    clamp(
-                        55px,
-                        18vw,
-                        90px
-                    );
-
-                letter-spacing: -5px;
-            }
-
-            .subtitle {
-                font-size: 16px;
-            }
-        }
-    </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -617,8 +41,8 @@
         </button>
 
         <button
-            class="auth-button"
             id="authButton"
+            class="auth-button"
             type="button"
             onclick="openAuth()"
         >
@@ -627,7 +51,10 @@
 
     </div>
 
-    <div id="profileMenu" class="profile-menu">
+    <div
+        id="profileMenu"
+        class="profile-menu"
+    >
 
         <div class="profile-menu-title">
             My Profile
@@ -635,13 +62,25 @@
 
         <div class="profile-preview">
 
-            <div class="profile-big-avatar">
+            <div
+                class="profile-big-avatar"
+                id="profileBigAvatar"
+            >
                 👤
             </div>
 
             <div>
-                <strong id="profileDisplayName">User</strong>
-                <small id="profileEmail"></small>
+
+                <strong
+                    id="profileDisplayName"
+                >
+                    User
+                </strong>
+
+                <small
+                    id="profileEmail"
+                ></small>
+
             </div>
 
         </div>
@@ -658,6 +97,13 @@
             onclick="changeAvatar()"
         >
             🖼️ Change avatar
+        </button>
+
+        <button
+            class="profile-menu-item"
+            onclick="closeProfileMenu()"
+        >
+            ⚙️ Profile settings
         </button>
 
         <button
@@ -680,22 +126,16 @@
             Desktop music software
         </div>
 
-
         <h1>
             Music<span>Pulse</span>
         </h1>
-
 
         <p class="subtitle">
             Create, manage and experience your music with MusicPulse.
             Download the latest desktop version for your computer.
         </p>
 
-
         <div class="downloads">
-
-
-            <!-- MAC -->
 
             <a
                 class="download"
@@ -716,9 +156,6 @@
 
             </a>
 
-
-            <!-- WINDOWS -->
-
             <a
                 class="download"
                 href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-Setup-1.0.0-x64.exe"
@@ -738,9 +175,7 @@
 
             </a>
 
-
         </div>
-
 
         <div class="release">
 
@@ -768,35 +203,32 @@
 </footer>
 
 
-<!-- ========================= -->
-<!-- LOGIN / REGISTER WINDOW    -->
-<!-- ========================= -->
+<!-- =====================================================
+     AUTH MODAL
+     ===================================================== -->
 
 <div
     class="auth-overlay"
-    id="authOverlay" class="premium-auth-overlay"
+    id="authOverlay"
 >
 
-    <div class="auth-box premium-auth-modal">
-
+    <div class="auth-box">
 
         <button
             class="close-auth"
+            type="button"
             onclick="closeAuth()"
         >
             ×
         </button>
 
-
         <h2 id="authTitle">
             Login
         </h2>
 
-
         <p id="authDescription">
             Sign in to your MusicPulse account.
         </p>
-
 
         <input
             id="email"
@@ -805,7 +237,6 @@
             autocomplete="email"
         >
 
-
         <input
             id="password"
             type="password"
@@ -813,28 +244,30 @@
             autocomplete="current-password"
         >
 
-
         <button
             class="auth-submit"
+            type="button"
             onclick="submitAuth()"
         >
             Login
         </button>
 
-
         <div class="separator">
             OR
         </div>
 
-
         <button
             class="discord-button"
+            type="button"
             onclick="signInWithDiscord()"
         >
-            <span class="discord-icon">◈</span>
-            Continue with Discord
-        </button>
+            <span class="discord-icon">
+                ◈
+            </span>
 
+            Continue with Discord
+
+        </button>
 
         <div class="auth-switch">
 
@@ -843,554 +276,795 @@
             </span>
 
             <button
-                onclick="switchAuth()"
+                type="button"
                 id="switchButton"
+                onclick="switchAuth()"
             >
                 Register
             </button>
 
         </div>
 
-
         <div
             class="auth-message"
             id="authMessage"
         ></div>
-
 
     </div>
 
 </div>
 
 
+<!-- =====================================================
+     HIDDEN AVATAR INPUT
+     ===================================================== -->
+
+<input
+    id="avatarUpload"
+    type="file"
+    accept="image/png,image/jpeg,image/webp"
+    style="display:none;"
+>
+
+
 <script>
 
-    /* ========================= */
-    /* SUPABASE                   */
-    /* ========================= */
+/* ========================================================
+   SUPABASE
+   ======================================================== */
 
-    const SUPABASE_URL =
-        "https://doearrsajrfzlqsbrryt.supabase.co";
+const SUPABASE_URL =
+    "https://doearrsajrfzlqsbrryt.supabase.co";
 
-    const SUPABASE_KEY =
-        "sb_publishable_DwxG0zK_VZRvC8S-dcw7xQ_C1fXujae";
+const SUPABASE_KEY =
+    "sb_publishable_DwxG0zK_VZRvC8S-dcw7xQ_C1fXujae";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
+/* ========================================================
+   VARIABLES
+   ======================================================== */
+
+let registerMode = false;
+
+
+/* ========================================================
+   AUTH OPEN
+   ======================================================== */
+
+function openAuth() {
+
+    const overlay =
+        document.getElementById(
+            "authOverlay"
+        );
+
+    overlay.classList.remove(
+        "closing"
+    );
+
+    overlay.classList.add(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+
+    document.getElementById(
+        "authMessage"
+    ).textContent = "";
+
+}
+
+
+/* ========================================================
+   AUTH CLOSE
+   ======================================================== */
+
+function closeAuth() {
+
+    const overlay =
+        document.getElementById(
+            "authOverlay"
+        );
+
+    overlay.classList.add(
+        "closing"
+    );
+
+    setTimeout(function () {
+
+        overlay.classList.remove(
+            "active",
+            "closing"
+        );
+
+        document.body.style.overflow =
+            "";
+
+    }, 280);
+
+}
+
+
+/* ========================================================
+   LOGIN / REGISTER SWITCH
+   ======================================================== */
+
+function switchAuth() {
+
+    registerMode =
+        !registerMode;
+
+    const title =
+        document.getElementById(
+            "authTitle"
+        );
+
+    const description =
+        document.getElementById(
+            "authDescription"
+        );
+
+    const submit =
+        document.querySelector(
+            ".auth-submit"
+        );
+
+    const switchText =
+        document.getElementById(
+            "switchText"
+        );
+
+    const switchButton =
+        document.getElementById(
+            "switchButton"
         );
 
 
-    /* ========================= */
-    /* VARIABLES                  */
-    /* ========================= */
+    if (registerMode) {
 
-    let registerMode = false;
+        title.textContent =
+            "Create account";
 
+        description.textContent =
+            "Create your MusicPulse account.";
 
-    /* ========================= */
-    /* OPEN AUTH                  */
-    /* ========================= */
+        submit.textContent =
+            "Register";
 
-    function openAuth() {
+        switchText.textContent =
+            "Already have an account?";
 
-        document
-            .getElementById("authOverlay")
-            .classList.add("active");
+        switchButton.textContent =
+            "Login";
 
-        document
-            .getElementById("authMessage")
-            .textContent = "";
+    } else {
 
-    }
+        title.textContent =
+            "Login";
 
+        description.textContent =
+            "Sign in to your MusicPulse account.";
 
-    /* ========================= */
-    /* CLOSE AUTH                 */
-    /* ========================= */
+        submit.textContent =
+            "Login";
 
-    function closeAuth() {
+        switchText.textContent =
+            "Don't have an account?";
 
-        document
-            .getElementById("authOverlay")
-            .classList.remove("active");
-
-    }
-
-
-    /* ========================= */
-    /* SWITCH LOGIN / REGISTER    */
-    /* ========================= */
-
-    function switchAuth() {
-
-        registerMode = !registerMode;
-
-
-        const title =
-            document.getElementById("authTitle");
-
-
-        const description =
-            document.getElementById("authDescription");
-
-
-        const submit =
-            document.querySelector(".auth-submit");
-
-
-        const switchText =
-            document.getElementById("switchText");
-
-
-        const switchButton =
-            document.getElementById("switchButton");
-
-
-        if (registerMode) {
-
-            title.textContent =
-                "Register";
-
-
-            description.textContent =
-                "Create your MusicPulse account.";
-
-
-            submit.textContent =
-                "Register";
-
-
-            switchText.textContent =
-                "Already have an account?";
-
-
-            switchButton.textContent =
-                "Login";
-
-        } else {
-
-            title.textContent =
-                "Login";
-
-
-            description.textContent =
-                "Sign in to your MusicPulse account.";
-
-
-            submit.textContent =
-                "Login";
-
-
-            switchText.textContent =
-                "Don't have an account?";
-
-
-            switchButton.textContent =
-                "Register";
-        }
-
-
-        document
-            .getElementById("authMessage")
-            .textContent = "";
+        switchButton.textContent =
+            "Register";
 
     }
 
 
-    /* ========================= */
-    /* EMAIL LOGIN / REGISTER     */
-    /* ========================= */
+    document.getElementById(
+        "authMessage"
+    ).textContent = "";
 
-    async function submitAuth() {
-
-        const email =
-            document
-                .getElementById("email")
-                .value
-                .trim();
+}
 
 
-        const password =
-            document
-                .getElementById("password")
-                .value;
+/* ========================================================
+   EMAIL AUTH
+   ======================================================== */
+
+async function submitAuth() {
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+    const message =
+        document.getElementById(
+            "authMessage"
+        );
 
 
-        const message =
-            document
-                .getElementById("authMessage");
-
+    if (!email || !password) {
 
         message.style.color =
             "#ff5555";
 
+        message.textContent =
+            "Enter your email and password.";
 
-        if (!email || !password) {
+        return;
 
-            message.textContent =
-                "Enter your email and password.";
-
-            return;
-        }
+    }
 
 
-        if (password.length < 6) {
+    if (password.length < 6) {
 
-            message.textContent =
-                "Password must contain at least 6 characters.";
-
-            return;
-        }
-
+        message.style.color =
+            "#ff5555";
 
         message.textContent =
-            "Please wait...";
+            "Password must contain at least 6 characters.";
+
+        return;
+
+    }
 
 
-        try {
+    message.style.color =
+        "#999";
 
-            if (registerMode) {
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient.auth.signUp({
-
-                        email: email,
-
-                        password: password
-
-                    });
+    message.textContent =
+        "Please wait...";
 
 
-                if (error)
-                    throw error;
+    try {
+
+        if (registerMode) {
+
+            const result =
+                await supabaseClient.auth.signUp({
+
+                    email:
+                        email,
+
+                    password:
+                        password
+
+                });
 
 
-                message.style.color =
-                    "#55ff88";
+            if (result.error)
+                throw result.error;
 
 
-                if (data.session) {
+            message.style.color =
+                "#55ff88";
 
-                    message.textContent =
-                        "Account created successfully!";
-
-
-                    updateAuthButton();
-
-
-                    setTimeout(
-                        closeAuth,
-                        1000
-                    );
-
-                } else {
-
-                    message.textContent =
-                        "Account created! Check your email to confirm your account.";
-
-                }
-
-            } else {
-
-                const {
-                    error
-                } =
-                    await supabaseClient.auth.signInWithPassword({
-
-                        email: email,
-
-                        password: password
-
-                    });
-
-
-                if (error)
-                    throw error;
-
-
-                message.style.color =
-                    "#55ff88";
-
+            if (result.data.session) {
 
                 message.textContent =
-                    "Logged in successfully!";
+                    "Account created!";
 
-
-                updateAuthButton();
-
+                await updateAuthUI();
 
                 setTimeout(
                     closeAuth,
                     700
                 );
 
+            } else {
+
+                message.textContent =
+                    "Account created! Check your email.";
+
             }
 
-        } catch (error) {
+        } else {
 
-            message.style.color =
-                "#ff5555";
+            const result =
+                await supabaseClient.auth.signInWithPassword({
 
+                    email:
+                        email,
 
-            message.textContent =
-                error.message;
-
-        }
-
-    }
-
-
-    /* ========================= */
-    /* DISCORD LOGIN              */
-    /* ========================= */
-
-    async function signInWithDiscord() {
-
-        const message =
-            document
-                .getElementById("authMessage");
-
-
-        message.style.color =
-            "#aaaaaa";
-
-
-        message.textContent =
-            "Connecting to Discord...";
-
-
-        try {
-
-            const {
-                error
-            } =
-                await supabaseClient.auth.signInWithOAuth({
-
-                    provider: "discord",
-
-                    options: {
-
-                        redirectTo:
-                            "https://flxnr-demo.github.io/musicpulse.github.io/"
-
-                    }
+                    password:
+                        password
 
                 });
 
 
-            if (error)
-                throw error;
+            if (result.error)
+                throw result.error;
 
-
-        } catch (error) {
 
             message.style.color =
-                "#ff5555";
-
+                "#55ff88";
 
             message.textContent =
-                error.message;
-
-        }
-
-    }
+                "Logged in successfully!";
 
 
-    /* ========================= */
-    /* LOGOUT                     */
-    /* ========================= */
-
-    async function logout() {
-
-        const {
-            error
-        } =
-            await supabaseClient.auth.signOut();
+            await updateAuthUI();
 
 
-        if (error) {
-
-            console.error(
-                "Logout error:",
-                error
+            setTimeout(
+                closeAuth,
+                650
             );
 
         }
 
+    } catch (error) {
 
-        updateAuthButton();
+        message.style.color =
+            "#ff5555";
 
-    }
-
-
-    /* ========================= */
-    /* UPDATE HEADER BUTTON       */
-    /* ========================= */
-
-    async function updateAuthButton() {
-
-        const button =
-            document.getElementById("authButton");
-
-        const profile =
-            document.getElementById("profileButton");
-
-        const { data } =
-            await supabaseClient.auth.getUser();
-
-        if (data.user) {
-
-            button.textContent = "Logout";
-            button.onclick = logout;
-
-            profile.style.display = "flex";
-
-            const metadata =
-                data.user.user_metadata || {};
-
-            document.getElementById(
-                "profileDisplayName"
-            ).textContent =
-                metadata.custom_name ||
-                metadata.full_name ||
-                metadata.name ||
-                "User";
-
-            document.getElementById(
-                "profileEmail"
-            ).textContent =
-                data.user.email || "";
-
-        } else {
-
-            button.textContent = "Login";
-            button.onclick = openAuth;
-
-            profile.style.display = "none";
-
-        }
+        message.textContent =
+            error.message;
 
     }
 
-    function toggleProfileMenu() {
+}
 
-        const menu =
-            document.getElementById("profileMenu");
 
-        menu.classList.toggle(
-            "profile-menu-open"
+/* ========================================================
+   DISCORD
+   ======================================================== */
+
+async function signInWithDiscord() {
+
+    const message =
+        document.getElementById(
+            "authMessage"
         );
 
-    }
+    message.style.color =
+        "#aaa";
 
-    async function changeProfileName() {
+    message.textContent =
+        "Connecting to Discord...";
 
-        const { data } =
-            await supabaseClient.auth.getUser();
 
-        if (!data.user) return;
+    try {
 
-        const current =
-            data.user.user_metadata?.custom_name ||
-            data.user.user_metadata?.full_name ||
-            "User";
+        const result =
+            await supabaseClient.auth.signInWithOAuth({
 
-        const name =
-            prompt(
-                "Enter your new name:",
-                current
-            );
+                provider:
+                    "discord",
 
-        if (!name || !name.trim()) return;
+                options: {
 
-        const { error } =
-            await supabaseClient.auth.updateUser({
+                    redirectTo:
+                        window.location.origin +
+                        window.location.pathname
 
-                data: {
-                    custom_name: name.trim()
                 }
 
             });
 
-        if (error) {
 
-            alert(error.message);
-            return;
+        if (result.error)
+            throw result.error;
 
-        }
 
-        updateAuthButton();
+    } catch (error) {
+
+        message.style.color =
+            "#ff5555";
+
+        message.textContent =
+            error.message;
 
     }
 
-    function changeAvatar() {
+}
 
-        alert(
-            "Custom avatar upload will be added next."
+
+/* ========================================================
+   PROFILE UI
+   ======================================================== */
+
+async function updateAuthUI() {
+
+    const authButton =
+        document.getElementById(
+            "authButton"
         );
 
+    const profileButton =
+        document.getElementById(
+            "profileButton"
+        );
+
+    const {
+        data
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if (!data.user) {
+
+        authButton.textContent =
+            "Login";
+
+        authButton.onclick =
+            openAuth;
+
+        profileButton.style.display =
+            "none";
+
+        closeProfileMenu();
+
+        return;
+
     }
 
-    /* ========================= */
-    /* AUTH STATE                 */
-    /* ========================= */
 
-    supabaseClient.auth.onAuthStateChange(
+    authButton.textContent =
+        "Logout";
 
-        function () {
+    authButton.onclick =
+        logout;
 
-            updateAuthButton();
+    profileButton.style.display =
+        "flex";
+
+
+    const metadata =
+        data.user.user_metadata ||
+        {};
+
+
+    const name =
+        metadata.custom_name ||
+        metadata.full_name ||
+        metadata.name ||
+        metadata.user_name ||
+        "User";
+
+
+    document.getElementById(
+        "profileDisplayName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "profileEmail"
+    ).textContent =
+        data.user.email ||
+        "";
+
+
+    const avatar =
+        metadata.custom_avatar;
+
+
+    const avatarElement =
+        document.getElementById(
+            "profileBigAvatar"
+        );
+
+
+    if (avatar) {
+
+        avatarElement.innerHTML =
+            `<img src="${avatar}" alt="Avatar">`;
+
+    } else {
+
+        avatarElement.innerHTML =
+            "👤";
+
+    }
+
+}
+
+
+/* ========================================================
+   PROFILE MENU
+   ======================================================== */
+
+function toggleProfileMenu() {
+
+    const menu =
+        document.getElementById(
+            "profileMenu"
+        );
+
+    menu.classList.toggle(
+        "profile-menu-open"
+    );
+
+}
+
+
+function closeProfileMenu() {
+
+    const menu =
+        document.getElementById(
+            "profileMenu"
+        );
+
+    menu.classList.remove(
+        "profile-menu-open"
+    );
+
+}
+
+
+/* ========================================================
+   CHANGE NAME
+   ======================================================== */
+
+async function changeProfileName() {
+
+    const {
+        data
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if (!data.user)
+        return;
+
+
+    const current =
+        data.user.user_metadata?.custom_name ||
+        data.user.user_metadata?.full_name ||
+        "User";
+
+
+    const newName =
+        prompt(
+            "Enter your new name:",
+            current
+        );
+
+
+    if (!newName)
+        return;
+
+
+    const name =
+        newName.trim();
+
+
+    if (!name)
+        return;
+
+
+    if (name.length > 25) {
+
+        alert(
+            "Name is too long. Maximum 25 characters."
+        );
+
+        return;
+
+    }
+
+
+    const result =
+        await supabaseClient.auth.updateUser({
+
+            data: {
+
+                custom_name:
+                    name
+
+            }
+
+        });
+
+
+    if (result.error) {
+
+        alert(
+            result.error.message
+        );
+
+        return;
+
+    }
+
+
+    await updateAuthUI();
+
+    closeProfileMenu();
+
+}
+
+
+/* ========================================================
+   AVATAR
+   ======================================================== */
+
+function changeAvatar() {
+
+    const input =
+        document.getElementById(
+            "avatarUpload"
+        );
+
+    input.value =
+        "";
+
+    input.click();
+
+}
+
+
+/* ========================================================
+   AVATAR FILE
+   ======================================================== */
+
+document
+    .getElementById("avatarUpload")
+    .addEventListener(
+        "change",
+        async function () {
+
+            const file =
+                this.files[0];
+
+            if (!file)
+                return;
+
+
+            if (file.size >
+                2 * 1024 * 1024
+            ) {
+
+                alert(
+                    "Avatar must be smaller than 2 MB."
+                );
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                async function () {
+
+                    const result =
+                        await supabaseClient.auth.updateUser({
+
+                            data: {
+
+                                custom_avatar:
+                                    reader.result
+
+                            }
+
+                        });
+
+
+                    if (result.error) {
+
+                        alert(
+                            result.error.message
+                        );
+
+                        return;
+
+                    }
+
+
+                    await updateAuthUI();
+
+                    closeProfileMenu();
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
 
         }
-
     );
 
 
-    /* ========================= */
-    /* INITIAL CHECK              */
-    /* ========================= */
+/* ========================================================
+   LOGOUT
+   ======================================================== */
 
-    updateAuthButton();
+async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    closeProfileMenu();
+
+    await updateAuthUI();
+
+}
 
 
-    /* ========================= */
-    /* CLOSE WHEN CLICKING OUTSIDE */
-    /* ========================= */
+/* ========================================================
+   AUTH STATE
+   ======================================================== */
 
-    document
-        .getElementById("authOverlay")
-        .addEventListener(
-            "click",
-            function(event) {
+supabaseClient.auth.onAuthStateChange(
+    function () {
 
-                if (
-                    event.target === this
-                ) {
-
-                    closeAuth();
-
-                }
-
-            }
+        setTimeout(
+            updateAuthUI,
+            0
         );
 
+    }
+);
 
-    /* ========================= */
-    /* ESC CLOSE                  */
-    /* ========================= */
 
-    document.addEventListener(
-        "keydown",
-        function(event) {
+/* ========================================================
+   INITIAL LOAD
+   ======================================================== */
+
+updateAuthUI();
+
+
+/* ========================================================
+   CLOSE PROFILE WHEN CLICKING OUTSIDE
+   ======================================================== */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const menu =
+            document.getElementById(
+                "profileMenu"
+            );
+
+        const button =
+            document.getElementById(
+                "profileButton"
+            );
+
+
+        if (
+            menu &&
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            closeProfileMenu();
+
+        }
+
+    }
+);
+
+
+/* ========================================================
+   AUTH OUTSIDE CLICK
+   ======================================================== */
+
+document
+    .getElementById("authOverlay")
+    .addEventListener(
+        "click",
+        function (event) {
 
             if (
-                event.key === "Escape"
+                event.target ===
+                this
             ) {
 
                 closeAuth();
@@ -1400,158 +1074,29 @@
         }
     );
 
-</script>
 
+/* ========================================================
+   ESC
+   ======================================================== */
 
+document.addEventListener(
+    "keydown",
+    function (event) {
 
+        if (
+            event.key ===
+            "Escape"
+        ) {
 
-<script>
-/* =========================================
-   MUSICPULSE — SMOOTH UI SYSTEM
-   ========================================= */
+            closeAuth();
 
-(function () {
-
-    function animateOpen(element) {
-
-        if (!element) return;
-
-        element.classList.remove(
-            "closing",
-            "closed"
-        );
-
-        element.classList.add("active");
-
-    }
-
-
-    function animateClose(element) {
-
-        if (!element) return;
-
-        element.classList.add("closing");
-
-        setTimeout(function () {
-
-            element.classList.remove(
-                "active",
-                "closing"
-            );
-
-        }, 260);
-
-    }
-
-
-    /* Detect existing auth functions */
-
-    const originalOpenAuth =
-        window.openAuth;
-
-    if (typeof originalOpenAuth === "function") {
-
-        window.openAuth = function () {
-
-            originalOpenAuth.apply(
-                this,
-                arguments
-            );
-
-            setTimeout(function () {
-
-                const overlay =
-                    document.getElementById(
-                        "authOverlay"
-                    );
-
-                if (overlay) {
-                    overlay.classList.add(
-                        "active"
-                    );
-                }
-
-            }, 20);
-
-        };
-
-    }
-
-
-    const originalCloseAuth =
-        window.closeAuth;
-
-    if (typeof originalCloseAuth === "function") {
-
-        window.closeAuth = function () {
-
-            const overlay =
-                document.getElementById(
-                    "authOverlay"
-                );
-
-            if (overlay) {
-
-                overlay.classList.add(
-                    "closing"
-                );
-
-                setTimeout(function () {
-
-                    originalCloseAuth.apply(
-                        this,
-                        arguments
-                    );
-
-                    overlay.classList.remove(
-                        "active",
-                        "closing"
-                    );
-
-                }, 180);
-
-            } else {
-
-                originalCloseAuth.apply(
-                    this,
-                    arguments
-                );
-
-            }
-
-        };
-
-    }
-
-
-    /* Click animation */
-
-    document.addEventListener(
-        "click",
-        function (event) {
-
-            const button =
-                event.target.closest(
-                    "button"
-                );
-
-            if (!button) return;
-
-            button.classList.remove(
-                "pulse-click"
-            );
-
-            void button.offsetWidth;
-
-            button.classList.add(
-                "pulse-click"
-            );
+            closeProfileMenu();
 
         }
-    );
 
+    }
+);
 
-})();
 </script>
 
 </body>
