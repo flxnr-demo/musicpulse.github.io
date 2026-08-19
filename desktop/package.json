@@ -1,0 +1,37 @@
+{
+  "name": "musicpulse-desktop",
+  "version": "1.0.0",
+  "description": "MusicPulse desktop application",
+  "main": "electron.cjs",
+  "author": "FLXNR",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"electron .\"",
+    "build": "vite build",
+    "electron": "electron .",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "concurrently": "^9.0.0",
+    "electron": "^43.4.1",
+    "electron-builder": "^26.15.3",
+    "vite": "^7.0.0"
+  },
+  "build": {
+    "appId": "com.musicpulse.desktop",
+    "productName": "MusicPulse",
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.music"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
