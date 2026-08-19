@@ -1174,3 +1174,316 @@ header .header-right {
 
     color: #ff9999;
 }
+
+/* =========================================
+   MUSICPULSE — PREMIUM UI ANIMATIONS
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+button,
+input,
+a {
+    transition:
+        transform .18s cubic-bezier(.2,.8,.2,1),
+        opacity .18s ease,
+        background .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        color .18s ease;
+}
+
+/* Smooth page appearance */
+
+body {
+    animation: pageEnter .55s ease both;
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+
+header {
+    animation: headerEnter .55s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes headerEnter {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Main cards */
+
+.container,
+.card,
+.badge,
+.stats,
+.dashboardHeader {
+    animation:
+        contentEnter .6s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes contentEnter {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Buttons */
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+/* =========================================
+   AUTH MODAL
+   ========================================= */
+
+#authOverlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease,
+        backdrop-filter .25s ease;
+
+    backdrop-filter: blur(0px);
+}
+
+#authOverlay.active,
+#authOverlay.show,
+#authOverlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    backdrop-filter: blur(10px);
+}
+
+#authOverlay > div,
+#authOverlay .auth-modal,
+#authOverlay .auth-box,
+#authOverlay .modal {
+    transform:
+        translateY(18px)
+        scale(.94);
+
+    opacity: 0;
+
+    transition:
+        transform .3s cubic-bezier(.2,.8,.2,1),
+        opacity .25s ease;
+}
+
+#authOverlay.active > div,
+#authOverlay.show > div,
+#authOverlay.open > div,
+#authOverlay.active .auth-modal,
+#authOverlay.show .auth-modal,
+#authOverlay.open .auth-modal,
+#authOverlay.active .auth-box,
+#authOverlay.show .auth-box,
+#authOverlay.open .auth-box,
+#authOverlay.active .modal,
+#authOverlay.show .modal,
+#authOverlay.open .modal {
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity: 1;
+}
+
+/* Inputs */
+
+input {
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease,
+        background .2s ease;
+}
+
+input:focus {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,.06),
+        0 8px 25px rgba(0,0,0,.18);
+}
+
+/* =========================================
+   LOGIN BUTTON
+   ========================================= */
+
+.auth-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-button::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.18),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left .5s ease;
+}
+
+.auth-button:hover::after {
+    left: 140%;
+}
+
+/* =========================================
+   CARDS / PANELS
+   ========================================= */
+
+.card,
+.stats,
+.dashboardHeader {
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+.card:hover,
+.stats:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
+}
+
+/* =========================================
+   PROFILE MENU
+   ========================================= */
+
+.profile-menu {
+    transform:
+        translateY(-8px)
+        scale(.95);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease,
+        transform .25s cubic-bezier(.2,.8,.2,1),
+        visibility .2s ease;
+}
+
+.profile-menu-open {
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+/* Profile avatar */
+
+.profile-button {
+    cursor: pointer;
+
+    transition:
+        transform .2s cubic-bezier(.2,.8,.2,1),
+        box-shadow .2s ease;
+}
+
+.profile-button:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.06);
+}
+
+.profile-button:active {
+    transform: scale(.92);
+}
+
+/* =========================================
+   MODAL BACKDROP
+   ========================================= */
+
+.auth-overlay,
+.modal-overlay {
+    transition:
+        opacity .25s ease,
+        backdrop-filter .25s ease;
+}
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+

@@ -1403,5 +1403,156 @@
 </script>
 
 
+
+
+<script>
+/* =========================================
+   MUSICPULSE — SMOOTH UI SYSTEM
+   ========================================= */
+
+(function () {
+
+    function animateOpen(element) {
+
+        if (!element) return;
+
+        element.classList.remove(
+            "closing",
+            "closed"
+        );
+
+        element.classList.add("active");
+
+    }
+
+
+    function animateClose(element) {
+
+        if (!element) return;
+
+        element.classList.add("closing");
+
+        setTimeout(function () {
+
+            element.classList.remove(
+                "active",
+                "closing"
+            );
+
+        }, 260);
+
+    }
+
+
+    /* Detect existing auth functions */
+
+    const originalOpenAuth =
+        window.openAuth;
+
+    if (typeof originalOpenAuth === "function") {
+
+        window.openAuth = function () {
+
+            originalOpenAuth.apply(
+                this,
+                arguments
+            );
+
+            setTimeout(function () {
+
+                const overlay =
+                    document.getElementById(
+                        "authOverlay"
+                    );
+
+                if (overlay) {
+                    overlay.classList.add(
+                        "active"
+                    );
+                }
+
+            }, 20);
+
+        };
+
+    }
+
+
+    const originalCloseAuth =
+        window.closeAuth;
+
+    if (typeof originalCloseAuth === "function") {
+
+        window.closeAuth = function () {
+
+            const overlay =
+                document.getElementById(
+                    "authOverlay"
+                );
+
+            if (overlay) {
+
+                overlay.classList.add(
+                    "closing"
+                );
+
+                setTimeout(function () {
+
+                    originalCloseAuth.apply(
+                        this,
+                        arguments
+                    );
+
+                    overlay.classList.remove(
+                        "active",
+                        "closing"
+                    );
+
+                }, 180);
+
+            } else {
+
+                originalCloseAuth.apply(
+                    this,
+                    arguments
+                );
+
+            }
+
+        };
+
+    }
+
+
+    /* Click animation */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    "button"
+                );
+
+            if (!button) return;
+
+            button.classList.remove(
+                "pulse-click"
+            );
+
+            void button.offsetWidth;
+
+            button.classList.add(
+                "pulse-click"
+            );
+
+        }
+    );
+
+
+})();
+</script>
+
 </body>
 </html>
