@@ -605,12 +605,66 @@
         <div class="version">
             v1.0.0
         </div>
-<button
+
+        <button
+            id="profileButton"
+            class="profile-button"
+            type="button"
+            onclick="toggleProfileMenu()"
+            style="display:none;"
+        >
+            <span>👤</span>
+        </button>
+
+        <button
             class="auth-button"
             id="authButton"
+            type="button"
             onclick="openAuth()"
         >
             Login
+        </button>
+
+    </div>
+
+    <div id="profileMenu" class="profile-menu">
+
+        <div class="profile-menu-title">
+            My Profile
+        </div>
+
+        <div class="profile-preview">
+
+            <div class="profile-big-avatar">
+                👤
+            </div>
+
+            <div>
+                <strong id="profileDisplayName">User</strong>
+                <small id="profileEmail"></small>
+            </div>
+
+        </div>
+
+        <button
+            class="profile-menu-item"
+            onclick="changeProfileName()"
+        >
+            ✏️ Change name
+        </button>
+
+        <button
+            class="profile-menu-item"
+            onclick="changeAvatar()"
+        >
+            🖼️ Change avatar
+        </button>
+
+        <button
+            class="profile-menu-item logout-item"
+            onclick="logout()"
+        >
+            🚪 Logout
         </button>
 
     </div>
@@ -1184,48 +1238,102 @@
         const button =
             document.getElementById("authButton");
 
-        const avatar =
-            document.getElementById("userAvatar");
+        const profile =
+            document.getElementById("profileButton");
 
-        const {
-            data
-        } =
+        const { data } =
             await supabaseClient.auth.getUser();
 
         if (data.user) {
 
-            button.textContent =
-                "Logout";
+            button.textContent = "Logout";
+            button.onclick = logout;
 
-            button.onclick =
-                logout;
-
-            const user =
-                data.user;
+            profile.style.display = "flex";
 
             const metadata =
-                user.user_metadata || {};
-const avatarUrl =
-                metadata.avatar_url ||
-                metadata.picture ||
-                "";
+                data.user.user_metadata || {};
 
-            if (avatarUrl) {
-                avatar.src = avatarUrl;
-                avatar.style.display = "block";
-            } else {
-                avatar.style.display = "none";
-            }
+            document.getElementById(
+                "profileDisplayName"
+            ).textContent =
+                metadata.custom_name ||
+                metadata.full_name ||
+                metadata.name ||
+                "User";
+
+            document.getElementById(
+                "profileEmail"
+            ).textContent =
+                data.user.email || "";
 
         } else {
 
-            button.textContent =
-                "Login";
+            button.textContent = "Login";
+            button.onclick = openAuth;
 
-            button.onclick =
-                openAuth;
+            profile.style.display = "none";
 
         }
+
+    }
+
+    function toggleProfileMenu() {
+
+        const menu =
+            document.getElementById("profileMenu");
+
+        menu.classList.toggle(
+            "profile-menu-open"
+        );
+
+    }
+
+    async function changeProfileName() {
+
+        const { data } =
+            await supabaseClient.auth.getUser();
+
+        if (!data.user) return;
+
+        const current =
+            data.user.user_metadata?.custom_name ||
+            data.user.user_metadata?.full_name ||
+            "User";
+
+        const name =
+            prompt(
+                "Enter your new name:",
+                current
+            );
+
+        if (!name || !name.trim()) return;
+
+        const { error } =
+            await supabaseClient.auth.updateUser({
+
+                data: {
+                    custom_name: name.trim()
+                }
+
+            });
+
+        if (error) {
+
+            alert(error.message);
+            return;
+
+        }
+
+        updateAuthButton();
+
+    }
+
+    function changeAvatar() {
+
+        alert(
+            "Custom avatar upload will be added next."
+        );
 
     }
 
