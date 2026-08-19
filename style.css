@@ -1038,3 +1038,40 @@ header .header-right {
     gap: 8px !important;
 }
 
+
+/* DISCORD AVATAR — FINAL */
+header .header-right #userProfile {
+    display: flex !important;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 !important;
+    margin: 0 2px 0 0 !important;
+    flex: 0 0 30px !important;
+    overflow: hidden !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+header .header-right #userProfile #userAvatar {
+    display: block !important;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+header .header-right #userProfile #userName {
+    display: none !important;
+}
