@@ -945,3 +945,21 @@ footer {
     }
 }
 ```
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-right: 10px;
+    color: white;
+    font-weight: 600;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
