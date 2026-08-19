@@ -946,98 +946,12 @@ footer {
 }
 ```
 
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    margin-right: 10px;
-    color: white;
-    font-weight: 600;
-}
-
-.user-avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.2);
-}
-
-
 /* FIX: mała ikonka profilu obok Logout */
 .header-right {
     display: flex;
     align-items: center;
     gap: 8px;
 }
-
-.user-profile {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    margin: 0;
-    padding: 0;
-}
-
-.user-avatar {
-    display: block;
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.2);
-}
-
-#userName {
-    display: none;
-}
-
-
-/* FINAL PROFILE AVATAR FIX */
-header .header-right #userProfile {
-    display: flex !important;
-    position: relative !important;
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    flex: 0 0 32px !important;
-    overflow: hidden !important;
-}
-
-header .header-right #userProfile #userAvatar {
-    display: block !important;
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
-}
-
-header .header-right #userProfile #userName {
-    display: none !important;
-}
-
-header .header-right {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    gap: 8px !important;
-}
-
 
 /* DISCORD AVATAR — FINAL */
 header .header-right #userProfile {
@@ -1074,4 +988,29 @@ header .header-right #userProfile #userAvatar {
 
 header .header-right #userProfile #userName {
     display: none !important;
+}
+
+
+/* CLEAN DISCORD AVATAR */
+header .header-right {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+}
+
+header .header-right #userAvatar {
+    display: none;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    flex: 0 0 30px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 2px solid rgba(255,255,255,.2) !important;
 }

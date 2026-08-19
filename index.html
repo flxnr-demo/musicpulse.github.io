@@ -605,13 +605,7 @@
         <div class="version">
             v1.0.0
         </div>
-
-        <div id="userProfile" class="user-profile" style="display:none;">
-            <img id="userAvatar" class="user-avatar" src="" alt="Avatar">
-            <span id="userName"></span>
-        </div>
-
-        <button
+<button
             class="auth-button"
             id="authButton"
             onclick="openAuth()"
@@ -1190,14 +1184,8 @@
         const button =
             document.getElementById("authButton");
 
-        const profile =
-            document.getElementById("userProfile");
-
         const avatar =
             document.getElementById("userAvatar");
-
-        const name =
-            document.getElementById("userName");
 
         const {
             data
@@ -1217,21 +1205,10 @@
 
             const metadata =
                 user.user_metadata || {};
-
-            const username =
-                metadata.full_name ||
-                metadata.name ||
-                metadata.user_name ||
-                user.email ||
-                "User";
-
-            const avatarUrl =
+const avatarUrl =
                 metadata.avatar_url ||
                 metadata.picture ||
                 "";
-
-            name.textContent =
-                username;
 
             if (avatarUrl) {
                 avatar.src = avatarUrl;
@@ -1240,9 +1217,6 @@
                 avatar.style.display = "none";
             }
 
-            profile.style.display =
-                "flex";
-
         } else {
 
             button.textContent =
@@ -1250,9 +1224,6 @@
 
             button.onclick =
                 openAuth;
-
-            profile.style.display =
-                "none";
 
         }
 
