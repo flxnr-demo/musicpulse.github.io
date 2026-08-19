@@ -6,41 +6,48 @@
 
     <title>MusicPulse</title>
 
-    <link rel="stylesheet" href="./style.css">
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="background-glow glow-one"></div>
-<div class="background-glow glow-two"></div>
-<div class="noise"></div>
+<header>
 
-<header class="site-header">
-
-    <a class="logo" href="#">
+    <div class="logo">
         Music<span>Pulse</span>
-    </a>
+    </div>
 
-    <div class="header-actions">
+    <div class="header-right">
 
-        <span class="version">
+        <div class="version">
             v1.0.0
-        </span>
+        </div>
+
+        <!-- PROFILE BUTTON -->
 
         <button
             id="profileButton"
             class="profile-button"
+            type="button"
             onclick="toggleProfileMenu()"
-            aria-label="Profile"
         >
-            👤
+            <span id="headerAvatarFallback">👤</span>
+
+            <img
+                id="headerAvatar"
+                class="header-avatar"
+                alt="Avatar"
+            >
         </button>
+
+        <!-- LOGIN / LOGOUT -->
 
         <button
             id="authButton"
-            class="login-button"
+            class="auth-button"
+            type="button"
             onclick="openAuth()"
         >
             Login
@@ -48,296 +55,235 @@
 
     </div>
 
-    <div id="profileMenu" class="profile-menu">
+</header>
 
-        <div class="profile-header">
-            <div class="profile-avatar-large">
+
+<!-- ========================= -->
+<!-- PROFILE MENU -->
+<!-- ========================= -->
+
+<div
+    id="profileMenu"
+    class="profile-menu"
+>
+
+    <div class="profile-menu-title">
+        My Profile
+    </div>
+
+    <div class="profile-preview">
+
+        <div class="profile-avatar-wrapper">
+
+            <div
+                id="profileAvatarFallback"
+                class="profile-big-avatar"
+            >
                 👤
             </div>
 
-            <div class="profile-user-info">
-                <strong id="profileDisplayName">User</strong>
-                <span id="profileEmail"></span>
-            </div>
+            <img
+                id="profileBigAvatar"
+                class="profile-big-avatar-image"
+                alt="Profile avatar"
+            >
+
         </div>
 
-        <div class="profile-divider"></div>
+        <div class="profile-user-info">
 
-        <button onclick="changeProfileName()">
-            <span>✏️</span>
-            Change name
-        </button>
+            <strong id="profileDisplayName">
+                User
+            </strong>
 
-        <button onclick="changeAvatar()">
-            <span>🖼️</span>
-            Change avatar
-        </button>
+            <small id="profileEmail">
+            </small>
 
-        <button onclick="profileSettings()">
-            <span>⚙️</span>
-            Profile settings
-        </button>
-
-        <button
-            class="danger"
-            onclick="logout()"
-        >
-            <span>🚪</span>
-            Logout
-        </button>
+        </div>
 
     </div>
 
-</header>
+
+    <button
+        class="profile-menu-item"
+        onclick="openNameModal()"
+    >
+        <span>✏️</span>
+        <span>Change name</span>
+    </button>
+
+
+    <button
+        class="profile-menu-item"
+        onclick="openAvatarPicker()"
+    >
+        <span>🖼️</span>
+        <span>Change avatar</span>
+    </button>
+
+
+    <div class="profile-divider"></div>
+
+
+    <button
+        class="profile-menu-item logout-item"
+        onclick="logout()"
+    >
+        <span>🚪</span>
+        <span>Logout</span>
+    </button>
+
+</div>
 
 
 <main>
 
-    <section class="hero">
+    <div class="container">
 
-        <div class="hero-content">
-
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                Desktop music software
-            </div>
-
-            <h1>
-                Music<span>Pulse</span>
-            </h1>
-
-            <p class="hero-subtitle">
-                Create, manage and experience your music
-                with a fast and modern desktop app.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a
-                    class="download-card"
-                    href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-1.0.0-arm64.dmg"
-                >
-                    <div class="download-icon">
-                        
-                    </div>
-
-                    <div>
-                        <strong>
-                            Download for Mac
-                        </strong>
-
-                        <span>
-                            Apple Silicon · ARM64 · DMG
-                        </span>
-                    </div>
-
-                    <div class="download-arrow">
-                        →
-                    </div>
-                </a>
-
-
-                <a
-                    class="download-card"
-                    href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-Setup-1.0.0-x64.exe"
-                >
-                    <div class="download-icon windows">
-                        ▣
-                    </div>
-
-                    <div>
-                        <strong>
-                            Download for Windows
-                        </strong>
-
-                        <span>
-                            Windows · x64 · EXE
-                        </span>
-                    </div>
-
-                    <div class="download-arrow">
-                        →
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="release-info">
-                MusicPulse 1.0.0
-                <span>•</span>
-                <a
-                    href="https://github.com/flxnr-demo/musicpulse.github.io/releases/tag/v1.0.0"
-                    target="_blank"
-                >
-                    View release
-                </a>
-            </div>
-
+        <div class="badge">
+            Desktop music software
         </div>
 
-    </section>
+        <h1>
+            Music<span>Pulse</span>
+        </h1>
+
+        <p class="subtitle">
+            Create, manage and experience your music with MusicPulse.
+            Download the latest desktop version for your computer.
+        </p>
 
 
-    <section class="features">
+        <div class="downloads">
 
-        <div class="section-heading">
+            <a
+                class="download"
+                href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-1.0.0-arm64.dmg"
+            >
 
-            <span>
-                BUILT FOR MUSIC
-            </span>
+                <div class="download-icon">
+                    
+                </div>
 
-            <h2>
-                Everything in one place.
-            </h2>
+                <div class="download-title">
+                    Download for Mac
+                </div>
 
-            <p>
-                A clean desktop experience designed
-                around your music workflow.
-            </p>
+                <div class="download-info">
+                    Apple Silicon · ARM64 · DMG
+                </div>
+
+            </a>
+
+
+            <a
+                class="download"
+                href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-Setup-1.0.0-x64.exe"
+            >
+
+                <div class="download-icon">
+                    ▣
+                </div>
+
+                <div class="download-title">
+                    Download for Windows
+                </div>
+
+                <div class="download-info">
+                    Windows · x64 · EXE
+                </div>
+
+            </a>
 
         </div>
 
 
-        <div class="feature-grid">
+        <div class="release">
 
-            <article class="feature-card">
+            MusicPulse 1.0.0 ·
 
-                <div class="feature-icon">
-                    ⚡
-                </div>
-
-                <h3>
-                    Fast
-                </h3>
-
-                <p>
-                    Lightweight and responsive,
-                    built to launch quickly.
-                </p>
-
-            </article>
-
-
-            <article class="feature-card">
-
-                <div class="feature-icon">
-                    🎵
-                </div>
-
-                <h3>
-                    Music focused
-                </h3>
-
-                <p>
-                    Everything you need without
-                    unnecessary distractions.
-                </p>
-
-            </article>
-
-
-            <article class="feature-card">
-
-                <div class="feature-icon">
-                    🔒
-                </div>
-
-                <h3>
-                    Your account
-                </h3>
-
-                <p>
-                    Login with email or Discord
-                    and manage your profile.
-                </p>
-
-            </article>
+            <a
+                href="https://github.com/flxnr-demo/musicpulse.github.io/releases/tag/v1.0.0"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View release
+            </a>
 
         </div>
 
-    </section>
+    </div>
 
 </main>
 
 
 <footer>
 
-    <span>
-        © 2026 MusicPulse
-    </span>
-
-    <span>
-        Made for music.
-    </span>
+    © 2026 Music<span>Pulse</span>
 
 </footer>
 
 
-<!-- LOGIN -->
+<!-- ========================= -->
+<!-- AUTH MODAL -->
+<!-- ========================= -->
 
 <div
     id="authOverlay"
-    class="auth-overlay"
+    class="modal-overlay"
 >
 
-    <div class="auth-modal">
+    <div class="auth-box">
 
         <button
-            class="close-button"
+            class="close-modal"
             onclick="closeAuth()"
         >
             ×
         </button>
 
-        <div class="auth-icon">
-            ♪
+
+        <div class="modal-icon">
+            🔐
         </div>
 
+
         <h2 id="authTitle">
-            Welcome back
+            Login
         </h2>
+
 
         <p id="authDescription">
             Sign in to your MusicPulse account.
         </p>
 
 
-        <label>
-            Email
-        </label>
-
         <input
             id="email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="Email"
             autocomplete="email"
         >
 
 
-        <label>
-            Password
-        </label>
-
         <input
             id="password"
             type="password"
-            placeholder="Your password"
+            placeholder="Password"
             autocomplete="current-password"
         >
 
 
         <button
-            class="submit-button"
+            class="auth-submit"
             onclick="submitAuth()"
         >
             Login
         </button>
 
 
-        <div class="auth-separator">
-            <span></span>
-            OR
-            <span></span>
+        <div class="separator">
+            <span>OR</span>
         </div>
 
 
@@ -357,8 +303,8 @@
             </span>
 
             <button
-                id="switchButton"
                 onclick="switchAuth()"
+                id="switchButton"
             >
                 Register
             </button>
@@ -376,13 +322,221 @@
 </div>
 
 
+<!-- ========================= -->
+<!-- NAME MODAL -->
+<!-- ========================= -->
+
+<div
+    id="nameOverlay"
+    class="modal-overlay"
+>
+
+    <div class="small-modal">
+
+        <button
+            class="close-modal"
+            onclick="closeNameModal()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-icon">
+            ✏️
+        </div>
+
+
+        <h2>
+            Change name
+        </h2>
+
+
+        <p>
+            Choose the name shown on your MusicPulse profile.
+        </p>
+
+
+        <input
+            id="newNameInput"
+            type="text"
+            maxlength="32"
+            placeholder="Your name"
+        >
+
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-button"
+                onclick="closeNameModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="primary-button"
+                onclick="saveProfileName()"
+            >
+                Save
+            </button>
+
+        </div>
+
+
+        <div
+            id="nameMessage"
+            class="modal-message"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- AVATAR MODAL -->
+<!-- ========================= -->
+
+<div
+    id="avatarOverlay"
+    class="modal-overlay"
+>
+
+    <div class="small-modal avatar-modal">
+
+        <button
+            class="close-modal"
+            onclick="closeAvatarModal()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-icon">
+            🖼️
+        </div>
+
+
+        <h2>
+            Change avatar
+        </h2>
+
+
+        <p>
+            Upload a JPG, PNG or WebP image.
+        </p>
+
+
+        <div
+            id="avatarDropzone"
+            class="avatar-dropzone"
+            onclick="triggerAvatarPicker()"
+        >
+
+            <div class="upload-icon">
+                ↑
+            </div>
+
+            <strong>
+                Choose image
+            </strong>
+
+            <span>
+                Click to browse your files
+            </span>
+
+        </div>
+
+
+        <input
+            id="avatarInput"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            hidden
+        >
+
+
+        <div
+            id="avatarPreviewContainer"
+            class="avatar-preview-container"
+        >
+
+            <img
+                id="avatarPreview"
+                alt="Avatar preview"
+            >
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-button"
+                onclick="closeAvatarModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                id="saveAvatarButton"
+                class="primary-button"
+                onclick="saveAvatar()"
+                disabled
+            >
+                Save avatar
+            </button>
+
+        </div>
+
+
+        <div
+            id="avatarMessage"
+            class="modal-message"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- SUCCESS TOAST -->
+<!-- ========================= -->
+
+<div
+    id="toast"
+    class="toast"
+>
+
+    <div class="toast-icon">
+        ✓
+    </div>
+
+    <div>
+        <strong id="toastTitle">
+            Done
+        </strong>
+
+        <span id="toastText">
+        </span>
+    </div>
+
+</div>
+
+
 <script>
+
+/* =========================================
+   SUPABASE
+   ========================================= */
 
 const SUPABASE_URL =
     "https://doearrsajrfzlqsbrryt.supabase.co";
 
 const SUPABASE_KEY =
     "sb_publishable_DwxG0zK_VZRvC8S-dcw7xQ_C1fXujae";
+
 
 const supabaseClient =
     window.supabase.createClient(
@@ -391,58 +545,76 @@ const supabaseClient =
     );
 
 
+/* =========================================
+   VARIABLES
+   ========================================= */
+
 let registerMode = false;
 
+let selectedAvatarFile = null;
 
-/* =========================
-   AUTH MODAL
-========================= */
+
+/* =========================================
+   ELEMENTS
+   ========================================= */
+
+const authOverlay =
+    document.getElementById("authOverlay");
+
+const nameOverlay =
+    document.getElementById("nameOverlay");
+
+const avatarOverlay =
+    document.getElementById("avatarOverlay");
+
+const profileMenu =
+    document.getElementById("profileMenu");
+
+
+/* =========================================
+   AUTH
+   ========================================= */
 
 function openAuth() {
 
-    const overlay =
-        document.getElementById("authOverlay");
+    profileMenu.classList.remove(
+        "profile-menu-open"
+    );
 
-    overlay.classList.remove("closing");
-
-    overlay.classList.add("active");
-
-    document.body.classList.add("modal-open");
+    authOverlay.classList.add(
+        "modal-open"
+    );
 
 }
 
 
 function closeAuth() {
 
-    const overlay =
-        document.getElementById("authOverlay");
-
-    overlay.classList.add("closing");
+    authOverlay.classList.add(
+        "modal-closing"
+    );
 
     setTimeout(() => {
 
-        overlay.classList.remove(
-            "active",
-            "closing"
+        authOverlay.classList.remove(
+            "modal-open",
+            "modal-closing"
         );
 
-        document.body.classList.remove(
-            "modal-open"
-        );
-
-    }, 280);
+    }, 250);
 
 }
 
 
-/* =========================
-   LOGIN / REGISTER
-========================= */
+/* =========================================
+   LOGIN / REGISTER SWITCH
+   ========================================= */
 
 function switchAuth() {
 
     registerMode =
         !registerMode;
+
 
     const title =
         document.getElementById("authTitle");
@@ -451,7 +623,7 @@ function switchAuth() {
         document.getElementById("authDescription");
 
     const submit =
-        document.querySelector(".submit-button");
+        document.querySelector(".auth-submit");
 
     const switchText =
         document.getElementById("switchText");
@@ -496,24 +668,25 @@ function switchAuth() {
 
     }
 
-    document.getElementById(
-        "authMessage"
-    ).textContent = "";
-
 }
 
+
+/* =========================================
+   EMAIL AUTH
+   ========================================= */
 
 async function submitAuth() {
 
     const email =
-        document.getElementById(
-            "email"
-        ).value.trim();
+        document
+            .getElementById("email")
+            .value
+            .trim();
 
     const password =
-        document.getElementById(
-            "password"
-        ).value;
+        document
+            .getElementById("password")
+            .value;
 
     const message =
         document.getElementById(
@@ -523,8 +696,10 @@ async function submitAuth() {
 
     if (!email || !password) {
 
-        message.textContent =
-            "Enter your email and password.";
+        showAuthMessage(
+            "Please enter your email and password.",
+            false
+        );
 
         return;
 
@@ -533,16 +708,20 @@ async function submitAuth() {
 
     if (password.length < 6) {
 
-        message.textContent =
-            "Password must contain at least 6 characters.";
+        showAuthMessage(
+            "Password must contain at least 6 characters.",
+            false
+        );
 
         return;
 
     }
 
 
-    message.textContent =
-        "Please wait...";
+    showAuthMessage(
+        "Please wait...",
+        null
+    );
 
 
     try {
@@ -567,8 +746,10 @@ async function submitAuth() {
 
             if (data.session) {
 
-                message.textContent =
-                    "Account created!";
+                showAuthMessage(
+                    "Account created successfully!",
+                    true
+                );
 
                 updateAuthButton();
 
@@ -579,8 +760,10 @@ async function submitAuth() {
 
             } else {
 
-                message.textContent =
-                    "Check your email to confirm your account.";
+                showAuthMessage(
+                    "Account created. Check your email to confirm your account.",
+                    true
+                );
 
             }
 
@@ -601,87 +784,138 @@ async function submitAuth() {
                 throw error;
 
 
-            message.textContent =
-                "Logged in successfully!";
+            showAuthMessage(
+                "Logged in successfully!",
+                true
+            );
+
 
             updateAuthButton();
 
+
             setTimeout(
                 closeAuth,
-                700
+                600
             );
 
         }
 
     } catch (error) {
 
-        message.textContent =
-            error.message;
+        showAuthMessage(
+            error.message,
+            false
+        );
 
     }
 
 }
 
 
-/* =========================
-   DISCORD
-========================= */
-
-async function signInWithDiscord() {
+function showAuthMessage(
+    text,
+    success
+) {
 
     const message =
         document.getElementById(
             "authMessage"
         );
 
+
     message.textContent =
-        "Connecting to Discord...";
+        text;
 
 
-    const {
-        error
-    } =
-        await supabaseClient.auth.signInWithOAuth({
-
-            provider: "discord",
-
-            options: {
-
-                redirectTo:
-                    "https://flxnr-demo.github.io/musicpulse.github.io/"
-
-            }
-
-        });
+    message.className =
+        "auth-message";
 
 
-    if (error) {
+    if (success === true)
+        message.classList.add(
+            "success"
+        );
 
-        message.textContent =
-            error.message;
+    if (success === false)
+        message.classList.add(
+            "error"
+        );
+
+}
+
+
+/* =========================================
+   DISCORD
+   ========================================= */
+
+async function signInWithDiscord() {
+
+    showAuthMessage(
+        "Connecting to Discord...",
+        null
+    );
+
+
+    try {
+
+        const {
+            error
+        } =
+            await supabaseClient.auth.signInWithOAuth({
+
+                provider: "discord",
+
+                options: {
+
+                    redirectTo:
+                        window.location.origin +
+                        window.location.pathname
+
+                }
+
+            });
+
+
+        if (error)
+            throw error;
+
+    } catch (error) {
+
+        showAuthMessage(
+            error.message,
+            false
+        );
 
     }
 
 }
 
 
-/* =========================
-   PROFILE
-========================= */
+/* =========================================
+   LOGOUT
+   ========================================= */
 
-function toggleProfileMenu() {
+async function logout() {
 
-    const menu =
-        document.getElementById(
-            "profileMenu"
-        );
+    await supabaseClient.auth.signOut();
 
-    menu.classList.toggle(
-        "open"
+    profileMenu.classList.remove(
+        "profile-menu-open"
+    );
+
+    updateAuthButton();
+
+    showToast(
+        "Logged out",
+        "You have been logged out."
     );
 
 }
 
+
+/* =========================================
+   UPDATE HEADER
+   ========================================= */
 
 async function updateAuthButton() {
 
@@ -691,10 +925,15 @@ async function updateAuthButton() {
         await supabaseClient.auth.getUser();
 
 
+    const user =
+        data.user;
+
+
     const authButton =
         document.getElementById(
             "authButton"
         );
+
 
     const profileButton =
         document.getElementById(
@@ -702,38 +941,7 @@ async function updateAuthButton() {
         );
 
 
-    if (data.user) {
-
-        authButton.textContent =
-            "Logout";
-
-        authButton.onclick =
-            logout;
-
-        profileButton.classList.add(
-            "visible"
-        );
-
-
-        const metadata =
-            data.user.user_metadata || {};
-
-
-        document.getElementById(
-            "profileDisplayName"
-        ).textContent =
-            metadata.custom_name ||
-            metadata.full_name ||
-            metadata.name ||
-            "User";
-
-
-        document.getElementById(
-            "profileEmail"
-        ).textContent =
-            data.user.email || "";
-
-    } else {
+    if (!user) {
 
         authButton.textContent =
             "Login";
@@ -741,33 +949,164 @@ async function updateAuthButton() {
         authButton.onclick =
             openAuth;
 
-        profileButton.classList.remove(
-            "visible"
+        profileButton.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    authButton.textContent =
+        "Logout";
+
+    authButton.onclick =
+        logout;
+
+    profileButton.style.display =
+        "flex";
+
+
+    const metadata =
+        user.user_metadata || {};
+
+
+    const name =
+        metadata.custom_name ||
+        metadata.full_name ||
+        metadata.name ||
+        "User";
+
+
+    document.getElementById(
+        "profileDisplayName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "profileEmail"
+    ).textContent =
+        user.email || "";
+
+
+    const avatarUrl =
+        metadata.avatar_url || "";
+
+
+    updateAvatarElements(
+        avatarUrl
+    );
+
+}
+
+
+/* =========================================
+   AVATAR DISPLAY
+   ========================================= */
+
+function updateAvatarElements(
+    url
+) {
+
+    const headerAvatar =
+        document.getElementById(
+            "headerAvatar"
         );
 
-        document
-            .getElementById(
-                "profileMenu"
-            )
-            .classList.remove(
-                "open"
-            );
+    const headerFallback =
+        document.getElementById(
+            "headerAvatarFallback"
+        );
+
+
+    const bigAvatar =
+        document.getElementById(
+            "profileBigAvatar"
+        );
+
+    const bigFallback =
+        document.getElementById(
+            "profileAvatarFallback"
+        );
+
+
+    if (url) {
+
+        headerAvatar.src =
+            url;
+
+        headerAvatar.style.display =
+            "block";
+
+        headerFallback.style.display =
+            "none";
+
+
+        bigAvatar.src =
+            url;
+
+        bigAvatar.style.display =
+            "block";
+
+        bigFallback.style.display =
+            "none";
+
+    } else {
+
+        headerAvatar.style.display =
+            "none";
+
+        headerFallback.style.display =
+            "block";
+
+
+        bigAvatar.style.display =
+            "none";
+
+        bigFallback.style.display =
+            "flex";
 
     }
 
 }
 
 
-async function logout() {
+/* =========================================
+   PROFILE MENU
+   ========================================= */
 
-    await supabaseClient.auth.signOut();
+function toggleProfileMenu() {
 
-    updateAuthButton();
+    const button =
+        document.getElementById(
+            "profileButton"
+        );
+
+
+    if (
+        button.style.display === "none"
+    )
+        return;
+
+
+    profileMenu.classList.toggle(
+        "profile-menu-open"
+    );
 
 }
 
 
-async function changeProfileName() {
+/* =========================================
+   NAME MODAL
+   ========================================= */
+
+async function openNameModal() {
+
+    profileMenu.classList.remove(
+        "profile-menu-open"
+    );
+
 
     const {
         data
@@ -779,143 +1118,765 @@ async function changeProfileName() {
         return;
 
 
-    const current =
+    const currentName =
         data.user.user_metadata?.custom_name ||
         data.user.user_metadata?.full_name ||
-        "User";
+        data.user.user_metadata?.name ||
+        "";
 
 
-    const name =
-        prompt(
-            "Enter your new name:",
-            current
+    document.getElementById(
+        "newNameInput"
+    ).value =
+        currentName;
+
+
+    document.getElementById(
+        "nameMessage"
+    ).textContent =
+        "";
+
+
+    nameOverlay.classList.add(
+        "modal-open"
+    );
+
+
+    setTimeout(() => {
+
+        document.getElementById(
+            "newNameInput"
+        ).focus();
+
+    }, 250);
+
+}
+
+
+function closeNameModal() {
+
+    nameOverlay.classList.add(
+        "modal-closing"
+    );
+
+
+    setTimeout(() => {
+
+        nameOverlay.classList.remove(
+            "modal-open",
+            "modal-closing"
+        );
+
+    }, 250);
+
+}
+
+
+async function saveProfileName() {
+
+    const input =
+        document.getElementById(
+            "newNameInput"
         );
 
 
-    if (!name || !name.trim())
-        return;
+    const message =
+        document.getElementById(
+            "nameMessage"
+        );
 
 
-    const {
-        error
-    } =
-        await supabaseClient.auth.updateUser({
-
-            data: {
-                custom_name:
-                    name.trim()
-            }
-
-        });
+    const name =
+        input.value.trim();
 
 
-    if (error) {
+    if (!name) {
 
-        alert(error.message);
+        message.textContent =
+            "Please enter a name.";
+
+        message.className =
+            "modal-message error";
 
         return;
 
     }
 
 
-    updateAuthButton();
-
-}
-
-
-function changeAvatar() {
-
-    alert(
-        "Avatar upload can be connected to Supabase Storage next."
-    );
-
-}
+    message.textContent =
+        "Saving...";
 
 
-function profileSettings() {
+    try {
 
-    alert(
-        "Profile settings coming soon."
-    );
+        const {
+            error
+        } =
+            await supabaseClient.auth.updateUser({
 
-}
+                data: {
+                    custom_name: name
+                }
+
+            });
 
 
-/* =========================
-   EVENTS
-========================= */
+        if (error)
+            throw error;
 
-supabaseClient.auth.onAuthStateChange(
-    () => {
+
         updateAuthButton();
+
+
+        closeNameModal();
+
+
+        setTimeout(() => {
+
+            showToast(
+                "Profile updated",
+                "Your name has been changed."
+            );
+
+        }, 280);
+
+
+    } catch (error) {
+
+        message.textContent =
+            error.message;
+
+        message.className =
+            "modal-message error";
+
+    }
+
+}
+
+
+/* =========================================
+   AVATAR PICKER
+   ========================================= */
+
+function openAvatarPicker() {
+
+    profileMenu.classList.remove(
+        "profile-menu-open"
+    );
+
+
+    selectedAvatarFile =
+        null;
+
+
+    document.getElementById(
+        "avatarInput"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "avatarPreviewContainer"
+    ).classList.remove(
+        "visible"
+    );
+
+
+    document.getElementById(
+        "saveAvatarButton"
+    ).disabled =
+        true;
+
+
+    document.getElementById(
+        "avatarMessage"
+    ).textContent =
+        "";
+
+
+    avatarOverlay.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+function closeAvatarModal() {
+
+    avatarOverlay.classList.add(
+        "modal-closing"
+    );
+
+
+    setTimeout(() => {
+
+        avatarOverlay.classList.remove(
+            "modal-open",
+            "modal-closing"
+        );
+
+    }, 250);
+
+}
+
+
+function triggerAvatarPicker() {
+
+    document.getElementById(
+        "avatarInput"
+    ).click();
+
+}
+
+
+/* =========================================
+   FILE SELECT
+   ========================================= */
+
+document
+    .getElementById("avatarInput")
+    .addEventListener(
+        "change",
+        handleAvatarFile
+    );
+
+
+function handleAvatarFile(
+    event
+) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file)
+        return;
+
+
+    const allowed = [
+        "image/png",
+        "image/jpeg",
+        "image/webp"
+    ];
+
+
+    if (
+        !allowed.includes(
+            file.type
+        )
+    ) {
+
+        showAvatarMessage(
+            "Use PNG, JPG or WebP.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    if (
+        file.size >
+        5 * 1024 * 1024
+    ) {
+
+        showAvatarMessage(
+            "Maximum file size is 5 MB.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    selectedAvatarFile =
+        file;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(event) {
+
+            const preview =
+                document.getElementById(
+                    "avatarPreview"
+                );
+
+
+            preview.src =
+                event.target.result;
+
+
+            document.getElementById(
+                "avatarPreviewContainer"
+            ).classList.add(
+                "visible"
+            );
+
+
+            document.getElementById(
+                "saveAvatarButton"
+            ).disabled =
+                false;
+
+        };
+
+
+    reader.readAsDataURL(
+        file
+    );
+
+}
+
+
+/* =========================================
+   DRAG & DROP
+   ========================================= */
+
+const dropzone =
+    document.getElementById(
+        "avatarDropzone"
+    );
+
+
+dropzone.addEventListener(
+    "dragover",
+    function(event) {
+
+        event.preventDefault();
+
+        dropzone.classList.add(
+            "dragging"
+        );
+
     }
 );
 
 
-updateAuthButton();
+dropzone.addEventListener(
+    "dragleave",
+    function() {
+
+        dropzone.classList.remove(
+            "dragging"
+        );
+
+    }
+);
 
 
-document
-    .getElementById("authOverlay")
-    .addEventListener(
-        "click",
-        function(event) {
+dropzone.addEventListener(
+    "drop",
+    function(event) {
 
-            if (
-                event.target === this
-            ) {
+        event.preventDefault();
 
-                closeAuth();
+        dropzone.classList.remove(
+            "dragging"
+        );
 
+
+        const file =
+            event.dataTransfer.files[0];
+
+
+        if (!file)
+            return;
+
+
+        handleAvatarFile({
+            target: {
+                files: [file]
             }
+        });
 
-        }
+    }
+);
+
+
+/* =========================================
+   SAVE AVATAR
+   ========================================= */
+
+async function saveAvatar() {
+
+    if (!selectedAvatarFile)
+        return;
+
+
+    const button =
+        document.getElementById(
+            "saveAvatarButton"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "Uploading...";
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.getUser();
+
+
+        if (error)
+            throw error;
+
+
+        if (!data.user)
+            throw new Error(
+                "You are not logged in."
+            );
+
+
+        const userId =
+            data.user.id;
+
+
+        const extension =
+            selectedAvatarFile.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        const filePath =
+            userId +
+            "/avatar." +
+            extension;
+
+
+        const upload =
+            await supabaseClient
+                .storage
+                .from("avatars")
+                .upload(
+                    filePath,
+                    selectedAvatarFile,
+                    {
+                        upsert: true,
+                        cacheControl: "3600",
+                        contentType:
+                            selectedAvatarFile.type
+                    }
+                );
+
+
+        if (upload.error)
+            throw upload.error;
+
+
+        const publicUrl =
+            supabaseClient
+                .storage
+                .from("avatars")
+                .getPublicUrl(
+                    filePath
+                )
+                .data
+                .publicUrl;
+
+
+        const finalUrl =
+            publicUrl +
+            "?t=" +
+            Date.now();
+
+
+        const update =
+            await supabaseClient.auth.updateUser({
+
+                data: {
+                    avatar_url:
+                        finalUrl
+                }
+
+            });
+
+
+        if (update.error)
+            throw update.error;
+
+
+        updateAvatarElements(
+            finalUrl
+        );
+
+
+        updateAuthButton();
+
+
+        closeAvatarModal();
+
+
+        setTimeout(() => {
+
+            showToast(
+                "Avatar updated",
+                "Your new profile picture is now active."
+            );
+
+        }, 280);
+
+
+    } catch (error) {
+
+        console.error(
+            "Avatar upload error:",
+            error
+        );
+
+
+        showAvatarMessage(
+            error.message ||
+            "Upload failed.",
+            false
+        );
+
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Save avatar";
+
+    }
+
+}
+
+
+/* =========================================
+   AVATAR MESSAGE
+   ========================================= */
+
+function showAvatarMessage(
+    text,
+    success
+) {
+
+    const message =
+        document.getElementById(
+            "avatarMessage"
+        );
+
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "modal-message";
+
+
+    if (success === true)
+        message.classList.add(
+            "success"
+        );
+
+    if (success === false)
+        message.classList.add(
+            "error"
+        );
+
+}
+
+
+/* =========================================
+   TOAST
+   ========================================= */
+
+function showToast(
+    title,
+    text
+) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    document.getElementById(
+        "toastTitle"
+    ).textContent =
+        title;
+
+
+    document.getElementById(
+        "toastText"
+    ).textContent =
+        text;
+
+
+    toast.classList.add(
+        "toast-show"
     );
 
+
+    setTimeout(() => {
+
+        toast.classList.remove(
+            "toast-show"
+        );
+
+    }, 3000);
+
+}
+
+
+/* =========================================
+   CLOSE MODALS OUTSIDE
+   ========================================= */
+
+[
+    authOverlay,
+    nameOverlay,
+    avatarOverlay
+].forEach(
+    overlay => {
+
+        overlay.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target === overlay
+                ) {
+
+                    if (
+                        overlay === authOverlay
+                    )
+                        closeAuth();
+
+                    if (
+                        overlay === nameOverlay
+                    )
+                        closeNameModal();
+
+                    if (
+                        overlay === avatarOverlay
+                    )
+                        closeAvatarModal();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================
+   CLICK OUTSIDE PROFILE
+   ========================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const profileButton =
+            document.getElementById(
+                "profileButton"
+            );
+
+
+        if (
+            !profileMenu.contains(
+                event.target
+            ) &&
+            !profileButton.contains(
+                event.target
+            )
+        ) {
+
+            profileMenu.classList.remove(
+                "profile-menu-open"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   ESC
+   ========================================= */
 
 document.addEventListener(
     "keydown",
     function(event) {
 
         if (
-            event.key === "Escape"
-        ) {
+            event.key !== "Escape"
+        )
+            return;
 
-            closeAuth();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "click",
-    function(event) {
-
-        const menu =
-            document.getElementById(
-                "profileMenu"
-            );
-
-        const profile =
-            document.getElementById(
-                "profileButton"
-            );
 
         if (
-            !menu.contains(event.target) &&
-            !profile.contains(event.target)
-        ) {
+            authOverlay.classList.contains(
+                "modal-open"
+            )
+        )
+            closeAuth();
 
-            menu.classList.remove(
-                "open"
-            );
 
-        }
+        if (
+            nameOverlay.classList.contains(
+                "modal-open"
+            )
+        )
+            closeNameModal();
+
+
+        if (
+            avatarOverlay.classList.contains(
+                "modal-open"
+            )
+        )
+            closeAvatarModal();
+
+
+        profileMenu.classList.remove(
+            "profile-menu-open"
+        );
 
     }
 );
+
+
+/* =========================================
+   AUTH STATE
+   ========================================= */
+
+supabaseClient.auth.onAuthStateChange(
+    function() {
+
+        updateAuthButton();
+
+    }
+);
+
+
+/* =========================================
+   INITIAL
+   ========================================= */
+
+updateAuthButton();
 
 </script>
 
