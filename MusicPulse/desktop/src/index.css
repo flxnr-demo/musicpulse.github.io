@@ -1,0 +1,2244 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  background: #050505;
+  color: #fff;
+
+  min-height: 100vh;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 70% -10%,
+      rgba(255,255,255,.035),
+      transparent 30%
+    ),
+    #050505;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER
+========================================================= */
+
+.loginScreen {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255,255,255,.045),
+      transparent 35%
+    ),
+    #050505;
+}
+
+.loginBox {
+  width: 100%;
+  max-width: 430px;
+
+  padding: 40px;
+
+  border-radius: 24px;
+
+  background: #101010;
+
+  border: 1px solid #252525;
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.55);
+}
+
+.loginLogo {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 42px;
+}
+
+.loginLogoIcon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #000;
+
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.loginLogo strong {
+  display: block;
+
+  color: #fff;
+
+  font-size: 17px;
+}
+
+.loginLogo span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #666;
+
+  font-size: 12px;
+}
+
+.loginHeader {
+  margin-bottom: 25px;
+}
+
+.loginHeader h1 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 32px;
+  font-weight: 800;
+
+  letter-spacing: -1px;
+}
+
+.loginHeader p {
+  margin: 8px 0 0;
+
+  color: #666;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   DISCORD LOGIN
+========================================================= */
+
+.discordButton {
+  width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border: 1px solid #333;
+
+  border-radius: 11px;
+
+  background: #181818;
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 750;
+
+  transition:
+    background .2s,
+    border-color .2s,
+    transform .2s,
+    box-shadow .2s;
+}
+
+.discordButton:hover {
+  background: #222;
+
+  border-color: #555;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.25);
+}
+
+.discordButton:active {
+  transform: translateY(0);
+}
+
+.discordButton:disabled {
+  opacity: .5;
+
+  cursor: wait;
+
+  transform: none;
+}
+
+.discordIcon {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   LOGIN DIVIDER
+========================================================= */
+
+.loginDivider {
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  margin: 20px 0;
+}
+
+.loginDivider::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  height: 1px;
+
+  background: #242424;
+}
+
+.loginDivider span {
+  position: relative;
+
+  padding: 0 12px;
+
+  background: #101010;
+
+  color: #555;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   LOGIN INPUTS
+========================================================= */
+
+.loginInput {
+  width: 100%;
+  height: 48px;
+
+  margin-bottom: 12px;
+
+  padding: 0 14px;
+
+  border: 1px solid #292929;
+
+  border-radius: 11px;
+
+  outline: none;
+
+  background: #080808;
+
+  color: #fff;
+
+  font-size: 14px;
+
+  transition:
+    border-color .2s,
+    background .2s,
+    box-shadow .2s;
+}
+
+.loginInput:focus {
+  border-color: #555;
+
+  background: #0b0b0b;
+
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.035);
+}
+
+.loginInput::placeholder {
+  color: #555;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.loginSubmit {
+  width: 100%;
+  height: 48px;
+
+  margin-top: 5px;
+
+  border: 0;
+
+  border-radius: 11px;
+
+  background: #fff;
+
+  color: #000;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  transition:
+    background .2s,
+    transform .2s,
+    box-shadow .2s;
+}
+
+.loginSubmit:hover {
+  background: #eee;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 25px rgba(255,255,255,.08);
+}
+
+.loginSubmit:active {
+  transform: translateY(0);
+}
+
+.loginSubmit:disabled {
+  opacity: .5;
+
+  cursor: wait;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   LOGIN MESSAGE
+========================================================= */
+
+.loginMessage {
+  margin-top: 15px;
+
+  padding: 11px;
+
+  border-radius: 9px;
+
+  background: #181818;
+
+  color: #aaa;
+
+  font-size: 12px;
+
+  text-align: center;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   LOGIN SWITCH
+========================================================= */
+
+.loginSwitch {
+  margin-top: 22px;
+
+  color: #666;
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+.loginSwitch button {
+  margin-left: 5px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.loginSwitch button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   LOGIN FOOTER
+========================================================= */
+
+.loginFooter {
+  margin-top: 30px;
+
+  color: #444;
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   AUTH LOADING
+========================================================= */
+
+.authLoading {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  background: #050505;
+
+  color: #555;
+
+  font-size: 13px;
+}
+
+.loadingLogo {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #fff;
+
+  color: #000;
+
+  font-size: 24px;
+  font-weight: 900;
+
+  animation: pulseLogo 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseLogo {
+
+  0%,
+  100% {
+    opacity: .5;
+    transform: scale(.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: 270px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px 20px;
+
+  background: #090909;
+
+  border-right: 1px solid #202020;
+
+  z-index: 10;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 0 10px;
+
+  margin-bottom: 40px;
+}
+
+.brandIcon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #000;
+
+  font-size: 21px;
+  font-weight: 900;
+
+  box-shadow:
+    0 5px 20px rgba(255,255,255,.05);
+}
+
+.brand strong {
+  display: block;
+
+  color: #fff;
+
+  font-size: 16px;
+}
+
+.brand span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #555;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.navItem {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 12px 13px;
+
+  border: 1px solid transparent;
+
+  border-radius: 11px;
+
+  background: transparent;
+
+  color: #666;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  text-align: left;
+
+  transition:
+    background .2s,
+    color .2s,
+    border-color .2s,
+    transform .2s;
+}
+
+.navItem:hover {
+  background: #131313;
+
+  color: #ccc;
+
+  transform: translateX(2px);
+}
+
+.navItem.active {
+  background: #1a1a1a;
+
+  border-color: #292929;
+
+  color: #fff;
+}
+
+.navIcon {
+  width: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+
+  font-size: 17px;
+}
+
+.navItem.active .navIcon {
+  color: #fff;
+}
+
+
+/* =========================================================
+   SIDEBAR PROFILE
+========================================================= */
+
+.sidebarBottom {
+  margin-top: auto;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #202020;
+}
+
+.miniProfile {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 8px;
+
+  border-radius: 12px;
+
+  transition:
+    background .2s;
+}
+
+.miniProfile:hover {
+  background: #111;
+}
+
+.miniProfile > div:last-child {
+  min-width: 0;
+}
+
+.miniProfile strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #ddd;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.miniProfile span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #555;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      #444,
+      #191919 60%,
+      #0c0c0c
+    );
+
+  border: 1px solid #383838;
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,.35);
+
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+
+  border-color: #666;
+}
+
+.avatar.big {
+  width: 46px;
+  height: 46px;
+
+  font-size: 17px;
+
+  border-color: #3b3b3b;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logoutButton {
+  width: 100%;
+
+  margin-top: 15px;
+
+  padding: 9px;
+
+  border: 1px solid #252525;
+
+  border-radius: 9px;
+
+  background: #151515;
+
+  color: #777;
+
+  font-size: 12px;
+
+  transition:
+    color .2s,
+    background .2s,
+    border-color .2s;
+}
+
+.logoutButton:hover {
+  color: #fff;
+
+  background: #1b1b1b;
+
+  border-color: #444;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+  width: calc(100% - 270px);
+
+  min-height: 100vh;
+
+  margin-left: 270px;
+
+  padding: 45px;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 35px;
+}
+
+.topbar h1 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 38px;
+  font-weight: 850;
+
+  letter-spacing: -1.5px;
+}
+
+.topbar p {
+  margin-top: 7px;
+
+  color: #666;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   TOP USER
+========================================================= */
+
+.topUser {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 6px 7px 6px 13px;
+
+  border: 1px solid transparent;
+
+  border-radius: 14px;
+
+  transition:
+    background .2s,
+    border-color .2s;
+}
+
+.topUser:hover {
+  background: #101010;
+
+  border-color: #252525;
+}
+
+.topUser > div:first-child {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 4px;
+}
+
+.topUser strong {
+  max-width: 180px;
+
+  overflow: hidden;
+
+  color: #ddd;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.topUser span {
+  color: #555;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   SCORE HERO
+========================================================= */
+
+.scoreHero {
+  min-height: 245px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 35px 40px;
+
+  margin-bottom: 25px;
+
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at 85% 50%,
+      rgba(255,255,255,.055),
+      transparent 35%
+    ),
+    #111;
+
+  border: 1px solid #252525;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  color: #666;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.scoreNumber {
+  margin-top: 8px;
+
+  color: #fff;
+
+  font-size: 68px;
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: -4px;
+}
+
+.scoreNumber span {
+  color: #555;
+
+  font-size: 25px;
+
+  letter-spacing: -1px;
+}
+
+.scoreHero p {
+  max-width: 500px;
+
+  margin-top: 13px;
+
+  color: #666;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.scoreHero p strong {
+  color: #aaa;
+}
+
+
+/* =========================================================
+   SCORE RING
+========================================================= */
+
+.scoreRing {
+  width: 150px;
+  height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #fff 0deg 313deg,
+      #333 313deg 360deg
+    );
+
+  position: relative;
+
+  box-shadow:
+    0 0 45px rgba(255,255,255,.05);
+}
+
+.scoreRing::before {
+  content: "";
+
+  position: absolute;
+
+  width: 122px;
+  height: 122px;
+
+  border-radius: 50%;
+
+  background: #111;
+}
+
+.scoreRing div {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.scoreRing strong {
+  font-size: 31px;
+}
+
+.scoreRing span {
+  margin-top: 3px;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.statsGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+.statCard {
+  min-height: 165px;
+
+  padding: 25px 27px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  border-radius: 20px;
+
+  background: #111;
+
+  border: 1px solid #252525;
+
+  transition:
+    transform .2s,
+    border-color .2s,
+    background .2s;
+}
+
+.statCard:hover {
+  transform: translateY(-3px);
+
+  border-color: #444;
+
+  background: #121212;
+}
+
+.statTitle {
+  color: #777;
+
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.statValue {
+  color: #fff;
+
+  font-size: 39px;
+
+  line-height: 1;
+
+  letter-spacing: -1.5px;
+}
+
+.positive {
+  color: #aaa;
+
+  font-size: 14px;
+  font-weight: 650;
+}
+
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.panel {
+  width: 100%;
+
+  padding: 29px;
+
+  margin-bottom: 25px;
+
+  border-radius: 22px;
+
+  background: #101010;
+
+  border: 1px solid #252525;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 27px;
+}
+
+.panelHeader > div:first-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.panelHeader h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 24px;
+
+  letter-spacing: -.6px;
+}
+
+.panelHeader span {
+  color: #666;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   PERIOD BUTTONS
+========================================================= */
+
+.periodButtons {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 5px;
+
+  border-radius: 11px;
+
+  background: #181818;
+
+  border: 1px solid #282828;
+}
+
+.period {
+  padding: 9px 13px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #777;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition:
+    background .2s,
+    color .2s;
+}
+
+.period:hover {
+  color: #fff;
+}
+
+.period.active {
+  background: #fff;
+
+  color: #000;
+}
+
+
+/* =========================================================
+   PERFORMANCE CHART
+========================================================= */
+
+.chartArea {
+  height: 320px;
+
+  display: flex;
+
+  gap: 15px;
+
+  position: relative;
+}
+
+.chartGrid {
+  width: 48px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 6px 0 23px;
+
+  color: #555;
+
+  font-size: 11px;
+}
+
+.chartBars {
+  flex: 1;
+
+  display: flex;
+  align-items: flex-end;
+
+  gap: 12px;
+
+  padding: 8px 4px 22px;
+
+  border-bottom: 1px solid #292929;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 63px,
+      #191919 64px
+    );
+}
+
+.chartColumn {
+  height: 100%;
+
+  flex: 1;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar {
+  width: 100%;
+
+  min-height: 12px;
+
+  border-radius: 7px 7px 2px 2px;
+
+  background:
+    linear-gradient(
+      to top,
+      #555,
+      #fff
+    );
+
+  transition:
+    height .3s,
+    opacity .2s;
+}
+
+.bar:hover {
+  opacity: .75;
+}
+
+
+/* =========================================================
+   CONTENT GRID
+========================================================= */
+
+.contentGrid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(360px, 1fr);
+
+  gap: 25px;
+}
+
+.contentGrid .panel {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   TRACKS
+========================================================= */
+
+.trackList {
+  display: flex;
+  flex-direction: column;
+}
+
+.track {
+  min-height: 78px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 17px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #202020;
+}
+
+.track:last-child {
+  border-bottom: 0;
+}
+
+.trackNumber {
+  width: 28px;
+
+  flex-shrink: 0;
+
+  color: #555;
+
+  font-size: 15px;
+
+  text-align: center;
+}
+
+.cover {
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #3b3b3b,
+      #101010
+    );
+
+  border: 1px solid #333;
+
+  color: #fff;
+
+  font-size: 25px;
+}
+
+.trackName {
+  flex: 1;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.trackName strong {
+  overflow: hidden;
+
+  color: #eee;
+
+  font-size: 16px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.trackName span {
+  color: #666;
+
+  font-size: 13px;
+}
+
+.trackStats {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 4px;
+}
+
+.trackStats strong {
+  color: #ddd;
+
+  font-size: 15px;
+}
+
+.trackStats small {
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   TEXT BUTTON
+========================================================= */
+
+.textButton {
+  padding: 8px 10px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #aaa;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.textButton:hover {
+  color: #fff;
+}
+
+
+/* =========================================================
+   PLATFORMS
+========================================================= */
+
+.platformList {
+  display: flex;
+  flex-direction: column;
+}
+
+.platform {
+  min-height: 66px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  border-bottom: 1px solid #202020;
+}
+
+.platform:last-child {
+  border-bottom: 0;
+}
+
+.platformIcon {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: #222;
+
+  border: 1px solid #333;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.platformIcon.huge {
+  width: 75px;
+  height: 75px;
+
+  border-radius: 18px;
+
+  font-size: 28px;
+}
+
+.platformName {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.platformName strong {
+  font-size: 15px;
+}
+
+.platformName span {
+  color: #666;
+
+  font-size: 12px;
+}
+
+.platform > small {
+  color: #aaa;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profileHero {
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  min-height: 230px;
+
+  padding: 40px;
+
+  margin-bottom: 25px;
+
+  border-radius: 24px;
+
+  background: #111;
+
+  border: 1px solid #252525;
+}
+
+.artistAvatar {
+  width: 145px;
+  height: 145px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  color: #000;
+
+  font-size: 60px;
+  font-weight: 900;
+}
+
+.profileHero h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 46px;
+
+  letter-spacing: -2px;
+}
+
+.profileHero p {
+  margin: 9px 0 17px;
+
+  color: #777;
+
+  font-size: 16px;
+}
+
+.tags {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.tags span {
+  padding: 8px 12px;
+
+  border-radius: 8px;
+
+  background: #202020;
+
+  color: #aaa;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   TRACK TOOLS
+========================================================= */
+
+.trackTools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.searchBox {
+  width: 330px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 14px;
+
+  border-radius: 11px;
+
+  background: #181818;
+
+  border: 1px solid #292929;
+}
+
+.searchBox span {
+  color: #777;
+
+  font-size: 20px;
+}
+
+.searchBox input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-size: 14px;
+}
+
+.searchBox input::placeholder {
+  color: #555;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn {
+  padding: 12px 17px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: #fff;
+
+  color: #000;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 20px rgba(255,255,255,.08);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.emptyState {
+  min-height: 180px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+}
+
+.emptyState strong {
+  font-size: 18px;
+}
+
+.emptyState span {
+  color: #666;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ANALYTICS
+========================================================= */
+
+.analyticsCards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.analyticsCard {
+  min-height: 145px;
+
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  border-radius: 18px;
+
+  background: #111;
+
+  border: 1px solid #252525;
+}
+
+.analyticsCard span {
+  color: #666;
+
+  font-size: 14px;
+}
+
+.analyticsCard strong {
+  font-size: 26px;
+}
+
+.analyticsCard small {
+  color: #999;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   PLATFORM GRID
+========================================================= */
+
+.platformGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+.platformCard {
+  min-height: 250px;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  border-radius: 21px;
+
+  background: #111;
+
+  border: 1px solid #252525;
+
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.platformCard:hover {
+  transform: translateY(-3px);
+
+  border-color: #444;
+}
+
+.platformCard h2 {
+  margin: 20px 0 8px;
+
+  font-size: 21px;
+}
+
+.platformCard > strong {
+  font-size: 35px;
+
+  letter-spacing: -1px;
+}
+
+.platformCard > span {
+  color: #666;
+
+  font-size: 13px;
+}
+
+.platformCard > small {
+  margin-top: auto;
+
+  color: #aaa;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   RELEASES
+========================================================= */
+
+.releaseGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 25px;
+}
+
+.releaseCard {
+  min-height: 250px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+
+  padding: 30px;
+
+  border-radius: 22px;
+
+  background: #111;
+
+  border: 1px solid #252525;
+
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.releaseCard:hover {
+  transform: translateY(-3px);
+
+  border-color: #444;
+}
+
+.releaseCover {
+  width: 145px;
+  height: 145px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #444,
+      #111
+    );
+
+  font-size: 55px;
+}
+
+.releaseInfo {
+  min-width: 0;
+}
+
+.releaseInfo h2 {
+  margin: 0;
+
+  font-size: 24px;
+
+  line-height: 1.2;
+}
+
+.releaseInfo p {
+  margin: 9px 0 15px;
+
+  color: #666;
+
+  font-size: 14px;
+}
+
+.releaseStatus {
+  display: inline-block;
+
+  padding: 8px 11px;
+
+  border-radius: 8px;
+
+  background: #1c1c1c;
+
+  color: #aaa;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1400
+========================================================= */
+
+@media (max-width: 1400px) {
+
+  .main {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .statsGrid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .platformGrid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .releaseGrid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1100
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .sidebar {
+    width: 235px;
+  }
+
+  .main {
+    width: calc(100% - 235px);
+
+    margin-left: 235px;
+
+    padding: 35px 25px;
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .contentGrid .panel {
+    margin-bottom: 0;
+  }
+
+  .statsGrid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 800
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .sidebar {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    padding: 20px;
+
+    border-right: 0;
+
+    border-bottom: 1px solid #252525;
+  }
+
+  .sidebar nav {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .sidebarBottom {
+    display: none;
+  }
+
+  .main {
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 25px 18px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .topbar h1 {
+    font-size: 34px;
+  }
+
+  .topUser {
+    width: 100%;
+
+    justify-content: flex-end;
+  }
+
+  .scoreHero {
+    padding: 30px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .scoreRing {
+    width: 120px;
+    height: 120px;
+  }
+
+  .scoreRing::before {
+    width: 96px;
+    height: 96px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .analyticsCards,
+  .platformGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .trackTools {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .searchBox {
+    width: 100%;
+  }
+
+  .releaseCard {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 600
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .loginScreen {
+    padding: 18px;
+  }
+
+  .loginBox {
+    padding: 28px 22px;
+  }
+
+  .loginHeader h1 {
+    font-size: 27px;
+  }
+
+  .loginLogo {
+    margin-bottom: 32px;
+  }
+
+  .panel {
+    padding: 21px;
+  }
+
+  .panelHeader {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .periodButtons {
+    width: 100%;
+
+    overflow-x: auto;
+  }
+
+  .period {
+    white-space: nowrap;
+  }
+
+  .scoreHero {
+    padding: 25px;
+  }
+
+  .scoreNumber {
+    font-size: 56px;
+  }
+
+  .profileHero {
+    padding: 25px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .profileHero h2 {
+    font-size: 38px;
+  }
+
+  .artistAvatar {
+    width: 110px;
+    height: 110px;
+
+    font-size: 45px;
+  }
+
+  .track {
+    gap: 10px;
+  }
+
+  .trackNumber {
+    width: 20px;
+  }
+
+  .cover {
+    width: 48px;
+    height: 48px;
+  }
+
+  .trackStats {
+    display: none;
+  }
+
+  .topUser {
+    padding: 5px 6px;
+  }
+
+  .topUser strong {
+    max-width: 130px;
+  }
+
+  .avatar.big {
+    width: 42px;
+    height: 42px;
+
+    font-size: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #292929;
+
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b3b3b;
+}
