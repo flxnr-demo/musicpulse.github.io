@@ -1,8 +1,24 @@
-```css
+/* =========================================================
+   MUSICPULSE — COMPLETE PREMIUM UI
+   ========================================================= */
+
+:root {
+    --red: #ff3030;
+    --red-light: #ff5555;
+    --bg: #080808;
+    --panel: rgba(18, 18, 21, .88);
+    --panel-soft: rgba(255,255,255,.045);
+    --border: rgba(255,255,255,.09);
+    --text: #ffffff;
+    --muted: #888;
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html {
@@ -10,1219 +26,154 @@ html {
 }
 
 body {
-    background: #070707;
-    color: #ffffff;
+    margin: 0;
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            rgba(255,40,40,.10),
+            transparent 40%
+        ),
+        var(--bg);
+
+    color: var(--text);
 
     font-family:
         -apple-system,
         BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
         "Segoe UI",
-        Arial,
         sans-serif;
 
-    overflow-x: hidden;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar {
-    height: 82px;
-
-    padding: 0 6vw;
-
-    display: flex;
-    align-items: center;
-
-    border-bottom: 1px solid #1b1b1b;
-
-    background: rgba(7, 7, 7, 0.86);
-
-    backdrop-filter: blur(18px);
-
-    position: sticky;
-    top: 0;
-
-    z-index: 100;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-
-    gap: 12px;
-
-    font-size: 21px;
-    font-weight: 800;
-
-    margin-right: auto;
-}
-
-.logoIcon {
-    width: 39px;
-    height: 39px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 11px;
-
-    background: #ffffff;
-    color: #000000;
-
-    font-size: 22px;
-}
-
-.navbar nav {
-    display: flex;
-
-    gap: 34px;
-
-    margin-right: 35px;
-}
-
-.navbar nav a {
-    color: #888;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    transition: 0.2s;
-}
-
-.navbar nav a:hover {
-    color: #fff;
-}
-
-.navButton {
-    padding: 11px 19px;
-
-    background: #fff;
-    color: #000;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-    font-weight: 800;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    min-height: 760px;
-
-    padding: 100px 6vw;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 0.9fr)
-        minmax(500px, 1.1fr);
-
-    align-items: center;
-
-    gap: 80px;
-
-    position: relative;
-}
-
-.hero::before {
-    content: "";
-
-    position: absolute;
-
-    width: 650px;
-    height: 650px;
-
-    right: 0;
-    top: 30px;
-
-    background: rgba(255,255,255,0.045);
-
-    filter: blur(130px);
-
-    border-radius: 50%;
-
-    pointer-events: none;
-}
-
-.heroText {
-    position: relative;
-    z-index: 2;
-}
-
-.eyebrow {
-    display: inline-block;
-
-    padding: 9px 14px;
-
-    border: 1px solid #292929;
-
-    border-radius: 100px;
-
-    color: #888;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    letter-spacing: 1.7px;
-
-    margin-bottom: 28px;
-}
-
-.hero h1 {
-    font-size: clamp(65px, 7vw, 105px);
-
-    line-height: 0.91;
-
-    letter-spacing: -6px;
-
-    font-weight: 900;
-
-    margin-bottom: 30px;
-}
-
-.hero h1 span {
-    color: #707070;
-}
-
-.heroText > p {
-    max-width: 590px;
-
-    color: #8a8a8a;
-
-    font-size: 18px;
-
-    line-height: 1.65;
-
-    margin-bottom: 38px;
-}
-
-
-/* =========================
-   DOWNLOAD BUTTONS
-========================= */
-
-.heroButtons {
-    display: flex;
-
-    gap: 13px;
-
-    flex-wrap: wrap;
-}
-
-.downloadButton {
-    min-width: 205px;
-
-    min-height: 68px;
-
-    padding: 12px 18px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 13px;
-
-    border-radius: 13px;
-
-    transition: 0.25s;
-}
-
-.downloadButton:hover {
-    transform: translateY(-4px);
-}
-
-.downloadButton.primary {
-    background: #ffffff;
-    color: #000;
-}
-
-.downloadButton.secondary {
-    background: #111111;
-
-    border: 1px solid #303030;
-}
-
-.buttonIcon {
-    font-size: 25px;
-}
-
-.downloadButton small {
-    display: block;
-
-    font-size: 8px;
-
-    font-weight: 800;
-
-    opacity: 0.55;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 3px;
-}
-
-.downloadButton strong {
-    display: block;
-
-    font-size: 17px;
-}
-
-.version {
-    margin-top: 15px;
-
-    color: #555;
-
-    font-size: 11px;
-}
-
-
-/* =========================
-   DASHBOARD PREVIEW
-========================= */
-
-.heroDashboard {
-    position: relative;
-
-    z-index: 2;
-}
-
-.window {
-    width: 100%;
-
-    border-radius: 22px;
-
-    background: #101010;
-
-    border: 1px solid #292929;
-
-    box-shadow:
-        0 50px 120px rgba(0,0,0,0.7);
-
-    overflow: hidden;
-}
-
-.windowTop {
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 0 20px;
-
-    background: #151515;
-
-    border-bottom: 1px solid #222;
-
-    color: #777;
-
-    font-size: 11px;
-}
-
-.dots {
-    display: flex;
-
-    gap: 6px;
-}
-
-.dots i {
-    width: 9px;
-    height: 9px;
-
-    display: block;
-
-    border-radius: 50%;
-
-    background: #3b3b3b;
-}
-
-.live {
-    color: #777;
-
-    font-size: 9px;
-
-    font-weight: 800;
-}
-
-.windowContent {
-    padding: 27px;
-}
-
-.dashboardHeader {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 25px;
-}
-
-.dashboardHeader span {
-    color: #777;
-
-    font-size: 11px;
-}
-
-.dashboardHeader h3 {
-    margin-top: 5px;
-
-    font-size: 20px;
-}
-
-.profile {
-    width: 39px;
-    height: 39px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #fff;
-    color: #000;
-
-    font-weight: 800;
-}
-
-
-/* STATS */
-
-.stats {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 10px;
-
-    margin-bottom: 13px;
-}
-
-.stat {
-    padding: 17px;
-
-    background: #151515;
-
-    border: 1px solid #222;
-
-    border-radius: 12px;
-}
-
-.stat small {
-    display: block;
-
-    color: #666;
-
-    font-size: 8px;
-
-    font-weight: 800;
-
-    margin-bottom: 7px;
-}
-
-.stat strong {
-    display: block;
-
-    font-size: 21px;
-}
-
-.stat span {
-    color: #777;
-
-    font-size: 9px;
-}
-
-
-/* CHART */
-
-.chartCard {
-    padding: 18px;
-
-    background: #151515;
-
-    border: 1px solid #222;
-
-    border-radius: 12px;
-}
-
-.chartHeader {
-    display: flex;
-
-    justify-content: space-between;
-
-    color: #777;
-
-    font-size: 10px;
-
-    margin-bottom: 20px;
-}
-
-.chartHeader strong {
-    color: #aaa;
-}
-
-.chart {
-    height: 155px;
-
-    display: flex;
-
-    align-items: end;
-
-    gap: 9px;
-}
-
-.chart i {
-    flex: 1;
-
-    display: block;
-
-    border-radius: 4px 4px 1px 1px;
-
-    background:
-        linear-gradient(
-            to top,
-            #4b4b4b,
-            #dddddd
-        );
-
-    opacity: 0.85;
-}
-
-
-/* =========================
-   SECTIONS
-========================= */
-
-.section {
-    padding: 130px 6vw;
-
-    border-top: 1px solid #171717;
-}
-
-.sectionHeading > span {
-    color: #666;
-
-    font-size: 10px;
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-}
-
-.sectionHeading h2 {
-    margin-top: 16px;
-
-    font-size: clamp(45px, 5vw, 70px);
-
-    line-height: 1;
-
-    letter-spacing: -3px;
-}
-
-
-/* FEATURES */
-
-.featureGrid {
-    margin-top: 65px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 17px;
-}
-
-.feature {
-    min-height: 250px;
-
-    padding: 28px;
-
-    border-radius: 18px;
-
-    background: #0d0d0d;
-
-    border: 1px solid #202020;
-
-    transition: 0.25s;
-}
-
-.feature:hover {
-    transform: translateY(-5px);
-
-    border-color: #3a3a3a;
-}
-
-.featureIcon {
-    width: 46px;
-    height: 46px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #171717;
-
-    border-radius: 12px;
-
-    font-size: 19px;
-
-    margin-bottom: 40px;
-}
-
-.feature h3 {
-    font-size: 19px;
-
-    margin-bottom: 12px;
-}
-
-.feature p {
-    color: #707070;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================
-   DOWNLOAD SECTION
-========================= */
-
-.downloadSection {
-    padding: 100px 6vw;
-}
-
-.downloadBox {
-    padding: 60px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 60px;
-
-    border-radius: 25px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #171717,
-            #0c0c0c
-        );
-
-    border: 1px solid #292929;
-}
-
-.downloadText > span {
-    color: #666;
-
-    font-size: 10px;
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-}
-
-.downloadText h2 {
-    margin: 17px 0;
-
-    font-size: clamp(42px, 5vw, 65px);
-
-    line-height: 0.95;
-
-    letter-spacing: -3px;
-}
-
-.downloadText p {
-    color: #707070;
-
-    font-size: 15px;
-}
-
-.downloadOptions {
-    min-width: 410px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-.downloadOption {
-    min-height: 82px;
-
-    padding: 15px 18px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    border-radius: 14px;
-
-    background: #151515;
-
-    border: 1px solid #282828;
-
-    transition: 0.2s;
-}
-
-.downloadOption:hover {
-    background: #1c1c1c;
-
-    border-color: #444;
-
-    transform: translateX(4px);
-}
-
-.optionIcon {
-    width: 45px;
-    height: 45px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 11px;
-
-    background: #fff;
-    color: #000;
-
-    font-size: 22px;
-}
-
-.downloadOption div:nth-child(2) {
-    flex: 1;
-}
-
-.downloadOption strong {
-    display: block;
-
-    font-size: 15px;
-
-    margin-bottom: 4px;
-}
-
-.downloadOption small {
-    color: #666;
-
-    font-size: 10px;
-}
-
-.downloadOption b {
-    color: #888;
-
-    font-size: 20px;
-}
-
-
-/* =========================
-   REQUIREMENTS
-========================= */
-
-.requirements {
-    padding: 35px 6vw;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    border-top: 1px solid #171717;
-
-    border-bottom: 1px solid #171717;
-}
-
-.requirements div {
-    padding: 10px 25px;
-
-    border-right: 1px solid #202020;
-}
-
-.requirements div:first-child {
-    padding-left: 0;
-}
-
-.requirements div:last-child {
-    border-right: none;
-}
-
-.requirements span {
-    display: block;
-
-    color: #555;
-
-    font-size: 9px;
-
-    font-weight: 900;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 8px;
-}
-
-.requirements strong {
-    font-size: 13px;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    min-height: 100px;
-
-    padding: 0 6vw;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    color: #4f4f4f;
-
-    font-size: 12px;
-}
-
-.footerLogo {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    color: #fff;
-
-    font-weight: 800;
-}
-
-.footerLogo span {
-    width: 25px;
-    height: 25px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 7px;
-
-    background: #fff;
-    color: #000;
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1150px) {
-
-    .hero {
-        grid-template-columns: 1fr;
-
-        padding-top: 80px;
-    }
-
-    .heroDashboard {
-        max-width: 750px;
-    }
-
-    .featureGrid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .downloadBox {
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-}
-
-
-@media (max-width: 700px) {
-
-    .navbar {
-        padding: 0 5vw;
-    }
-
-    .navbar nav {
-        display: none;
-    }
-
-    .navButton {
-        display: none;
-    }
-
-    .hero {
-        padding: 70px 5vw;
-
-        min-height: auto;
-    }
-
-    .hero h1 {
-        font-size: 60px;
-
-        letter-spacing: -4px;
-    }
-
-    .heroButtons {
-        flex-direction: column;
-    }
-
-    .downloadButton {
-        width: 100%;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .section {
-        padding: 90px 5vw;
-    }
-
-    .featureGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .downloadSection {
-        padding: 60px 5vw;
-    }
-
-    .downloadBox {
-        padding: 35px 25px;
-    }
-
-    .downloadOptions {
-        width: 100%;
-
-        min-width: 0;
-    }
-
-    .requirements {
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 25px;
-
-        padding: 35px 5vw;
-    }
-
-    .requirements div {
-        border-right: none;
-
-        padding: 0;
-    }
-
-    footer {
-        padding: 30px 5vw;
-    }
-}
-```
-
-/* FIX: mała ikonka profilu obok Logout */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-
-
-/* =========================================
-   MUSICPULSE CLEAN PROFILE
-   ========================================= */
-
-header {
-    position: relative;
-}
-
-header .header-right {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    gap: 8px !important;
-}
-
-/* 30x30 profile circle */
-
-#profileButton.profile-button {
-    width: 30px !important;
-    height: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    flex: 0 0 30px !important;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50% !important;
-
-    border: 1px solid rgba(255,255,255,.18) !important;
-
-    background: rgba(255,255,255,.08) !important;
-
-    color: white !important;
-
-    font-size: 14px !important;
-
-    line-height: 30px !important;
-
-    cursor: pointer;
-
-    overflow: hidden;
-
-    transition:
-        transform .18s ease,
-        background .18s ease;
-}
-
-#profileButton.profile-button:hover {
-    transform: scale(1.08);
-    background: rgba(255,255,255,.16) !important;
-}
-
-/* Profile popup */
-
-#profileMenu.profile-menu {
-    position: absolute !important;
-
-    top: 55px !important;
-    right: 18px !important;
-
-    width: 240px !important;
-
-    padding: 15px !important;
-
-    box-sizing: border-box !important;
-
-    background: rgba(20,20,24,.97) !important;
-
-    border: 1px solid rgba(255,255,255,.12) !important;
-
-    border-radius: 16px !important;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.45) !important;
-
-    z-index: 99999 !important;
-
-    opacity: 0 !important;
-
-    visibility: hidden !important;
-
-    transform:
-        translateY(-8px)
-        scale(.96) !important;
-
-    pointer-events: none !important;
-
-    transition:
-        opacity .18s ease,
-        transform .18s ease,
-        visibility .18s ease !important;
-}
-
-#profileMenu.profile-menu-open {
-    opacity: 1 !important;
-
-    visibility: visible !important;
-
-    transform:
-        translateY(0)
-        scale(1) !important;
-
-    pointer-events: auto !important;
-}
-
-.profile-menu-title {
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.profile-preview {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 10px;
-
-    margin-bottom: 8px;
-
-    border-radius: 10px;
-
-    background: rgba(255,255,255,.05);
-}
-
-.profile-big-avatar {
-    width: 40px;
-    height: 40px;
-
-    min-width: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.10);
-
-    font-size: 19px;
-}
-
-.profile-preview strong {
-    display: block;
-
-    color: white;
-
-    font-size: 14px;
-}
-
-.profile-preview small {
-    display: block;
-
-    color: #888;
-
-    font-size: 11px;
-
-    margin-top: 3px;
-
-    max-width: 145px;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-}
-
-.profile-menu-item {
-    width: 100%;
-
-    padding: 10px;
-
-    border: 0;
-
-    background: transparent;
-
-    color: #ccc;
-
-    text-align: left;
-
-    border-radius: 9px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    transition:
-        background .15s ease,
-        color .15s ease,
-        transform .15s ease;
-}
-
-.profile-menu-item:hover {
-    background: rgba(255,255,255,.08);
-
-    color: white;
-
-    transform: translateX(2px);
-}
-
-.logout-item {
-    color: #ff7777;
-}
-
-.logout-item:hover {
-    background: rgba(255,70,70,.10);
-
-    color: #ff9999;
-}
-
-/* =========================================
-   MUSICPULSE — PREMIUM UI ANIMATIONS
-   ========================================= */
-
-* {
-    box-sizing: border-box;
+    animation: pageIn .6s ease both;
 }
 
 button,
 input,
 a {
-    transition:
-        transform .18s cubic-bezier(.2,.8,.2,1),
-        opacity .18s ease,
-        background .18s ease,
-        border-color .18s ease,
-        box-shadow .18s ease,
-        color .18s ease;
+    font-family: inherit;
 }
 
-/* Smooth page appearance */
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
 
-body {
-    animation: pageEnter .55s ease both;
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 650px;
+    height: 650px;
+
+    left: -300px;
+    top: 35%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,30,30,.08),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+
+    z-index: -2;
+
+    animation:
+        backgroundFloat 12s ease-in-out infinite alternate;
 }
 
-@keyframes pageEnter {
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    right: -250px;
+    bottom: 5%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,30,30,.06),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+
+    z-index: -2;
+
+    animation:
+        backgroundFloat2 15s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundFloat {
     from {
-        opacity: 0;
-        transform: translateY(8px);
+        transform: translate3d(0,0,0) scale(1);
     }
 
     to {
-        opacity: 1;
-        transform: translateY(0);
+        transform: translate3d(90px,-50px,0) scale(1.12);
     }
 }
 
-/* Header */
+@keyframes backgroundFloat2 {
+    from {
+        transform: translate3d(0,0,0);
+    }
+
+    to {
+        transform: translate3d(-70px,40px,0);
+    }
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 header {
-    animation: headerEnter .55s cubic-bezier(.2,.8,.2,1) both;
+    position: relative;
+
+    z-index: 100;
+
+    height: 74px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 34px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(7,7,9,.72);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    animation:
+        headerIn .65s cubic-bezier(.16,1,.3,1) both;
 }
 
-@keyframes headerEnter {
+@keyframes headerIn {
     from {
         opacity: 0;
-        transform: translateY(-15px);
+        transform: translateY(-20px);
     }
 
     to {
@@ -1231,33 +182,77 @@ header {
     }
 }
 
-/* Main cards */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
-.container,
-.card,
-.badge,
-.stats,
-.dashboardHeader {
-    animation:
-        contentEnter .6s cubic-bezier(.2,.8,.2,1) both;
+.logo {
+    font-size: 21px;
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+
+    cursor: default;
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
 }
 
-@keyframes contentEnter {
-    from {
-        opacity: 0;
-        transform: translateY(14px) scale(.985);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+.logo span {
+    color: var(--red);
 }
 
-/* Buttons */
+.logo:hover {
+    transform: translateX(2px);
+
+    filter:
+        drop-shadow(
+            0 0 14px
+            rgba(255,40,40,.35)
+        );
+}
+
+/* =========================================================
+   HEADER RIGHT
+   ========================================================= */
+
+.header-right {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 9px;
+}
+
+.version {
+    color: #777;
+
+    font-size: 11px;
+
+    margin-right: 5px;
+}
+
+/* =========================================================
+   BUTTON BASE
+   ========================================================= */
 
 button {
+    position: relative;
+
+    border: 0;
+
+    cursor: pointer;
+
     -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform .2s cubic-bezier(.16,1,.3,1),
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        color .2s ease;
 }
 
 button:hover {
@@ -1265,1467 +260,171 @@ button:hover {
 }
 
 button:active {
-    transform: scale(.96);
+    transform: scale(.94);
 }
 
-/* =========================================
-   AUTH MODAL
-   ========================================= */
+/* =========================================================
+   BUTTON SHINE
+   ========================================================= */
 
-#authOverlay {
-    opacity: 0;
-    visibility: hidden;
+button::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.17),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition:
+        left .5s ease;
+
     pointer-events: none;
-
-    transition:
-        opacity .25s ease,
-        visibility .25s ease,
-        backdrop-filter .25s ease;
-
-    backdrop-filter: blur(0px);
 }
 
-#authOverlay.active,
-#authOverlay.show,
-#authOverlay.open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-
-    backdrop-filter: blur(10px);
+button:hover::after {
+    left: 140%;
 }
 
-#authOverlay > div,
-#authOverlay .auth-modal,
-#authOverlay .auth-box,
-#authOverlay .modal {
-    transform:
-        translateY(18px)
-        scale(.94);
-
-    opacity: 0;
-
-    transition:
-        transform .3s cubic-bezier(.2,.8,.2,1),
-        opacity .25s ease;
-}
-
-#authOverlay.active > div,
-#authOverlay.show > div,
-#authOverlay.open > div,
-#authOverlay.active .auth-modal,
-#authOverlay.show .auth-modal,
-#authOverlay.open .auth-modal,
-#authOverlay.active .auth-box,
-#authOverlay.show .auth-box,
-#authOverlay.open .auth-box,
-#authOverlay.active .modal,
-#authOverlay.show .modal,
-#authOverlay.open .modal {
-    transform:
-        translateY(0)
-        scale(1);
-
-    opacity: 1;
-}
-
-/* Inputs */
-
-input {
-    outline: none;
-
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        transform .2s ease,
-        background .2s ease;
-}
-
-input:focus {
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 0 0 3px rgba(255,255,255,.06),
-        0 8px 25px rgba(0,0,0,.18);
-}
-
-/* =========================================
-   LOGIN BUTTON
-   ========================================= */
+/* =========================================================
+   LOGIN / LOGOUT
+   ========================================================= */
 
 .auth-button {
-    position: relative;
-    overflow: hidden;
-}
+    min-width: 76px;
 
-.auth-button::after {
-    content: "";
+    padding:
+        9px
+        14px;
 
-    position: absolute;
+    border-radius: 10px;
 
-    top: 0;
-    left: -120%;
-
-    width: 70%;
-    height: 100%;
+    color: white;
 
     background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.18),
-            transparent
-        );
-
-    transform: skewX(-20deg);
-
-    transition: left .5s ease;
-}
-
-.auth-button:hover::after {
-    left: 140%;
-}
-
-/* =========================================
-   CARDS / PANELS
-   ========================================= */
-
-.card,
-.stats,
-.dashboardHeader {
-    transition:
-        transform .22s ease,
-        border-color .22s ease,
-        box-shadow .22s ease;
-}
-
-.card:hover,
-.stats:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.18);
-}
-
-/* =========================================
-   PROFILE MENU
-   ========================================= */
-
-.profile-menu {
-    transform:
-        translateY(-8px)
-        scale(.95);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity .2s ease,
-        transform .25s cubic-bezier(.2,.8,.2,1),
-        visibility .2s ease;
-}
-
-.profile-menu-open {
-    transform:
-        translateY(0)
-        scale(1);
-
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-/* Profile avatar */
-
-.profile-button {
-    cursor: pointer;
-
-    transition:
-        transform .2s cubic-bezier(.2,.8,.2,1),
-        box-shadow .2s ease;
-}
-
-.profile-button:hover {
-    transform: scale(1.08);
-
-    box-shadow:
-        0 0 0 4px rgba(255,255,255,.06);
-}
-
-.profile-button:active {
-    transform: scale(.92);
-}
-
-/* =========================================
-   MODAL BACKDROP
-   ========================================= */
-
-.auth-overlay,
-.modal-overlay {
-    transition:
-        opacity .25s ease,
-        backdrop-filter .25s ease;
-}
-
-/* =========================================
-   REDUCED MOTION
-   ========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-    }
-
-}
-
-
-/* ==================================================
-   MUSICPULSE PREMIUM UI
-   ================================================== */
-
-:root {
-    --mp-red: #ff3030;
-    --mp-red-soft: rgba(255,48,48,.18);
-    --mp-glass: rgba(18,18,22,.88);
-    --mp-border: rgba(255,255,255,.10);
-}
-
-/* =========================
-   GLOBAL
-   ========================= */
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    overflow-x: hidden;
-}
-
-/* Delikatne światło w tle */
-
-body::before {
-    content: "";
-
-    position: fixed;
-
-    inset: -30%;
-
-    z-index: -2;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,40,40,.08),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(255,0,0,.055),
-            transparent 30%
-        );
-
-    animation: backgroundFloat 12s ease-in-out infinite alternate;
-}
-
-@keyframes backgroundFloat {
-
-    from {
-        transform: translate3d(-1%, -1%, 0) scale(1);
-    }
-
-    to {
-        transform: translate3d(1%, 1%, 0) scale(1.04);
-    }
-
-}
-
-/* =========================
-   HEADER
-   ========================= */
-
-header {
-    transition:
-        background .3s ease,
-        border-color .3s ease,
-        box-shadow .3s ease;
-}
-
-header:hover {
-    box-shadow:
-        0 8px 40px rgba(0,0,0,.18);
-}
-
-.logo {
-    transition:
-        transform .25s ease,
-        filter .25s ease;
-}
-
-.logo:hover {
-    transform: translateX(2px);
-    filter:
-        drop-shadow(0 0 12px rgba(255,40,40,.35));
-}
-
-/* =========================
-   BUTTONS
-   ========================= */
-
-button {
-    position: relative;
-
-    overflow: hidden;
-
-    cursor: pointer;
-}
-
-button::after {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: -120%;
-
-    width: 70%;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.18),
-            transparent
-        );
-
-    transform: skewX(-20deg);
-
-    transition: left .5s ease;
-
-    pointer-events: none;
-}
-
-button:hover::after {
-    left: 140%;
-}
-
-button:active {
-    transform: scale(.96);
-}
-
-/* =========================
-   AUTH OVERLAY
-   ========================= */
-
-#authOverlay {
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    background:
-        rgba(0,0,0,.62) !important;
-
-    backdrop-filter:
-        blur(0px) !important;
-
-    -webkit-backdrop-filter:
-        blur(0px) !important;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity .3s ease,
-        visibility .3s ease,
-        backdrop-filter .35s ease,
-        -webkit-backdrop-filter .35s ease;
-}
-
-/* JS / existing classes */
-
-#authOverlay.active,
-#authOverlay.show,
-#authOverlay.open {
-    opacity: 1 !important;
-
-    visibility: visible !important;
-
-    pointer-events: auto !important;
-
-    backdrop-filter:
-        blur(14px) !important;
-
-    -webkit-backdrop-filter:
-        blur(14px) !important;
-}
-
-/* =========================
-   AUTH BOX
-   ========================= */
-
-#authOverlay > div,
-#authOverlay .auth-box,
-#authOverlay .auth-modal,
-#authOverlay .premium-auth-modal {
-
-    transform:
-        translateY(35px)
-        scale(.90) !important;
-
-    opacity: 0 !important;
-
-    filter:
-        blur(6px);
-
-    transition:
-        transform .38s cubic-bezier(.16,1,.3,1),
-        opacity .28s ease,
-        filter .38s ease !important;
-}
-
-#authOverlay.active > div,
-#authOverlay.show > div,
-#authOverlay.open > div,
-#authOverlay.active .auth-box,
-#authOverlay.show .auth-box,
-#authOverlay.open .auth-box,
-#authOverlay.active .auth-modal,
-#authOverlay.show .auth-modal,
-#authOverlay.open .auth-modal,
-#authOverlay.active .premium-auth-modal,
-#authOverlay.show .premium-auth-modal,
-#authOverlay.open .premium-auth-modal {
-
-    transform:
-        translateY(0)
-        scale(1) !important;
-
-    opacity: 1 !important;
-
-    filter:
-        blur(0);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.55),
-        0 0 0 1px rgba(255,255,255,.07),
-        0 0 45px rgba(255,35,35,.07);
-}
-
-/* =========================
-   AUTH TITLE
-   ========================= */
-
-#authTitle {
-    animation: authTitleIn .45s .08s both;
-}
-
-@keyframes authTitleIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-/* =========================
-   INPUTS
-   ========================= */
-
-#authOverlay input {
+        rgba(255,255,255,.07);
 
     border:
-        1px solid rgba(255,255,255,.09) !important;
+        1px solid rgba(255,255,255,.10);
 
-    background:
-        rgba(255,255,255,.035) !important;
+    font-size: 13px;
+    font-weight: 650;
 
-    transition:
-        border-color .2s ease,
-        background .2s ease,
-        box-shadow .2s ease,
-        transform .2s ease !important;
+    overflow: hidden;
 }
 
-#authOverlay input:hover {
+.auth-button:hover {
+    background:
+        rgba(255,255,255,.12);
 
     border-color:
-        rgba(255,255,255,.18) !important;
-}
-
-#authOverlay input:focus {
-
-    border-color:
-        rgba(255,48,48,.65) !important;
-
-    background:
-        rgba(255,255,255,.055) !important;
+        rgba(255,255,255,.17);
 
     box-shadow:
-        0 0 0 3px rgba(255,48,48,.10),
-        0 8px 30px rgba(0,0,0,.20) !important;
-
-    transform:
-        translateY(-1px);
+        0 8px 25px rgba(0,0,0,.2);
 }
 
-/* =========================
-   LOGIN BUTTON
-   ========================= */
-
-.auth-submit {
-
-    box-shadow:
-        0 7px 25px rgba(255,40,40,.14);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        filter .2s ease !important;
-}
-
-.auth-submit:hover {
-
-    transform:
-        translateY(-2px) !important;
-
-    filter:
-        brightness(1.08);
-
-    box-shadow:
-        0 10px 35px rgba(255,40,40,.25);
-}
-
-/* =========================
-   DISCORD BUTTON
-   ========================= */
-
-.discord-button {
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease !important;
-}
-
-.discord-button:hover {
-
-    transform:
-        translateY(-2px) !important;
-
-    background:
-        rgba(255,255,255,.075) !important;
-
-    border-color:
-        rgba(255,255,255,.20) !important;
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.20);
-}
-
-/* =========================
-   CLOSE BUTTON
-   ========================= */
-
-.close-auth {
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        color .2s ease !important;
-}
-
-.close-auth:hover {
-
-    transform:
-        rotate(90deg)
-        scale(1.08) !important;
-
-    background:
-        rgba(255,255,255,.08) !important;
-
-    color:
-        white !important;
-}
-
-/* =========================
-   CARDS
-   ========================= */
-
-.card,
-.stats,
-.badge {
-
-    transition:
-        transform .25s cubic-bezier(.2,.8,.2,1),
-        box-shadow .25s ease,
-        border-color .25s ease !important;
-}
-
-.card:hover,
-.stats:hover {
-
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 18px 50px rgba(0,0,0,.18);
-}
-
-/* =========================
-   PROFILE
-   ========================= */
+/* =========================================================
+   PROFILE BUTTON
+   ========================================================= */
 
 #profileButton {
+    width: 30px;
+    height: 30px;
 
-    width: 30px !important;
-    height: 30px !important;
+    min-width: 30px;
+    min-height: 30px;
 
-    min-width: 30px !important;
-    max-width: 30px !important;
-
-    min-height: 30px !important;
-    max-height: 30px !important;
-
-    border-radius: 50% !important;
-
-    padding: 0 !important;
+    padding: 0;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
-
-    background:
-        rgba(255,255,255,.08) !important;
-
-    border:
-        1px solid rgba(255,255,255,.14) !important;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.18);
-
-    transition:
-        transform .22s ease,
-        box-shadow .22s ease,
-        background .22s ease !important;
-}
-
-#profileButton:hover {
-
-    transform:
-        scale(1.1);
-
-    background:
-        rgba(255,255,255,.14) !important;
-
-    box-shadow:
-        0 0 0 4px rgba(255,255,255,.05),
-        0 8px 25px rgba(0,0,0,.25);
-}
-
-/* =========================
-   PROFILE MENU
-   ========================= */
-
-#profileMenu {
-
-    transform:
-        translateY(-12px)
-        scale(.94) !important;
-
-    opacity: 0 !important;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        transform .25s cubic-bezier(.16,1,.3,1),
-        opacity .2s ease,
-        visibility .2s ease !important;
-}
-
-#profileMenu.profile-menu-open {
-
-    transform:
-        translateY(0)
-        scale(1) !important;
-
-    opacity: 1 !important;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-/* =========================
-   SCROLLBAR
-   ========================= */
-
-::-webkit-scrollbar {
-    width: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background:
-        rgba(255,255,255,.14);
-
-    border-radius: 20px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background:
-        rgba(255,255,255,.25);
-}
-
-/* =========================
-   REDUCED MOTION
-   ========================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation: none !important;
-
-        transition: none !important;
-    }
-
-}
-
-
-/* ==================================================
-   MUSICPULSE PREMIUM UI
-   ================================================== */
-
-:root {
-    --mp-red: #ff3030;
-    --mp-red-soft: rgba(255,48,48,.18);
-    --mp-glass: rgba(18,18,22,.88);
-    --mp-border: rgba(255,255,255,.10);
-}
-
-/* =========================
-   GLOBAL
-   ========================= */
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    overflow-x: hidden;
-}
-
-/* Delikatne światło w tle */
-
-body::before {
-    content: "";
-
-    position: fixed;
-
-    inset: -30%;
-
-    z-index: -2;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,40,40,.08),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(255,0,0,.055),
-            transparent 30%
-        );
-
-    animation: backgroundFloat 12s ease-in-out infinite alternate;
-}
-
-@keyframes backgroundFloat {
-
-    from {
-        transform: translate3d(-1%, -1%, 0) scale(1);
-    }
-
-    to {
-        transform: translate3d(1%, 1%, 0) scale(1.04);
-    }
-
-}
-
-/* =========================
-   HEADER
-   ========================= */
-
-header {
-    transition:
-        background .3s ease,
-        border-color .3s ease,
-        box-shadow .3s ease;
-}
-
-header:hover {
-    box-shadow:
-        0 8px 40px rgba(0,0,0,.18);
-}
-
-.logo {
-    transition:
-        transform .25s ease,
-        filter .25s ease;
-}
-
-.logo:hover {
-    transform: translateX(2px);
-    filter:
-        drop-shadow(0 0 12px rgba(255,40,40,.35));
-}
-
-/* =========================
-   BUTTONS
-   ========================= */
-
-button {
-    position: relative;
-
-    overflow: hidden;
-
-    cursor: pointer;
-}
-
-button::after {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: -120%;
-
-    width: 70%;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.18),
-            transparent
-        );
-
-    transform: skewX(-20deg);
-
-    transition: left .5s ease;
-
-    pointer-events: none;
-}
-
-button:hover::after {
-    left: 140%;
-}
-
-button:active {
-    transform: scale(.96);
-}
-
-/* =========================
-   AUTH OVERLAY
-   ========================= */
-
-#authOverlay {
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    background:
-        rgba(0,0,0,.62) !important;
-
-    backdrop-filter:
-        blur(0px) !important;
-
-    -webkit-backdrop-filter:
-        blur(0px) !important;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity .3s ease,
-        visibility .3s ease,
-        backdrop-filter .35s ease,
-        -webkit-backdrop-filter .35s ease;
-}
-
-/* JS / existing classes */
-
-#authOverlay.active,
-#authOverlay.show,
-#authOverlay.open {
-    opacity: 1 !important;
-
-    visibility: visible !important;
-
-    pointer-events: auto !important;
-
-    backdrop-filter:
-        blur(14px) !important;
-
-    -webkit-backdrop-filter:
-        blur(14px) !important;
-}
-
-/* =========================
-   AUTH BOX
-   ========================= */
-
-#authOverlay > div,
-#authOverlay .auth-box,
-#authOverlay .auth-modal,
-#authOverlay .premium-auth-modal {
-
-    transform:
-        translateY(35px)
-        scale(.90) !important;
-
-    opacity: 0 !important;
-
-    filter:
-        blur(6px);
-
-    transition:
-        transform .38s cubic-bezier(.16,1,.3,1),
-        opacity .28s ease,
-        filter .38s ease !important;
-}
-
-#authOverlay.active > div,
-#authOverlay.show > div,
-#authOverlay.open > div,
-#authOverlay.active .auth-box,
-#authOverlay.show .auth-box,
-#authOverlay.open .auth-box,
-#authOverlay.active .auth-modal,
-#authOverlay.show .auth-modal,
-#authOverlay.open .auth-modal,
-#authOverlay.active .premium-auth-modal,
-#authOverlay.show .premium-auth-modal,
-#authOverlay.open .premium-auth-modal {
-
-    transform:
-        translateY(0)
-        scale(1) !important;
-
-    opacity: 1 !important;
-
-    filter:
-        blur(0);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.55),
-        0 0 0 1px rgba(255,255,255,.07),
-        0 0 45px rgba(255,35,35,.07);
-}
-
-/* =========================
-   AUTH TITLE
-   ========================= */
-
-#authTitle {
-    animation: authTitleIn .45s .08s both;
-}
-
-@keyframes authTitleIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-/* =========================
-   INPUTS
-   ========================= */
-
-#authOverlay input {
-
-    border:
-        1px solid rgba(255,255,255,.09) !important;
-
-    background:
-        rgba(255,255,255,.035) !important;
-
-    transition:
-        border-color .2s ease,
-        background .2s ease,
-        box-shadow .2s ease,
-        transform .2s ease !important;
-}
-
-#authOverlay input:hover {
-
-    border-color:
-        rgba(255,255,255,.18) !important;
-}
-
-#authOverlay input:focus {
-
-    border-color:
-        rgba(255,48,48,.65) !important;
-
-    background:
-        rgba(255,255,255,.055) !important;
-
-    box-shadow:
-        0 0 0 3px rgba(255,48,48,.10),
-        0 8px 30px rgba(0,0,0,.20) !important;
-
-    transform:
-        translateY(-1px);
-}
-
-/* =========================
-   LOGIN BUTTON
-   ========================= */
-
-.auth-submit {
-
-    box-shadow:
-        0 7px 25px rgba(255,40,40,.14);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        filter .2s ease !important;
-}
-
-.auth-submit:hover {
-
-    transform:
-        translateY(-2px) !important;
-
-    filter:
-        brightness(1.08);
-
-    box-shadow:
-        0 10px 35px rgba(255,40,40,.25);
-}
-
-/* =========================
-   DISCORD BUTTON
-   ========================= */
-
-.discord-button {
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease !important;
-}
-
-.discord-button:hover {
-
-    transform:
-        translateY(-2px) !important;
-
-    background:
-        rgba(255,255,255,.075) !important;
-
-    border-color:
-        rgba(255,255,255,.20) !important;
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.20);
-}
-
-/* =========================
-   CLOSE BUTTON
-   ========================= */
-
-.close-auth {
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        color .2s ease !important;
-}
-
-.close-auth:hover {
-
-    transform:
-        rotate(90deg)
-        scale(1.08) !important;
-
-    background:
-        rgba(255,255,255,.08) !important;
-
-    color:
-        white !important;
-}
-
-/* =========================
-   CARDS
-   ========================= */
-
-.card,
-.stats,
-.badge {
-
-    transition:
-        transform .25s cubic-bezier(.2,.8,.2,1),
-        box-shadow .25s ease,
-        border-color .25s ease !important;
-}
-
-.card:hover,
-.stats:hover {
-
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 18px 50px rgba(0,0,0,.18);
-}
-
-/* =========================
-   PROFILE
-   ========================= */
-
-#profileButton {
-
-    width: 30px !important;
-    height: 30px !important;
-
-    min-width: 30px !important;
-    max-width: 30px !important;
-
-    min-height: 30px !important;
-    max-height: 30px !important;
-
-    border-radius: 50% !important;
-
-    padding: 0 !important;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        rgba(255,255,255,.08) !important;
-
-    border:
-        1px solid rgba(255,255,255,.14) !important;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.18);
-
-    transition:
-        transform .22s ease,
-        box-shadow .22s ease,
-        background .22s ease !important;
-}
-
-#profileButton:hover {
-
-    transform:
-        scale(1.1);
-
-    background:
-        rgba(255,255,255,.14) !important;
-
-    box-shadow:
-        0 0 0 4px rgba(255,255,255,.05),
-        0 8px 25px rgba(0,0,0,.25);
-}
-
-/* =========================
-   PROFILE MENU
-   ========================= */
-
-#profileMenu {
-
-    transform:
-        translateY(-12px)
-        scale(.94) !important;
-
-    opacity: 0 !important;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        transform .25s cubic-bezier(.16,1,.3,1),
-        opacity .2s ease,
-        visibility .2s ease !important;
-}
-
-#profileMenu.profile-menu-open {
-
-    transform:
-        translateY(0)
-        scale(1) !important;
-
-    opacity: 1 !important;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-/* =========================
-   SCROLLBAR
-   ========================= */
-
-::-webkit-scrollbar {
-    width: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background:
-        rgba(255,255,255,.14);
-
-    border-radius: 20px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background:
-        rgba(255,255,255,.25);
-}
-
-/* =========================
-   REDUCED MOTION
-   ========================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation: none !important;
-
-        transition: none !important;
-    }
-
-}
-
-
-/* AUTH CLOSE ANIMATION */
-
-#authOverlay.closing {
-    opacity: 0 !important;
-    visibility: visible !important;
-    pointer-events: none !important;
-
-    backdrop-filter:
-        blur(0px) !important;
-}
-
-#authOverlay.closing > div,
-#authOverlay.closing .auth-box,
-#authOverlay.closing .auth-modal {
-
-    transform:
-        translateY(25px)
-        scale(.93) !important;
-
-    opacity: 0 !important;
-
-    filter:
-        blur(5px) !important;
-}
-
-
-/* =========================================
-   MUSIC PULSE — CLEAN PROFILE
-   ========================================= */
-
-header .header-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 9px;
-}
-
-/* 30x30 profile button */
-
-#profileButton {
-    position: relative !important;
-
-    width: 30px !important;
-    height: 30px !important;
-
-    min-width: 30px !important;
-    max-width: 30px !important;
-
-    min-height: 30px !important;
-    max-height: 30px !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    flex: 0 0 30px !important;
-
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    border-radius: 50% !important;
-
-    overflow: hidden !important;
-
-    border:
-        1px solid rgba(255,255,255,.16) !important;
-
-    background:
-        rgba(255,255,255,.08) !important;
-
-    color: #fff !important;
-
-    font-size: 15px !important;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 4px 18px rgba(0,0,0,.22);
-
-    transition:
-        transform .22s cubic-bezier(.16,1,.3,1),
-        background .22s ease,
-        box-shadow .22s ease !important;
-}
-
-#profileButton:hover {
-    transform: scale(1.1) !important;
-
-    background:
-        rgba(255,255,255,.14) !important;
-
-    box-shadow:
-        0 0 0 4px rgba(255,48,48,.08),
-        0 8px 25px rgba(0,0,0,.28);
-}
-
-#profileButton:active {
-    transform: scale(.9) !important;
-}
-
-#profileButton::after {
-    display: none !important;
-}
-
-#profileIcon {
-    display: block;
-    line-height: 1;
-}
-
-#profileAvatar {
-    position: absolute;
-
-    inset: 0;
-
-    width: 30px !important;
-    height: 30px !important;
-
-    min-width: 30px !important;
-    min-height: 30px !important;
-
-    object-fit: cover;
 
     border-radius: 50%;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.055)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.25);
+
+    overflow: hidden;
 }
 
-/* =========================================
+#profileButton span {
+    font-size: 15px;
+
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+#profileButton:hover {
+    transform: scale(1.12);
+
+    background:
+        rgba(255,255,255,.16);
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.035),
+        0 8px 25px rgba(0,0,0,.3);
+}
+
+/* =========================================================
    PROFILE MENU
-   ========================================= */
+   ========================================================= */
 
 #profileMenu {
     position: absolute;
 
-    top: calc(100% + 12px);
+    top: 62px;
+    right: 28px;
 
-    right: 0;
+    width: 250px;
 
-    z-index: 9999;
-
-    width: 245px;
-
-    padding: 13px;
+    padding: 15px;
 
     border-radius: 16px;
 
     background:
-        rgba(18,18,22,.94);
+        rgba(17,17,20,.94);
 
     border:
         1px solid rgba(255,255,255,.10);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.55),
+        0 25px 80px rgba(0,0,0,.5),
         0 0 0 1px rgba(255,255,255,.025);
 
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
     transform:
-        translateY(-8px)
+        translateY(-10px)
         scale(.94);
-
-    transform-origin:
-        top right;
 
     opacity: 0;
 
@@ -2733,14 +432,16 @@ header .header-right {
 
     pointer-events: none;
 
+    transform-origin:
+        top right;
+
     transition:
-        opacity .2s ease,
+        opacity .22s ease,
         transform .28s cubic-bezier(.16,1,.3,1),
-        visibility .2s ease;
+        visibility .22s ease;
 }
 
 #profileMenu.profile-menu-open {
-
     opacity: 1;
 
     visibility: visible;
@@ -2752,33 +453,25 @@ header .header-right {
         scale(1);
 }
 
-/* title */
-
 .profile-menu-title {
+    color: white;
 
-    padding:
-        3px 4px 10px;
-
-    color: #fff;
-
-    font-size: 14px;
-
+    font-size: 15px;
     font-weight: 750;
+
+    margin-bottom: 12px;
 }
 
-/* preview */
-
 .profile-preview {
-
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 11px;
 
-    padding: 10px;
+    padding: 11px;
 
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 
     border-radius: 12px;
 
@@ -2790,13 +483,10 @@ header .header-right {
 }
 
 .profile-big-avatar {
+    width: 42px;
+    height: 42px;
 
-    position: relative;
-
-    width: 40px;
-    height: 40px;
-
-    min-width: 40px;
+    min-width: 42px;
 
     display: flex;
 
@@ -2805,48 +495,37 @@ header .header-right {
 
     border-radius: 50%;
 
-    overflow: hidden;
-
     background:
-        rgba(255,255,255,.09);
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.14),
+            rgba(255,255,255,.05)
+        );
 
-    font-size: 18px;
-}
+    border:
+        1px solid rgba(255,255,255,.12);
 
-#profileBigAvatar {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 40px;
-    height: 40px;
-
-    object-fit: cover;
-
-    border-radius: 50%;
+    font-size: 19px;
 }
 
 .profile-preview strong {
-
     display: block;
 
-    color: #fff;
+    color: white;
 
     font-size: 13px;
 }
 
 .profile-preview small {
-
     display: block;
 
-    color: #888;
+    color: #777;
 
     font-size: 11px;
 
     margin-top: 3px;
 
-    max-width: 160px;
+    max-width: 150px;
 
     overflow: hidden;
 
@@ -2855,68 +534,960 @@ header .header-right {
     white-space: nowrap;
 }
 
-/* menu buttons */
-
 .profile-menu-item {
-
     width: 100%;
 
-    padding: 10px;
+    padding: 10px 11px;
 
     margin-top: 3px;
 
-    border: 0 !important;
-
     border-radius: 9px;
 
-    background: transparent !important;
+    background: transparent;
 
-    color: #cfcfcf;
+    color: #aaa;
 
     text-align: left;
 
     font-size: 13px;
 
-    cursor: pointer;
-
-    transition:
-        background .18s ease,
-        color .18s ease,
-        transform .18s ease !important;
-}
-
-.profile-menu-item::after {
-    display: none !important;
+    overflow: hidden;
 }
 
 .profile-menu-item:hover {
+    color: white;
 
     background:
-        rgba(255,255,255,.07) !important;
-
-    color: #fff;
+        rgba(255,255,255,.075);
 
     transform:
-        translateX(2px) !important;
+        translateX(2px);
 }
 
 .logout-item {
-
-    color: #ff7777 !important;
-
-    margin-top: 5px;
-
-    border-top:
-        1px solid rgba(255,255,255,.06) !important;
-
-    border-radius: 0 0 9px 9px;
+    color: #ff7373;
 }
 
 .logout-item:hover {
+    color: #ff9a9a;
 
     background:
-        rgba(255,40,40,.09) !important;
-
-    color: #ff9999 !important;
+        rgba(255,45,45,.09);
 }
 
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+main {
+    min-height:
+        calc(100vh - 130px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+
+    text-align: center;
+
+    animation:
+        contentIn .75s .08s
+        cubic-bezier(.16,1,.3,1)
+        both;
+}
+
+@keyframes contentIn {
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* =========================================================
+   BADGE
+   ========================================================= */
+
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding:
+        7px
+        12px;
+
+    margin-bottom: 22px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    color: #999;
+
+    font-size: 11px;
+
+    letter-spacing: .4px;
+
+    animation:
+        fadeUp .55s .15s both;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+h1 {
+    margin:
+        0;
+
+    font-size:
+        clamp(
+            70px,
+            11vw,
+            130px
+        );
+
+    line-height: .9;
+
+    letter-spacing:
+        -7px;
+
+    font-weight:
+        900;
+
+    color:
+        white;
+
+    animation:
+        titleIn .8s .12s
+        cubic-bezier(.16,1,.3,1)
+        both;
+}
+
+h1 span {
+    color: var(--red);
+
+    text-shadow:
+        0 0 35px
+        rgba(255,40,40,.18);
+}
+
+@keyframes titleIn {
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px)
+            scale(.96);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+        filter: blur(0);
+    }
+}
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.subtitle {
+    max-width: 620px;
+
+    margin:
+        27px
+        auto
+        42px;
+
+    color:
+        #888;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.65;
+
+    animation:
+        fadeUp .6s .28s both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+}
+
+/* =========================================================
+   DOWNLOADS
+   ========================================================= */
+
+.downloads {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+    max-width: 650px;
+
+    margin:
+        0 auto;
+
+    animation:
+        downloadsIn .65s .38s both;
+}
+
+@keyframes downloadsIn {
+    from {
+        opacity: 0;
+        transform:
+            translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+}
+
+.download {
+    position: relative;
+
+    display: block;
+
+    padding:
+        24px;
+
+    text-decoration: none;
+
+    text-align: left;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    color: white;
+
+    overflow: hidden;
+
+    transition:
+        transform .3s cubic-bezier(.16,1,.3,1),
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.download::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(255,40,40,.13),
+            transparent 45%
+        );
+
+    opacity: 0;
+
+    transition:
+        opacity .3s ease;
+}
+
+.download:hover {
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(255,60,60,.25);
+
+    background:
+        rgba(255,255,255,.065);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.3),
+        0 0 35px rgba(255,40,40,.06);
+}
+
+.download:hover::before {
+    opacity: 1;
+}
+
+.download-icon {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    font-size: 19px;
+}
+
+.download-title {
+    position: relative;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.download-info {
+    position: relative;
+
+    color: #777;
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   RELEASE
+   ========================================================= */
+
+.release {
+    margin-top: 24px;
+
+    color: #666;
+
+    font-size: 11px;
+
+    animation:
+        fadeUp .6s .5s both;
+}
+
+.release a {
+    color: #888;
+
+    text-decoration: none;
+
+    transition:
+        color .2s ease;
+}
+
+.release a:hover {
+    color: white;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    height: 56px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #555;
+
+    font-size: 11px;
+
+    border-top:
+        1px solid rgba(255,255,255,.05);
+}
+
+footer span {
+    color: #777;
+}
+
+/* =========================================================
+   AUTH OVERLAY
+   ========================================================= */
+
+.auth-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,.68);
+
+    backdrop-filter:
+        blur(0px);
+
+    -webkit-backdrop-filter:
+        blur(0px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease,
+        backdrop-filter .35s ease,
+        -webkit-backdrop-filter .35s ease;
+}
+
+.auth-overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+}
+
+/* =========================================================
+   AUTH BOX
+   ========================================================= */
+
+.auth-box {
+    position: relative;
+
+    width: min(
+        390px,
+        100%
+    );
+
+    padding:
+        32px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,25,29,.97),
+            rgba(12,12,15,.97)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.65),
+        0 0 50px rgba(255,30,30,.06);
+
+    transform:
+        translateY(35px)
+        scale(.90);
+
+    opacity: 0;
+
+    filter:
+        blur(6px);
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1),
+        opacity .3s ease,
+        filter .4s ease;
+}
+
+.auth-overlay.active .auth-box {
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity: 1;
+
+    filter:
+        blur(0);
+}
+
+/* =========================================================
+   AUTH TITLE
+   ========================================================= */
+
+.auth-box h2 {
+    margin:
+        0 0 7px;
+
+    color: white;
+
+    font-size: 25px;
+
+    letter-spacing: -.6px;
+}
+
+.auth-box > p {
+    margin:
+        0 0 22px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   CLOSE
+   ========================================================= */
+
+.close-auth {
+    position: absolute;
+
+    top: 13px;
+    right: 14px;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #777;
+
+    font-size: 23px;
+
+    overflow: hidden;
+}
+
+.close-auth:hover {
+    color: white;
+
+    background:
+        rgba(255,255,255,.07);
+
+    transform:
+        rotate(90deg);
+}
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.auth-box input {
+    width: 100%;
+
+    height: 46px;
+
+    margin-top: 10px;
+
+    padding:
+        0 14px;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+.auth-box input::placeholder {
+    color: #666;
+}
+
+.auth-box input:hover {
+    border-color:
+        rgba(255,255,255,.15);
+}
+
+.auth-box input:focus {
+    transform:
+        translateY(-1px);
+
+    border-color:
+        rgba(255,48,48,.65);
+
+    background:
+        rgba(255,255,255,.06);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255,48,48,.09);
+}
+
+/* =========================================================
+   AUTH SUBMIT
+   ========================================================= */
+
+.auth-submit {
+    width: 100%;
+
+    height: 46px;
+
+    margin-top: 14px;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3030,
+            #d91616
+        );
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,30,30,.16);
+
+    overflow: hidden;
+}
+
+.auth-submit:hover {
+    filter:
+        brightness(1.08);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 14px 38px
+        rgba(255,30,30,.25);
+}
+
+/* =========================================================
+   SEPARATOR
+   ========================================================= */
+
+.separator {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin:
+        20px 0;
+
+    color: #555;
+
+    font-size: 10px;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+/* =========================================================
+   DISCORD
+   ========================================================= */
+
+.discord-button {
+    width: 100%;
+
+    height: 44px;
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    color: #ddd;
+
+    font-size: 13px;
+
+    overflow: hidden;
+}
+
+.discord-button:hover {
+    background:
+        rgba(255,255,255,.08);
+
+    border-color:
+        rgba(255,255,255,.17);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.25);
+}
+
+.discord-icon {
+    margin-right: 7px;
+
+    color: #aaa;
+}
+
+/* =========================================================
+   AUTH SWITCH
+   ========================================================= */
+
+.auth-switch {
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+.auth-switch button {
+    padding: 0;
+
+    margin-left: 4px;
+
+    background: transparent;
+
+    color: var(--red);
+
+    font-size: 12px;
+
+    overflow: visible;
+}
+
+.auth-switch button::after {
+    display: none;
+}
+
+.auth-switch button:hover {
+    color: #ff6868;
+
+    transform: none;
+}
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.auth-message {
+    min-height: 20px;
+
+    margin-top: 13px;
+
+    color: #ff5555;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+/* =========================================================
+   CARD ANIMATION
+   ========================================================= */
+
+.card,
+.stats,
+.badge {
+    transition:
+        transform .25s cubic-bezier(.16,1,.3,1),
+        box-shadow .25s ease;
+}
+
+.card:hover,
+.stats:hover {
+    transform:
+        translateY(-4px);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background:
+        rgba(255,255,255,.13);
+
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        rgba(255,255,255,.23);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    header {
+        height: 66px;
+
+        padding:
+            0 18px;
+    }
+
+    .version {
+        display: none;
+    }
+
+    main {
+        padding:
+            55px 18px;
+    }
+
+    h1 {
+        font-size:
+            clamp(
+                58px,
+                17vw,
+                90px
+            );
+
+        letter-spacing:
+            -5px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .downloads {
+        grid-template-columns:
+            1fr;
+
+        max-width: 360px;
+    }
+
+    #profileMenu {
+        right: 15px;
+
+        width: 235px;
+    }
+
+    .auth-box {
+        padding:
+            27px 22px;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+}
+
+/* =========================================================
+   PAGE ENTER
+   ========================================================= */
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
