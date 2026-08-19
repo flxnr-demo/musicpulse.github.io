@@ -6,7 +6,7 @@
 
     <title>MusicPulse</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@Supabase/supabase-js@2"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,8 +25,6 @@
             v1.0.0
         </div>
 
-        <!-- PROFILE BUTTON -->
-
         <button
             id="profileButton"
             class="profile-button"
@@ -42,8 +40,6 @@
             >
         </button>
 
-        <!-- LOGIN / LOGOUT -->
-
         <button
             id="authButton"
             class="auth-button"
@@ -58,14 +54,9 @@
 </header>
 
 
-<!-- ========================= -->
 <!-- PROFILE MENU -->
-<!-- ========================= -->
 
-<div
-    id="profileMenu"
-    class="profile-menu"
->
+<div id="profileMenu" class="profile-menu">
 
     <div class="profile-menu-title">
         My Profile
@@ -96,8 +87,7 @@
                 User
             </strong>
 
-            <small id="profileEmail">
-            </small>
+            <small id="profileEmail"></small>
 
         </div>
 
@@ -154,11 +144,18 @@
         </p>
 
 
+        <!-- ========================= -->
+        <!-- DOWNLOADS -->
+        <!-- ========================= -->
+
         <div class="downloads">
+
+            <!-- MAC -->
 
             <a
                 class="download"
                 href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-1.0.0-arm64.dmg"
+                download
             >
 
                 <div class="download-icon">
@@ -176,9 +173,12 @@
             </a>
 
 
+            <!-- WINDOWS -->
+
             <a
                 class="download"
                 href="https://github.com/flxnr-demo/musicpulse.github.io/releases/download/v1.0.0/MusicPulse-Setup-1.0.0-x64.exe"
+                download
             >
 
                 <div class="download-icon">
@@ -224,14 +224,9 @@
 </footer>
 
 
-<!-- ========================= -->
 <!-- AUTH MODAL -->
-<!-- ========================= -->
 
-<div
-    id="authOverlay"
-    class="modal-overlay"
->
+<div id="authOverlay" class="modal-overlay">
 
     <div class="auth-box">
 
@@ -322,14 +317,9 @@
 </div>
 
 
-<!-- ========================= -->
 <!-- NAME MODAL -->
-<!-- ========================= -->
 
-<div
-    id="nameOverlay"
-    class="modal-overlay"
->
+<div id="nameOverlay" class="modal-overlay">
 
     <div class="small-modal">
 
@@ -393,14 +383,9 @@
 </div>
 
 
-<!-- ========================= -->
 <!-- AVATAR MODAL -->
-<!-- ========================= -->
 
-<div
-    id="avatarOverlay"
-    class="modal-overlay"
->
+<div id="avatarOverlay" class="modal-overlay">
 
     <div class="small-modal avatar-modal">
 
@@ -500,26 +485,22 @@
 </div>
 
 
-<!-- ========================= -->
 <!-- SUCCESS TOAST -->
-<!-- ========================= -->
 
-<div
-    id="toast"
-    class="toast"
->
+<div id="toast" class="toast">
 
     <div class="toast-icon">
         ✓
     </div>
 
     <div>
+
         <strong id="toastTitle">
             Done
         </strong>
 
-        <span id="toastText">
-        </span>
+        <span id="toastText"></span>
+
     </div>
 
 </div>
@@ -617,19 +598,29 @@ function switchAuth() {
 
 
     const title =
-        document.getElementById("authTitle");
+        document.getElementById(
+            "authTitle"
+        );
 
     const description =
-        document.getElementById("authDescription");
+        document.getElementById(
+            "authDescription"
+        );
 
     const submit =
-        document.querySelector(".auth-submit");
+        document.querySelector(
+            ".auth-submit"
+        );
 
     const switchText =
-        document.getElementById("switchText");
+        document.getElementById(
+            "switchText"
+        );
 
     const switchButton =
-        document.getElementById("switchButton");
+        document.getElementById(
+            "switchButton"
+        );
 
 
     if (registerMode) {
@@ -687,12 +678,6 @@ async function submitAuth() {
         document
             .getElementById("password")
             .value;
-
-    const message =
-        document.getElementById(
-            "authMessage"
-        );
-
 
     if (!email || !password) {
 
